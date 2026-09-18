@@ -1,0 +1,1586 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interview Prep 2026 — Software Developer &amp; AI Architect (London, Inside IR35)</title>
+<meta name="description" content="Flashcard and voice role-play interview prep for London Inside IR35 contract roles: Software Developer and AI Architect.">
+<style>
+  :root{
+    --bg:#0b0f1a;
+    --bg-2:#101728;
+    --panel:#141c30;
+    --panel-2:#1a2440;
+    --line:#26324f;
+    --text:#e8edf7;
+    --muted:#93a0bd;
+    --accent:#4f8cff;
+    --accent-2:#7c5cff;
+    --good:#2fd48a;
+    --warn:#ffb545;
+    --bad:#ff6b7a;
+    --radius:16px;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 500px at 12% -10%, rgba(79,140,255,.16), transparent 60%),
+      radial-gradient(900px 500px at 95% 0%, rgba(124,92,255,.14), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;
+  }
+  a{color:var(--accent)}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .wrap{max-width:1500px;margin:0 auto;padding:18px 18px 60px}
+
+  header.top{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,rgba(26,36,64,.85),rgba(16,23,40,.85));
+    backdrop-filter:blur(6px);box-shadow:var(--shadow);
+  }
+  .brand{display:flex;flex-direction:column;gap:2px}
+  .brand h1{margin:0;font-size:19px;letter-spacing:.2px}
+  .brand p{margin:0;color:var(--muted);font-size:12.5px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap}
+  .badge{
+    border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11.5px;
+    color:var(--muted);background:rgba(20,28,48,.7);white-space:nowrap
+  }
+  .badge.ir35{border-color:rgba(255,181,69,.5);color:var(--warn)}
+  .badge.live{border-color:rgba(47,212,138,.45);color:var(--good)}
+
+  .rolebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 6px}
+  .roletab{
+    border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:10px 14px;
+    display:flex;flex-direction:column;gap:1px;min-width:230px;text-align:left;transition:.15s
+  }
+  .roletab strong{font-size:14px}
+  .roletab span{font-size:11.5px;color:var(--muted)}
+  .roletab:hover{border-color:#3a4a72}
+  .roletab.active{
+    background:linear-gradient(135deg,rgba(79,140,255,.22),rgba(124,92,255,.22));
+    border-color:var(--accent);box-shadow:0 0 0 1px rgba(79,140,255,.35) inset
+  }
+  .rolebar .spacer{flex:1}
+  .statline{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;align-items:center}
+  .statline b{color:var(--text)}
+
+  .layout{display:grid;grid-template-columns:minmax(360px,440px) 1fr;gap:16px;margin-top:12px;align-items:start}
+  @media (max-width:1050px){.layout{grid-template-columns:1fr}}
+  .col{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .panel{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+    box-shadow:var(--shadow);overflow:hidden
+  }
+  .panel .hd{
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel-2)
+  }
+  .panel .hd h2{margin:0;font-size:13.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted)}
+  .panel .bd{padding:14px}
+
+  .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{
+    border:1px solid var(--line);background:var(--panel-2);border-radius:10px;padding:8px 12px;font-size:13px;
+    transition:.15s
+  }
+  .btn:hover:not(:disabled){border-color:#43557f;background:#1e2a4a}
+  .btn.primary{background:linear-gradient(135deg,#3d7bff,#6b4dff);border-color:transparent;font-weight:600}
+  .btn.primary:hover:not(:disabled){filter:brightness(1.08)}
+  .btn.ghost{background:transparent}
+  .btn.danger{border-color:rgba(255,107,122,.4);color:var(--bad)}
+  .btn.rec{border-color:rgba(255,107,122,.55);color:var(--bad)}
+  .btn.rec.on{background:rgba(255,107,122,.16);border-color:var(--bad)}
+  .btn.small{padding:5px 9px;font-size:12px}
+
+  .deckmeta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);margin-bottom:8px}
+  .card{perspective:1400px;cursor:pointer;user-select:none}
+  .card-inner{
+    position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.15,.2,1);
+    min-height:350px
+  }
+  .card.flipped .card-inner{transform:rotateY(180deg)}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(160deg,#182241,#121a2f);padding:18px;display:flex;flex-direction:column;gap:10px;
+    box-shadow:var(--shadow);overflow:auto
+  }
+  .face.back{transform:rotateY(180deg);background:linear-gradient(160deg,#151d36,#101728)}
+  .face .cat{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{
+    font-size:11px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--muted);
+    background:rgba(11,15,26,.5)
+  }
+  .chip.hot{border-color:rgba(255,181,69,.45);color:var(--warn)}
+  .face h3{margin:6px 0 0;font-size:20px;line-height:1.35}
+  .face .qnum{color:var(--muted);font-size:12px;letter-spacing:1.4px;text-transform:uppercase}
+  .reveal-hint{margin-top:auto;color:var(--muted);font-size:12.5px;display:flex;align-items:center;gap:8px}
+  .face .insight{
+    border-left:3px solid var(--accent);padding:8px 10px;background:rgba(79,140,255,.08);border-radius:8px;
+    font-size:13px
+  }
+  .face h4{margin:10px 0 4px;font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+  .face ul{margin:4px 0;padding-left:18px;font-size:13.5px}
+  .face li{margin-bottom:5px}
+  .termrow{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+  .term{font-size:11.5px;border:1px dashed rgba(79,140,255,.55);color:#bcd2ff;border-radius:999px;padding:2px 8px}
+  .model{font-size:13px;background:rgba(47,212,138,.07);border:1px solid rgba(47,212,138,.3);border-radius:10px;padding:10px}
+  .model p{margin:0}
+  .flipnote{font-size:11.5px;color:var(--muted)}
+
+  .dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .dot{
+    width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);
+    font-size:11px;color:var(--muted);display:grid;place-items:center
+  }
+  .dot.answered{border-color:rgba(47,212,138,.5);color:var(--good)}
+  .dot.current{outline:2px solid var(--accent);outline-offset:1px;color:var(--text)}
+  .dot.scored{background:linear-gradient(135deg,rgba(47,212,138,.18),rgba(79,140,255,.18))}
+
+  textarea{
+    width:100%;min-height:170px;resize:vertical;background:#0d1425;color:var(--text);
+    border:1px solid var(--line);border-radius:12px;padding:12px;font:14px/1.5 inherit
+  }
+  textarea:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .row.between{justify-content:space-between}
+  .live{
+    margin-top:8px;min-height:20px;font-size:12.5px;color:var(--accent);font-style:italic
+  }
+  .hintline{font-size:12px;color:var(--muted);margin-top:6px}
+
+  .chat{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow:auto;padding-right:4px}
+  .msg{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;max-width:95%}
+  .msg .who{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+  .msg.interviewer{background:rgba(79,140,255,.09);border-color:rgba(79,140,255,.35)}
+  .msg.candidate{background:rgba(124,92,255,.09);border-color:rgba(124,92,255,.3);align-self:flex-end}
+  .msg.verdict{background:rgba(47,212,138,.08);border-color:rgba(47,212,138,.35)}
+  .msg.system{background:rgba(255,181,69,.07);border-color:rgba(255,181,69,.3);color:#ffd9a1}
+  .scorebar{display:flex;align-items:center;gap:10px;margin:8px 0 0}
+  .meter{flex:1;height:8px;border-radius:999px;background:#0d1425;border:1px solid var(--line);overflow:hidden}
+  .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--bad),var(--warn),var(--good))}
+  .checklist{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .check{font-size:11.5px;border-radius:999px;padding:2px 8px;border:1px solid var(--line);color:var(--muted)}
+  .check.ok{border-color:rgba(47,212,138,.5);color:var(--good)}
+  .check.miss{border-color:rgba(255,107,122,.35);color:#ffb3bb;opacity:.85}
+
+  .saved{display:flex;flex-direction:column;gap:8px;max-height:360px;overflow:auto}
+  .saved-item{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--panel-2);cursor:pointer}
+  .saved-item:hover{border-color:#43557f}
+  .saved-item .t{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
+  .saved-item .p{font-size:13px;margin-top:3px;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pill{font-size:11px;border-radius:999px;padding:1px 7px;border:1px solid var(--line);white-space:nowrap}
+  .pill.good{border-color:rgba(47,212,138,.5);color:var(--good)}
+  .pill.mid{border-color:rgba(255,181,69,.5);color:var(--warn)}
+  .pill.bad{border-color:rgba(255,107,122,.5);color:var(--bad)}
+
+  .switches{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--muted)}
+  .switches label{display:flex;gap:6px;align-items:center;cursor:pointer}
+  input[type=checkbox]{accent-color:var(--accent)}
+
+  .toast{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:#1b2744;border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-size:13px;
+    box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:50
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  footer.ft{margin-top:20px;color:var(--muted);font-size:12px;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <h1>Interview Prep 2026 · London Contract Market</h1>
+      <p>Flashcards, voice answers and live interviewer role-play for the UK contract market.</p>
+    </div>
+    <div class="badges">
+      <span class="badge ir35">Inside IR35 focus</span>
+      <span class="badge">Umbrella / PAYE engagement</span>
+      <span class="badge live">London / hybrid</span>
+      <span class="badge" id="voiceBadge">Voice: checking…</span>
+    </div>
+  </header>
+
+  <div class="rolebar" id="rolebar"></div>
+
+  <div class="rolebar">
+    <div class="statline">
+      <span>Progress: <b id="statProgress">0 / 0</b></span>
+      <span>Answered: <b id="statAnswered">0</b></span>
+      <span>Avg score: <b id="statAvg">–</b></span>
+      <span>Card <b id="statCard">1</b> of <b id="statTotal">0</b></span>
+    </div>
+    <div class="spacer"></div>
+    <div class="switches">
+      <label><input type="checkbox" id="ttsToggle" checked> Interviewer speaks</label>
+      <label><input type="checkbox" id="autoAsk" checked> Ask question aloud on card</label>
+      <button class="btn small ghost" id="btnExportMd">Export Markdown</button>
+      <button class="btn small ghost" id="btnExportJson">Export JSON</button>
+      <button class="btn small danger" id="btnReset">Reset role</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="col">
+
+      <section class="panel">
+        <div class="hd">
+          <h2 id="deckTitle">Flashcards</h2>
+          <div class="toolbar">
+            <button class="btn small" id="btnPrev">← Prev</button>
+            <button class="btn small" id="btnNext">Next →</button>
+            <button class="btn small" id="btnShuffle">Shuffle</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="deckmeta">
+            <span id="cardCat">Category</span>
+            <span id="cardIdx">1 / 18</span>
+          </div>
+          <div class="card" id="card" tabindex="0" role="button" aria-label="Flashcard, click to flip">
+            <div class="card-inner">
+              <div class="face front">
+                <div class="cat" id="frontCat"></div>
+                <div class="qnum" id="frontNum"></div>
+                <h3 id="frontQ"></h3>
+                <div class="reveal-hint">
+                  <span>Tap / press F to flip — what the interviewer is really testing, key terms and a model answer.</span>
+                </div>
+              </div>
+              <div class="face back">
+                <div class="cat"><span class="chip hot">Interviewer intent</span></div>
+                <div class="insight" id="backInsight"></div>
+                <h4>What a strong answer covers</h4>
+                <ul id="backHints"></ul>
+                <h4>Key terms the recruiter listens for</h4>
+                <div class="termrow" id="backTerms"></div>
+                <h4>Model answer (spoken style)</h4>
+                <div class="model"><p id="backModel"></p></div>
+                <div class="flipnote">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+          <div class="dots" id="dots"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="hd">
+          <h2>Saved answers</h2>
+          <span class="badge" id="savedCount">0</span>
+        </div>
+        <div class="bd">
+          <div class="saved" id="savedList"><span class="hintline">Nothing saved yet for this role.</span></div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="col">
+
+      <section class="panel">
+        <div class="hd">
+          <h2>Your answer</h2>
+          <div class="toolbar">
+            <button class="btn small" id="btnSpeakQ">▶ Play question</button>
+            <button class="btn small" id="btnModel">Show model answer</button>
+          </div>
+        </div>
+        <div class="bd">
+          <textarea id="answer" placeholder="Type your answer, or hit the mic and speak it. Answer as you would to a London recruiter — context, what you did, the numbers, the outcome."></textarea>
+          <div class="live" id="live"></div>
+          <div class="row between">
+            <div class="toolbar">
+              <button class="btn rec" id="btnMic" aria-pressed="false">● Record voice answer</button>
+              <button class="btn" id="btnClear">Clear</button>
+              <button class="btn" id="btnSave">Save answer</button>
+            </div>
+            <div class="toolbar">
+              <span class="badge" id="wordCount">0 words</span>
+              <button class="btn primary" id="btnSubmit">Submit to interviewer →</button>
+            </div>
+          </div>
+          <div class="hintline" id="micHint">Voice answers are transcribed in the browser (Chrome/Edge, en-GB). Nothing is uploaded.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="hd">
+          <h2>Role play — live interviewer</h2>
+          <div class="toolbar">
+            <button class="btn small" id="btnClearChat">Clear role play</button>
+            <button class="btn small" id="btnSaveTranscript">Save transcript</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="chat" id="chat">
+            <div class="msg system"><div class="who">Setup</div>Pick a role, flip the card, then answer out loud or in writing and press <b>Submit to interviewer</b>. The interviewer will acknowledge your answer, push back with real follow-up probes, then give a verdict you can save.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="hd"><h2>How to use this for a London Inside IR35 interview</h2></div>
+        <div class="bd" style="font-size:13px;color:var(--muted)">
+          <p style="margin-top:0">1. Work the deck top to bottom in order — recruiter screens first, then IR35 and commercials, then technical and behavioural.</p>
+          <p>2. Speak every answer with the mic. Contract interviews in London are screening calls; your spoken fluency is being assessed more than your typing.</p>
+          <p>3. Answer in under 90 seconds, hit the numbers (rate, notice, years, users, latency, cost saving), and finish with the outcome.</p>
+          <p style="margin-bottom:0">4. Inside IR35: never say you will control how you deliver. Frame everything as client-directed delivery through an umbrella company, and confirm you are comfortable working as a deemed employee for tax purposes.</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer class="ft">
+    Interview Prep 2026 · Built for the London Inside IR35 contract market · Software Developer &amp; AI Architect tracks ·
+    Answers and transcripts stay in your browser (localStorage) unless you export them.
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = {
+  roles: [
+    {
+      key: "sd",
+      name: "Software Developer",
+      sub: "Contract · London · Inside IR35",
+      blurb: "Full-stack / backend contract roles. Recruiter screen, IR35, technical depth and delivery under pressure.",
+      questions: [
+        {
+          id: "sd-01",
+          cat: "Recruiter Screen",
+          q: "Walk me through your CV and highlight the two contracts that are most relevant to this role. Why you, why now?",
+          insight: "The recruiter is testing whether you can pitch yourself in 90 seconds, and whether your last two contracts map cleanly onto the client's stack. They are also checking you are contract-minded, not a permie who will jump ship.",
+          hint: [
+            "60–90 second narrative: career arc, then two contracts with stack, business domain, team size and outcome.",
+            "Mirror the job spec keywords back — language, framework, cloud, CI/CD, delivery model.",
+            "State availability, notice period and day rate expectation without being asked.",
+            "Close with a pull: why this role specifically and why you are contracting."
+          ],
+          terms: ["contract", "stack", "notice", "day rate", "delivery", "agile", "stakeholders"],
+          model: "I am a software developer with 9 years' experience, the last 4 in contract delivery across financial services and retail. My most relevant contract was a 12-month engagement at a London bank, where I built and supported event-driven microservices on Azure using .NET, with a Terraform-managed CI/CD pipeline and 85% test coverage. Before that I delivered a React and Node replatform for a retail client that cut page load from 4 seconds to under 1.2. I work in small client-directed squads, I am used to hitting the ground running in week one, I am available two weeks from offer with a day rate of £X inside IR35, and I want this contract because it is the same stack at larger scale.",
+          follow: [
+            "Which parts of your last contract did you personally own end to end?",
+            "What did you deliver in your first 30 days there?",
+            "Why contract rather than permanent — and why this client?",
+            "What day rate are you looking for, and is that fixed inside IR35?"
+          ]
+        },
+        {
+          id: "sd-02",
+          cat: "IR35 & Compliance",
+          q: "This role has been assessed as inside IR35. What does that mean to you and how would you be engaged?",
+          insight: "Recruiters need to know you understand deemed employment, umbrella vs PAYE, and that you will not insist on working through your own PSC. Getting this wrong kills the submission risk-free.",
+          hint: [
+            "Show you understand the off-payroll rules: the client makes the SDS, you are taxed like an employee.",
+            "Explain engagement routes: umbrella company (most common) or client PAYE payroll.",
+            "Accept no PSC invoicing, no expenses tax relief, no substitution control.",
+            "Confirm you are comfortable with the net pay difference and have modelled it."
+          ],
+          terms: ["inside ir35", "umbrella", "paye", "sds", "deemed", "psc", "tax", "hmrc"],
+          model: "Yes, I understand it. The client has issued a status determination of inside IR35, so for tax purposes I am treated as a deemed employee of the end client. In practice I would be engaged through an umbrella company, invoicing the agency, with PAYE, employee's and employer's NI and the apprenticeship levy deducted at source. I would not use my own limited company, and I would not claim the expenses a PSC could claim. I have already modelled the net day rate so there are no surprises, and I am happy to sign a contract that reflects client direction and control.",
+          follow: [
+            "Which umbrella companies have you used before?",
+            "Have you compared umbrella versus client PAYE net pay?",
+            "What happens to your limited company while you are inside IR35?",
+            "Have you ever had a contract re-assessed from outside to inside IR35 — what changed?"
+          ]
+        },
+        {
+          id: "sd-03",
+          cat: "IR35 & Compliance",
+          q: "You are currently contracting through your own limited company. Why should we accept you for an inside IR35 role?",
+          insight: "The recruiter is testing attitude and flexibility. Many contractors push back on inside IR35; clients want someone who has already accepted the reality.",
+          hint: [
+            "State clearly you will operate compliantly through an umbrella — no negotiation needed.",
+            "Explain the practical difference: control, direction and supervision sit with the client.",
+            "Mention that outside-IR35 roles still exist but you are applying here with eyes open.",
+            "Reassure on continuity: you will not treat the role differently because of the tax status."
+          ],
+          terms: ["umbrella", "compliant", "control", "supervision", "direction", "limited company", "flexible"],
+          model: "I have run a limited company for years, but I take the status determination seriously. Inside IR35 means the client has control, direction and supervision, so my company is not the right vehicle. I would pause my company's contracting activity and engage through an umbrella for this contract. Practically, nothing changes about how I deliver — I still turn up, own my work and act as part of the client's team. I would rather take a compliant inside IR35 contract with a good client than an outside contract that would not survive an HMRC enquiry.",
+          follow: [
+            "Have you ever been through an HMRC compliance check?",
+            "What would you do if the client asked you to work a fixed 9 to 5 with line management?",
+            "Would you keep your limited company dormant or close it?",
+            "Does inside IR35 change your day rate expectation?"
+          ]
+        },
+        {
+          id: "sd-04",
+          cat: "Commercials",
+          q: "It is a 6-month London contract, hybrid 3 days on-site. What is your day rate, and what is your notice period and earliest start?",
+          insight: "A qualification question. Recruiters want a number that fits the client's band, no ambiguity about notice, and confirmation you accept the on-site pattern.",
+          hint: [
+            "Give one clear number for inside IR35, and say whether it is umbrella rate.",
+            "State notice period precisely and what you could do at short notice.",
+            "Confirm you can commit to 3 days on-site in London and your travel is workable.",
+            "Mention any rate flexibility only if you genuinely have it — do not undersell."
+          ],
+          terms: ["day rate", "inside ir35", "umbrella", "notice", "start date", "hybrid", "london", "onsite"],
+          model: "For an inside IR35 umbrella engagement of this scope I am looking at £X per day, and I am happy to confirm that is the umbrella rate. My notice period is two weeks, though I have started within a week before when the client needed it. I can commit to three days on-site in London — I am based within easy reach of the City and Canary Wharf. If the role extends beyond six months I am open to that, and I would want to review the rate at renewal rather than lock it for the year.",
+          follow: [
+            "Is that rate negotiable if the client offers a 12-month term?",
+            "How do you handle travel and accommodation costs inside IR35?",
+            "Have you worked 5 days on-site before — how did you manage it?",
+            "When could you realistically interview this week?"
+          ]
+        },
+        {
+          id: "sd-05",
+          cat: "Recruiter Screen",
+          q: "Do you have the right to work in the UK without sponsorship, and can you pass a DBS and BPSS / financial background check?",
+          insight: "London clients, especially banking and government, will not move without this. The recruiter wants a fast, unambiguous yes plus evidence.",
+          hint: [
+            "Answer directly: status, type of right to work, and documents you can provide today.",
+            "Confirm comfort with DBS, BPSS, SC or financial probity checks and the timelines involved.",
+            "Mention any lived-in-UK history required for SC if relevant.",
+            "Offer to send documentation immediately to speed up compliance."
+          ],
+          terms: ["right to work", "dbs", "bpss", "sponsorship", "security clearance", "compliance", "passport"],
+          model: "Yes — I have full right to work in the UK with no sponsorship required, and I can send my passport and share code today. I have passed DBS and financial probity checks for previous banking clients, and I am comfortable with BPSS or SC processes. For SC I have the five years of UK residency history ready in writing if that is needed. I know compliance can add two to four weeks, so I am happy to start the paperwork in parallel with the interview process.",
+          follow: [
+            "Have you ever held SC clearance, and has it lapsed?",
+            "Any gaps in your five-year history we should know about?",
+            "Do you have references from the last two contracts ready?",
+            "Can you complete an NDA and compliance pack this week?"
+          ]
+        },
+        {
+          id: "sd-06",
+          cat: "Technical",
+          q: "Explain the difference between REST and GraphQL, and how you would choose between them for a new service.",
+          insight: "Testing real decision-making rather than definitions. Strong candidates talk about team capability, caching, payload shape and operational cost.",
+          hint: [
+            "REST: resource-oriented, HTTP semantics, easy caching, multiple round trips for nested data.",
+            "GraphQL: single typed schema, client-selected fields, solves over-fetching, harder caching and rate limiting.",
+            "Decision criteria: number of client types, chattiness, caching needs, gateway maturity, team experience.",
+            "Mention hybrid and BFF patterns, and observability in both."
+          ],
+          terms: ["rest", "graphql", "schema", "caching", "over-fetching", "round trip", "bff", "versioning"],
+          model: "REST models resources over standard HTTP verbs, which gives us mature caching, easy CDN and edge behaviour, and simple observability. Its weakness is chatty clients: mobile or web apps end up making several round trips or receiving payloads they do not need. GraphQL exposes one typed schema and lets the client ask for exactly the fields it wants, which suits many client types and rapidly changing UIs. The trade-offs are caching, query complexity and rate limiting, so you need persisted queries and depth limits. I would choose REST for simple, cacheable, internal service-to-service APIs, and GraphQL with a backend-for-frontend layer when multiple client teams need different shapes from the same domain. I would also factor in the team's ability to operate it — GraphQL needs more platform discipline.",
+          follow: [
+            "How would you secure a GraphQL endpoint against expensive queries?",
+            "How do you handle API versioning in each approach?",
+            "What does your observability look like for a GraphQL gateway?",
+            "When would you choose gRPC instead?"
+          ]
+        },
+        {
+          id: "sd-07",
+          cat: "Technical",
+          q: "How do you ensure code quality and testing rigour when you join a contract mid-flight with existing technical debt?",
+          insight: "Contract clients want someone who improves the codebase without stopping delivery or rewriting everything. Pragmatism plus measurable standards.",
+          hint: [
+            "Start by reading the CI pipeline, the test pyramid and the failure history.",
+            "Protect the critical path first: contract tests, smoke tests, feature flags.",
+            "Introduce gradual standards: linting, coverage gates on changed files, trunk-based small PRs.",
+            "Quantify improvements — escaped defects, build time, deployment frequency."
+          ],
+          terms: ["test pyramid", "ci/cd", "regression", "contract tests", "feature flags", "tech debt", "code review", "coverage"],
+          model: "First I map the ground truth: I read the CI pipeline, look at what tests exist, and check where defects actually escape. Usually the critical path is under-tested and the corners are over-tested. I protect the money path first with contract tests and smoke tests, add feature flags so we can release safely, and then drive quality through small PRs, changed-file coverage gates rather than blanket coverage, and automated linting. I avoid large refactors in a contract — I make the debt visible, fix what we touch, and agree with the tech lead which two or three structural improvements are worth doing. Then I prove it with numbers: escaped defect rate, build duration and deployment frequency.",
+          follow: [
+            "What coverage gate would you set on changed files and why?",
+            "How do you get legacy code under test without rewriting it?",
+            "How do you handle a team that does not review PRs?",
+            "What is your view on mocking versus integration tests?"
+          ]
+        },
+        {
+          id: "sd-08",
+          cat: "Technical",
+          q: "Talk me through a production incident you diagnosed and fixed. What was the root cause and what changed afterwards?",
+          insight: "London clients ask this to see structured thinking under pressure, communication with stakeholders, and whether you leave systems better.",
+          hint: [
+            "Use a clear timeline: detection, triage, mitigation, root cause, permanent fix.",
+            "Name the tooling: logs, traces, dashboards, on-call process.",
+            "Say what you did to communicate with the business during the incident.",
+            "End with the blameless post-mortem actions and what you learned."
+          ],
+          terms: ["root cause", "rollback", "monitoring", "post-mortem", "on-call", "latency", "incident", "runbook"],
+          model: "On a payments platform we saw a spike in 500s during peak trading. I was on call, so I confirmed impact on the dashboard, checked the deployment timeline and rolled back the release within 12 minutes, which stopped the bleeding. The root cause was a connection pool exhaustion after a config change reduced the pool size under load. The permanent fix was to pin the pool size in code, add an alert on pool saturation and add a load test to the pipeline at peak profile. I ran the blameless post-mortem, and the follow-up actions — a config change freeze before peak and a runbook for pool exhaustion — meant we did not repeat it. I also wrote a one-page summary for the business side, because the trading desk needed to know what happened and what would change.",
+          follow: [
+            "How did you decide to roll back rather than fix forward?",
+            "What alert would have caught it earlier?",
+            "How do you keep stakeholders calm during an incident?",
+            "What did the post-mortem change in the team's process?"
+          ]
+        },
+        {
+          id: "sd-09",
+          cat: "Technical",
+          q: "Explain SOLID principles with a concrete example from something you have built.",
+          insight: "A filter for depth. Weak candidates list the acronym; strong ones give one vivid, real example and connect it to a business outcome.",
+          hint: [
+            "Pick one or two principles, not all five — depth beats recitation.",
+            "Use a real example: a payment provider abstraction, a report exporter, a notification service.",
+            "Tie it to change cost: how a new provider or channel became a small change.",
+            "Mention the tests that the design made possible."
+          ],
+          terms: ["single responsibility", "open closed", "liskov", "interface segregation", "dependency inversion", "abstraction", "polymorphism"],
+          model: "The one I lean on most is dependency inversion as a proxy for the whole set. On a payments service I was asked to add a second provider alongside the existing one. The original code called the provider directly from the order service, so every change touched core logic. I introduced a PaymentProvider interface with a narrow contract — authorise, capture, refund — and implemented it per provider. The order service depended on the interface, not the vendor. That is open-closed in practice: adding a third provider later was a new class plus config, no change to the order flow. It is also interface segregation, because the refund-only path did not have to implement methods it did not need. The immediate benefit was a test suite that ran against an in-memory provider, and the business benefit was shipping a new provider in days rather than weeks.",
+          follow: [
+            "Where would you deliberately break a SOLID principle?",
+            "How do you avoid over-abstracting a small codebase?",
+            "Can you give an example of a Liskov violation you have seen?",
+            "How do these principles interact with hexagonal architecture?"
+          ]
+        },
+        {
+          id: "sd-10",
+          cat: "Technical",
+          q: "A query on a key table has gone from 200ms to 8 seconds. How do you diagnose and fix it?",
+          insight: "They are testing whether you work from evidence rather than superstition. Indexes, plans, data growth, locks — in a sensible order.",
+          hint: [
+            "Reproduce with the real plan: EXPLAIN ANALYZE, wait statistics, ORM-generated SQL.",
+            "Check what changed: data volume, new query pattern, statistics, index or schema change.",
+            "Common fixes: missing composite index, parameter sniffing, N+1 queries, missing pagination.",
+            "Validate the fix with before/after plans and add a guardrail alert."
+          ],
+          terms: ["execution plan", "index", "n+1", "query plan", "pagination", "statistics", "lock", "profile"],
+          model: "I would start by capturing the actual query the application sends — usually the ORM generates something different from what developers assume. Then I run an execution plan on production-like data. The most common causes are a missing composite index for the predicate and sort order, an N+1 pattern triggered by a new code path, or unbounded result sets without pagination. I check whether data volume or statistics changed recently, because a plan can flip to a scan when the row estimate is wrong. The fix might simply be an index, or rewriting the query to be sargable and adding pagination. I always verify with before-and-after plans and timings, and I add a slow-query alert so we know before users do. I would also check whether a schema migration or a new feature caused it, so we fix the cause and not just the symptom.",
+          follow: [
+            "How do you decide between an index and a caching layer?",
+            "What is parameter sniffing, and how have you handled it?",
+            "How would you roll out an index change on a live table?",
+            "What would make you say the query itself is fine and the model is wrong?"
+          ]
+        },
+        {
+          id: "sd-11",
+          cat: "Technical",
+          q: "Design a rate limiter for a public API that serves 50,000 requests per second across multiple regions.",
+          insight: "An architecture conversation with numbers. They want distributed thinking: shared state, central bottlenecks, failure modes, and a fallback.",
+          hint: [
+            "Choose an algorithm and justify it: token bucket, sliding window, or leaky bucket.",
+            "Make it distributed: Redis with Lua, local token caches, or per-edge counters.",
+            "Avoid a single point of failure — degrade to local limiting if the shared store is unavailable.",
+            "Agree the contract with clients: 429s, Retry-After, per-key quotas and burst allowance."
+          ],
+          terms: ["token bucket", "sliding window", "redis", "distributed", "429", "burst", "quota", "sharding"],
+          model: "I would use a token bucket per API key, because it allows controlled bursts and a steady refill rate, which matches real client traffic better than a hard sliding window. For scale, each region runs an edge limiter that checks a local token cache and reconciles with a sharded Redis cluster using atomic Lua scripts, so the counters are eventually consistent and the hot path is local. The failure mode matters: if Redis is unreachable, the edge falls back to local limiting with a conservative rate so we degrade safely rather than fail open. Clients get standard 429 responses with Retry-After and clear quota headers, and we expose per-key usage dashboards. I would load test to 2x expected peak, because 50,000 requests per second at region level means the limiter must not add more than a millisecond or two to p99.",
+          follow: [
+            "How do you handle a client that needs to burst above quota at peak?",
+            "Would you ever rate limit by IP as well as API key?",
+            "How do you test the failure mode where Redis is down?",
+            "What metrics tell you the limiter itself is the bottleneck?"
+          ]
+        },
+        {
+          id: "sd-12",
+          cat: "Technical",
+          q: "How do you decide between a microservice and keeping functionality in a monolith?",
+          insight: "They want an architect's judgement, not dogma. Boundaries, team topology, operational cost and data ownership are the signals.",
+          hint: [
+            "Draw boundaries around business capabilities and data ownership, not layers.",
+            "Consider team structure: independent deployment only pays off with independent teams.",
+            "Name the real costs: distributed transactions, observability, latency, platform maturity.",
+            "Strategy: modular monolith first, extract when a boundary is proven and load justifies it."
+          ],
+          terms: ["domain boundary", "bounded context", "deployment", "coupling", "distributed transaction", "modular monolith", "team topology", "latency"],
+          model: "I start from domain boundaries and data ownership. If two capabilities are owned by different teams with different release cadences and they do not need to share a transaction, a service boundary is likely worth it. If they are one team, one schema and one release train, a modular monolith is cheaper to operate and gives the same modularity without the network hop. I am explicit about the costs of microservices: distributed transactions, eventual consistency, tracing, on-call surface, and a platform team to support it. My default for a client is a well-modularised monolith with clear module contracts and one database schema per module, then extract the two or three hottest or most independently changing parts into services when the load or team structure justifies it. That avoids distributed complexity you cannot staff.",
+          follow: [
+            "How would you migrate one module out without a big bang?",
+            "What signals tell you a service boundary is wrong?",
+            "How do you handle reporting across ten service databases?",
+            "What platform capabilities must exist before you split?"
+          ]
+        },
+        {
+          id: "sd-13",
+          cat: "Technical",
+          q: "Describe your experience with cloud and infrastructure as code. What have you built and owned yourself?",
+          insight: "Contract clients need people who can own deployment, not just code. They are calibrating how much platform work you can carry alone.",
+          hint: [
+            "Be specific: cloud, IaC tool, pipeline, environments, what you personally owned.",
+            "Mention cost awareness and security basics — IAM, secrets, networking.",
+            "Describe a migration or a pipeline you improved, with a metric.",
+            "Be honest about what you rely on a platform team for."
+          ],
+          terms: ["aws", "azure", "gcp", "terraform", "pipeline", "iam", "containers", "environments", "cost"],
+          model: "I have worked mainly on AWS and Azure. On my last two contracts I owned the Terraform for our own services — VPC, ECS and Lambda, RDS, IAM roles, secrets in AWS Secrets Manager — with separate stacks for dev, test and prod and a pipeline that planned on PR and applied on merge with manual approval. I set up blue-green deploys with health checks and automatic rollback. I am comfortable with Docker, GitHub Actions and Azure DevOps. I am cost-conscious: I right-size instances, use spot for batch, and I put budgets and alerts on each account. Where there is a dedicated platform team I prefer to contribute modules to their repository rather than create shadow infrastructure, because drift is the real enemy.",
+          follow: [
+            "How do you manage Terraform state across teams?",
+            "What is your approach to secrets rotation?",
+            "How would you handle a production rollback in your pipeline?",
+            "What cloud cost saving have you delivered, in numbers?"
+          ]
+        },
+        {
+          id: "sd-14",
+          cat: "Behavioural",
+          q: "Tell me about a time you disagreed with a technical decision. How did you handle it?",
+          insight: "They are testing collaboration and ego. The story should show you argued with evidence, then committed either way.",
+          hint: [
+            "Set the scene quickly: decision, stakes, who was involved.",
+            "Show evidence-based challenge — prototype, spike, benchmark, risk register.",
+            "Show you disagreed without making it personal, and that you escalated responsibly.",
+            "End with the outcome and what you would do differently."
+          ],
+          terms: ["evidence", "prototype", "trade-off", "escalate", "disagree and commit", "stakeholder", "risk"],
+          model: "On a contract the team wanted to adopt a new state management library mid-project. I thought it was the wrong call because we were six weeks from a regulated go-live and the migration would touch every screen. I did not just object — I built a two-day spike showing the migration cost and the regression risk, and I proposed deferring it to the next phase with a design that kept the option open. The architect disagreed on timing, and we took it to the delivery lead with both options costed. The decision was to defer, and I committed to making the interim design library-agnostic. Six months later we did the migration with a proper phase for it. What I would do differently is raise the concern in the design forum earlier, rather than letting it reach a full team decision before I spoke up.",
+          follow: [
+            "What if the decision had gone against you?",
+            "How do you disagree with someone more senior than you?",
+            "Have you ever been wrong in a technical argument?",
+            "How do you stop these debates becoming personal?"
+          ]
+        },
+        {
+          id: "sd-15",
+          cat: "Behavioural",
+          q: "How do you work with product owners and business stakeholders when the requirements are vague?",
+          insight: "Contract delivery in London is often under-specified. They want someone who creates clarity without blocking progress.",
+          hint: [
+            "Turn vagueness into examples: acceptance criteria, wireframes, example scenarios.",
+            "Slice for early value — ship something usable and iterate with feedback.",
+            "Show a communication rhythm: demos, written summaries, decision logs.",
+            "Handle conflict between stakeholders by making trade-offs visible."
+          ],
+          terms: ["acceptance criteria", "user story", "demo", "mvp", "decision log", "trade-off", "stakeholder", "iterate"],
+          model: "I start by converting vague into concrete examples. I will sit with the product owner and write three or four real user scenarios with acceptance criteria, then play them back for confirmation. Where there is still ambiguity I slice the work so the riskiest assumption is tested first, and I get something demoable in front of users quickly. I keep a written decision log — what we decided, why, and what we are deferring — because in a contract people change and memory does not survive. If two stakeholders want different things, I put the trade-offs on one page with cost and impact and ask them to choose, rather than me guessing. That usually resolves it faster than another meeting.",
+          follow: [
+            "What do you do when the product owner will not commit to a decision?",
+            "How do you push back on scope without damaging the relationship?",
+            "Can you give an example where an early demo changed the plan?",
+            "How do you document decisions so they stick?"
+          ]
+        },
+        {
+          id: "sd-16",
+          cat: "Motivation",
+          q: "Why are you looking for a contract rather than a permanent role, and why this client?",
+          insight: "They want to hear a stable, professional reason. Anything that sounds like job-hopping or rate-chasing is a red flag for a 6-month engagement.",
+          hint: [
+            "Frame contracting as a deliberate career choice: breadth, delivery focus, problem-solving.",
+            "Show you understand the client's context — sector, stack, programme.",
+            "Reassure on commitment for the full term and beyond if it extends.",
+            "Avoid criticising previous permanent employers."
+          ],
+          terms: ["contract", "delivery", "breadth", "commitment", "sector", "programme", "extend"],
+          model: "I moved into contracting deliberately about four years ago. I like coming in to solve a specific problem, delivering, and then moving to the next challenge — it suits how I work and I have been continuously engaged since. Permanent roles have their place, but the delivery focus of contract work keeps me sharp. I am interested in this client specifically because it is a regulated environment where engineering standards actually matter, the stack matches what I do best, and the programme is at a stage where someone who has done this before can add value quickly. I commit fully to the term — my last three contracts all ran to the end or were extended, and I would want this one to be a success for the team, not just a six-month stop.",
+          follow: [
+            "How many contracts have you had extended, and why?",
+            "What would make you consider going permanent again?",
+            "How do you avoid getting bored on a long engagement?",
+            "What do you know about our programme?"
+          ]
+        },
+        {
+          id: "sd-17",
+          cat: "Market Awareness",
+          q: "How do you keep your skills current, and what in the 2026 engineering landscape are you actually using?",
+          insight: "Clients want curiosity with evidence. They are checking whether you are current on AI-assisted development, platform engineering and supply chain security.",
+          hint: [
+            "Name specific practices you use: AI pair programming, dependency scanning, platform templates.",
+            "Give one thing you have learned recently and how you applied it at work.",
+            "Mention hardening concerns: SBOM, supply chain, secrets, prompt injection in dev tooling.",
+            "Show discernment — what you have evaluated and rejected, and why."
+          ],
+          terms: ["ai-assisted", "copilot", "sast", "sbom", "supply chain", "platform engineering", "observability", "learning"],
+          model: "I keep current in three ways: a weekly reading habit across engineering blogs and release notes, hands-on evaluation in a scratch repo, and volunteering for the new thing on the current contract. In 2026 the shifts I am actually using are AI-assisted development in the daily workflow — with the discipline that generated code still goes through review and tests — and platform engineering patterns where golden paths and templates replace bespoke pipelines. I am also much stricter on supply chain: SBOMs, pinned dependencies and automated scanning in CI, because that is now a client audit question, not a nice to have. I evaluate a lot and adopt little: I tried two agentic coding tools this year and only kept one, because the other produced code our review process could not trust.",
+          follow: [
+            "How do you stop AI-generated code becoming a review problem?",
+            "What did you learn in the last three months?",
+            "How do you measure whether a new tool actually helped?",
+            "What technical trend do you think is overhyped?"
+          ]
+        },
+        {
+          id: "sd-18",
+          cat: "Closing",
+          q: "Do you have any questions for me, and is there anything that would stop you taking this contract?",
+          insight: "A soft close. Recruiters use it to surface rate mismatches, competing offers and notice issues now rather than after CV submission.",
+          hint: [
+            "Ask sharp questions: assessment status, team size, delivery stage, extension likelihood, interview format.",
+            "Flag nothing blocking, but be transparent about competing processes.",
+            "Confirm the rate band and confirmation of IR35 status determination.",
+            "End with enthusiastic availability."
+          ],
+          terms: ["status determination", "interview process", "team", "extension", "rate band", "availability"],
+          model: "A few things would help me: has the client completed the status determination, and is there an approved rate band for the role? Who would I report to day to day, and is the delivery team already in place or being assembled? What does the interview process look like — technical pair exercise or design conversation? And is there a realistic view on extension past six months? Nothing is stopping me. I have one other process at second stage, but this role is my first choice because of the stack and sector. I am available to interview this week and can start on two weeks' notice.",
+          follow: [
+            "Would you accept the role at the bottom of the rate band?",
+            "When exactly could you start?",
+            "How do you handle two offers at once?",
+            "Anything else you want me to pass to the client?"
+          ]
+        }
+      ]
+    },
+    {
+      key: "ai",
+      name: "AI Architect",
+      sub: "Contract · London · Inside IR35",
+      blurb: "Enterprise AI architecture contracts: LLM platforms, RAG, agents, governance and the commercial story behind them.",
+      questions: [
+        {
+          id: "ai-01",
+          cat: "Recruiter Screen",
+          q: "Summarise your AI architecture experience and the most complex AI system you have designed end to end.",
+          insight: "The recruiter needs a crisp architecture narrative that maps to the client's brief: model choice, data flow, evaluation, governance and business outcome.",
+          hint: [
+            "Open with one sentence of positioning, then go straight into the flagship system.",
+            "Describe the architecture in layers: data, retrieval, model, serving, evaluation, governance.",
+            "Quantify scale and impact: users, requests, cost, accuracy, time saved.",
+            "Say which parts you personally owned versus led as an architect."
+          ],
+          terms: ["llm", "rag", "architecture", "evaluation", "governance", "scale", "guardrails", "roi"],
+          model: "I am an AI architect with 12 years in data and platform engineering, the last 3 focused on production LLM systems in regulated environments. The most complex system I designed was a knowledge assistant for a professional services firm: 40,000 documents, a hybrid retrieval layer combining keyword and vector search, a re-ranking stage, and a model router that sent simple queries to a small model and complex ones to a frontier model. It served 2,500 users with p95 latency under three seconds and cut research time by around 40%. I owned the architecture end to end — the gateway, retrieval, evaluation harness and the governance controls for PII and audit. I led a team of six engineers and worked directly with risk and compliance to get it approved.",
+          follow: [
+            "How did you measure the 40% time saving?",
+            "What would you do differently if you rebuilt it?",
+            "Which parts of the architecture were yours versus your team's?",
+            "What was the total run cost per month?"
+          ]
+        },
+        {
+          id: "ai-02",
+          cat: "IR35 & Compliance",
+          q: "This AI Architect role is inside IR35. How do you engage, and does it change how you work with the client's teams?",
+          insight: "Same compliance test as any London contract, but for senior architecture roles they also want to hear that you accept client direction on design decisions and delivery.",
+          hint: [
+            "Confirm umbrella or client PAYE engagement and no PSC.",
+            "Acknowledge deemed employment: client sets scope, priorities and working pattern.",
+            "Explain that architecture is still a service — you advise, the client decides and owns IP.",
+            "Confirm IP assignment and that you will not reuse client-specific artefacts."
+          ],
+          terms: ["inside ir35", "umbrella", "sds", "deemed employment", "ip", "direction", "control"],
+          model: "I am engaged inside IR35 through an umbrella company, invoicing the agency, with PAYE and both NI contributions deducted at source. My limited company would be dormant for the duration. It does not change my professionalism: the client sets the direction, priorities and working practices, and I work as part of their team. For architecture specifically, I produce designs and recommendations, and the client owns the decisions and the intellectual property. I am comfortable assigning IP and I would never reuse client-specific designs or data elsewhere. I have worked inside IR35 contracts before, so there is no adjustment period.",
+          follow: [
+            "Have you worked inside IR35 at architect level before?",
+            "How do you handle the client changing scope without a rate change?",
+            "Do you have professional indemnity insurance, and does it matter inside IR35?",
+            "How would you handle a client asking you to direct permanent staff?"
+          ]
+        },
+        {
+          id: "ai-03",
+          cat: "Commercials",
+          q: "What is your day rate for an AI Architect contract in London inside IR35, and what is your availability?",
+          insight: "AI architect rates in London command a premium, but recruiters are testing whether your number is inside the client's band and whether you will accept the engagement model.",
+          hint: [
+            "Give a single confident number and say it is the umbrella rate.",
+            "Justify it briefly with scope: architecture ownership, governance, delivery risk.",
+            "State notice, availability and on-site flexibility.",
+            "Signal flexibility on duration, not on baseline rate."
+          ],
+          terms: ["day rate", "umbrella", "notice", "availability", "premium", "scope", "hybrid"],
+          model: "For an inside IR35 AI Architect engagement with architecture ownership and governance responsibility, I am looking for £X per day as the umbrella rate. That reflects the scope — designing the platform, setting evaluation standards and working with risk and compliance, not just hands-on building. I am on two weeks' notice and can commit to three days on-site in London, more during kick-off. I am flexible on contract length and happy to extend, but I would expect the rate to be reviewed at renewal rather than fixed across a 12-month term.",
+          follow: [
+            "Is the rate negotiable for a longer commitment?",
+            "How do you justify an architect premium over a senior engineer?",
+            "Would you consider a lower rate for a fully remote engagement?",
+            "What would make you walk away from the contract?"
+          ]
+        },
+        {
+          id: "ai-04",
+          cat: "Architecture",
+          q: "How do you decide between building a custom model and using foundation model APIs such as OpenAI, Anthropic or Gemini?",
+          insight: "The core build-versus-buy judgement for AI architecture. They want a decision framework, not a vendor preference.",
+          hint: [
+            "Default to hosted frontier models for general language tasks — speed to value and lower risk.",
+            "Custom or fine-tuned models for domain-specific, high-volume or latency-critical tasks.",
+            "Consider data residency, cost per token, IP, vendor lock-in and model deprecation.",
+            "Design for portability: an abstraction layer and evaluated fallbacks."
+          ],
+          terms: ["foundation model", "fine-tune", "api", "latency", "cost per token", "data residency", "lock-in", "abstraction"],
+          model: "My default is to buy before build: hosted frontier models through an abstraction layer give speed to value, access to rapid capability improvements and no GPU operations burden. I only move to a custom or fine-tuned model when there is a clear reason — a narrow, repetitive task where a small model cuts cost by an order of magnitude, strict data residency or air-gapped requirements, or latency budgets an API cannot meet. Even then I start from an open-weight base and evaluate fine-tuning against a strong prompt-and-retrieval baseline, because fine-tuning is usually the wrong first move. Architecturally I keep a model gateway so providers are swappable, I run an evaluation suite against every candidate, and I factor in the commercial terms: token pricing at our volume, deprecation policy and what happens if the vendor changes the model under us.",
+          follow: [
+            "How do you make the gateway genuinely portable rather than vendor-shaped?",
+            "What task would justify fine-tuning in your experience?",
+            "How do you budget for token spend at enterprise volume?",
+            "What do you do when a provider deprecates the model you built on?"
+          ]
+        },
+        {
+          id: "ai-05",
+          cat: "Architecture",
+          q: "Walk me through the architecture of an enterprise RAG system — ingestion through to answer.",
+          insight: "The bread-and-butter architecture question. They want the full pipeline plus the parts most candidates forget: evaluation, access control and freshness.",
+          hint: [
+            "Ingestion: connectors, parsing, chunking strategy, metadata, incremental sync.",
+            "Retrieval: embeddings, hybrid search, re-ranking, query rewriting, filters.",
+            "Generation: context assembly, citations, model routing, guardrails.",
+            "Operations: evaluation harness, access control per document, freshness and feedback loops."
+          ],
+          terms: ["ingestion", "chunking", "embedding", "hybrid search", "re-ranking", "citations", "access control", "evaluation"],
+          model: "The pipeline starts at ingestion: connectors pull from SharePoint, Confluence and the document store, we parse to text while preserving structure, chunk along semantic boundaries with overlap, attach metadata — source, owner, classification, timestamps — and incrementally sync so deleted or updated documents are re-indexed. Retrieval is hybrid: keyword plus vector search, then a cross-encoder re-ranker on the top 50 candidates, with query rewriting for conversational follow-ups. Before generation we filter by the user's entitlements so no one retrieves a document they cannot open. The generation layer assembles context with source citations, applies output guardrails, and routes simple queries to a cheaper model. Around all of that sits the evaluation harness — a golden question set scored for retrieval recall and answer faithfulness on every change — plus user feedback and a freshness monitor. Access control and evaluation are the two things teams forget, and they are the two that decide whether it survives audit.",
+          follow: [
+            "How do you choose chunk size for a mixed document estate?",
+            "How do you evaluate retrieval separately from generation?",
+            "What happens when the answer is not in the retrieved context?",
+            "How do you keep the index fresh without reprocessing everything?"
+          ]
+        },
+        {
+          id: "ai-06",
+          cat: "Trust & Safety",
+          q: "How do you mitigate hallucinations in a production LLM application?",
+          insight: "They want layered mitigation plus honest acceptance that it cannot be eliminated. Grounding, verification, confidence and UX all matter.",
+          hint: [
+            "Ground generation in retrieved evidence and require citations.",
+            "Constrain the task: structured output, schema validation, allowed answer space.",
+            "Add verification: self-check, second-model review, deterministic validators for facts and numbers.",
+            "Design the UX for uncertainty: show sources, allow escalation to a human, log everything."
+          ],
+          terms: ["grounding", "citations", "structured output", "verification", "confidence", "human in the loop", "guardrails"],
+          model: "I treat hallucination as a risk to be managed in layers rather than a bug to be fixed. First, grounding: answers must be generated from retrieved evidence and cite the source; if retrieval finds nothing relevant, the system says so rather than guessing. Second, constraint: I use structured output with schema validation and deterministic checks for anything numeric, regulatory or transactional, so a wrong value fails validation instead of reaching a user. Third, verification: for high-stakes flows a second model or rule set reviews the draft against the sources, and anything below a confidence threshold is escalated to a human. Fourth, UX: show the citations, make it easy to report a bad answer, and never present an unverified number as fact. Finally, measurement — a golden set with faithfulness and citation-accuracy scores run on every prompt or model change. In a regulated client, that combination is what gets you through model risk review.",
+          follow: [
+            "How do you detect hallucination automatically at scale?",
+            "What confidence threshold would you set, and who owns it?",
+            "How do you handle a summarisation task where there is no single ground truth?",
+            "What do you tell the business when the model is confidently wrong?"
+          ]
+        },
+        {
+          id: "ai-07",
+          cat: "Evaluation",
+          q: "What is your approach to evaluating LLM quality — offline evals, online metrics and human review?",
+          insight: "Evaluation is the difference between a demo and a product. They want a concrete harness, not just 'we ask users'.",
+          hint: [
+            "Build a golden dataset from real user questions, versioned with the app.",
+            "Score retrieval and generation separately: recall, precision, faithfulness, relevance.",
+            "Use LLM-as-judge with calibration against human labels, plus deterministic checks.",
+            "Run evals in CI, gate releases, and track online metrics and user feedback."
+          ],
+          terms: ["golden set", "llm-as-judge", "faithfulness", "regression", "ci", "a/b", "thumbs", "drift"],
+          model: "I start with a golden dataset built from real user questions, labelled by domain experts, versioned alongside the prompts. For RAG I score retrieval and generation separately — retrieval recall and precision, then faithfulness, relevance and citation accuracy for the answer. I use LLM-as-judge for scale but calibrate it against a few hundred human labels before trusting it, and I use deterministic checks where the answer has a fixed form, like reference numbers or calculations. Evals run in CI on every prompt, model or retrieval change, and a regression blocks the release. In production I track adoption, thumbs-up and thumbs-down rates, escalation-to-human rate and latency, and I sample bad answers weekly for human review. That closed loop is what keeps quality from drifting silently when the vendor updates a model.",
+          follow: [
+            "How do you build a golden set quickly for a new domain?",
+            "How do you know your LLM judge is reliable?",
+            "What would you do if offline scores improve but users complain more?",
+            "Who owns evaluation in a client team after you leave?"
+          ]
+        },
+        {
+          id: "ai-08",
+          cat: "Governance",
+          q: "How do you handle data privacy, PII and regulatory compliance in an enterprise AI system?",
+          insight: "Critical for London financial services and public sector clients. They want UK GDPR, EU AI Act awareness and practical controls.",
+          hint: [
+            "Classify data before it reaches a model: PII, confidential, regulated.",
+            "Minimise and redact; keep data in-region and within contracted processing terms.",
+            "Controls: no training on client data, retention limits, audit logs, DPIA, model cards.",
+            "Map to the EU AI Act risk tiers and UK ICO guidance; document human oversight."
+          ],
+          terms: ["uk gdpr", "pii", "redaction", "dpia", "eu ai act", "retention", "audit", "human oversight"],
+          model: "I start with data classification: what may reach a model at all, what must be redacted, and what must stay inside the client's tenant. PII is detected and masked before it leaves our boundary, prompts and responses are logged with retention limits, and we use enterprise endpoints with contractual guarantees that customer data is not used for training. For UK GDPR we run a DPIA, define lawful basis and retention, and give data subjects a route to access and deletion — which is harder with vector indexes, so I plan for document-level deletion up front. I map the use case to the EU AI Act risk tiers and UK ICO guidance; most enterprise assistants are limited-risk, which means transparency and human oversight, but anything touching employment or credit decisions escalates to high-risk controls. Everything is documented in model cards and an audit trail so risk and internal audit can inspect it.",
+          follow: [
+            "How do you delete a person's data from a vector index at scale?",
+            "What would make you refuse to build something on compliance grounds?",
+            "How do you handle cross-border model providers?",
+            "What does human oversight look like in practice for a high-risk use case?"
+          ]
+        },
+        {
+          id: "ai-09",
+          cat: "Architecture",
+          q: "Explain agentic AI architectures — tool use, planning, memory — and the risks you design against.",
+          insight: "2026's defining architecture topic. They want both a competent reference architecture and a clear-eyed view of failure modes.",
+          hint: [
+            "Describe the loop: plan, act via tools, observe, reflect, terminate.",
+            "Components: tool registry, permissions, short and long-term memory, orchestrator, sandbox.",
+            "Risks: prompt injection via tools and data, runaway loops, cost blowout, irreversible actions.",
+            "Controls: least-privilege tools, confirmation gates, budgets, full audit trails, human approval."
+          ],
+          terms: ["agent", "tool use", "planning", "memory", "prompt injection", "least privilege", "sandbox", "human approval"],
+          model: "An agentic system is a loop: a planner decomposes the goal, the model selects tools from a registry, the orchestrator executes them, observations feed back, and a termination condition ends the run. Around that I design memory in layers — working context for the run, episodic history for continuity, and a retrieval layer for durable knowledge. The risks are what shape the architecture. Prompt injection via retrieved content or tool output is the big one, so tools run least-privilege, in a sandbox, and any irreversible action — payments, emails, writes to production systems — requires a human confirmation gate. I cap iteration counts and token budgets to stop runaway loops and cost blowout, and every step is logged with the tool inputs and outputs so an incident can be reconstructed. My rule is that an agent can prepare and recommend, but a human or a deterministic service authorises anything with real-world consequence.",
+          follow: [
+            "How do you defend against indirect prompt injection through a document?",
+            "When is an agent the wrong choice compared with a fixed workflow?",
+            "How do you test an agent that is non-deterministic?",
+            "How would you give an agent database access safely?"
+          ]
+        },
+        {
+          id: "ai-10",
+          cat: "Cost & Performance",
+          q: "How do you control LLM cost and latency at enterprise scale without hurting quality?",
+          insight: "They want engineering levers with numbers: routing, caching, context discipline and model selection.",
+          hint: [
+            "Measure first: cost per request, tokens in and out, p95 latency, cache hit rate.",
+            "Route: small model for easy queries, frontier model only for hard ones.",
+            "Cache: exact, semantic and prompt-prefix caching; batch offline workloads.",
+            "Reduce context: better retrieval, summarisation, structured prompts rather than dumping documents."
+          ],
+          terms: ["model routing", "semantic cache", "prompt caching", "batching", "token budget", "p95", "context window"],
+          model: "I start by instrumenting: cost per request, tokens in and out, cache hit rate, and p95 latency per route. Then I pull four levers. Routing — a classifier sends simple queries to a small model and only escalates hard ones to a frontier model; in practice that moves 60 to 70% of traffic to the cheap path with no measurable quality drop. Caching — exact match for repeated queries, semantic cache for paraphrases, and prompt-prefix caching where the provider supports it. Context discipline — most cost sits in oversized prompts, so better retrieval, summarisation of history and structured context cuts tokens dramatically. And batching for offline workloads with a discounted batch endpoint overnight. I gate every optimisation behind the evaluation suite so we can prove quality held, and I set per-team token budgets with alerts so cost never surprises the business.",
+          follow: [
+            "How do you build the routing classifier and keep it accurate?",
+            "What is a semantic cache, and where does it go wrong?",
+            "How do you charge cost back to business units?",
+            "When would you accept higher latency for lower cost?"
+          ]
+        },
+        {
+          id: "ai-11",
+          cat: "Operations",
+          q: "What does model observability and monitoring look like in production?",
+          insight: "They want to hear that LLM systems are monitored as products, with drift, quality and safety signals — not just CPU and uptime.",
+          hint: [
+            "Capture every interaction: prompt version, model version, retrieval results, tokens, latency, cost.",
+            "Track quality proxies: feedback, refusal rate, escalation rate, guardrail triggers.",
+            "Monitor drift in inputs and retrieval corpus; alert on model or vendor changes.",
+            "Define SLOs and an incident process for quality regressions, not just outages."
+          ],
+          terms: ["tracing", "drift", "feedback", "guardrail", "slo", "prompt version", "sampling", "regression"],
+          model: "Every interaction is traced with the prompt version, model version, retrieved document IDs, token counts, latency and cost, tied to a session ID. On top of that I track quality proxies in near real time: user feedback, refusal rate, escalation-to-human rate and guardrail triggers. Inputs are monitored for drift — new topics, languages or formats the retrieval layer handles badly — and the corpus is monitored for staleness and coverage gaps. Because providers change models underneath you, I pin versions, watch release notes and re-run the evaluation suite when anything changes; a vendor update is treated as a release. SLOs cover both availability and quality, for example p95 latency under three seconds and thumbs-down rate below 5%, and a quality regression triggers the same incident process as an outage, with rollback to the previous pinned model or prompt.",
+          follow: [
+            "What would you alert on overnight with no humans watching?",
+            "How do you debug a bad answer from three weeks ago?",
+            "How do you sample interactions without breaching privacy?",
+            "What is your rollback plan for a prompt regression?"
+          ]
+        },
+        {
+          id: "ai-12",
+          cat: "Architecture",
+          q: "How would you design an enterprise AI platform — multi-tenant, with guardrails and a shared gateway?",
+          insight: "A pure architecture question. They are looking for platform thinking: shared capabilities, tenancy, governance and developer experience.",
+          hint: [
+            "Layers: gateway, orchestration, retrieval, model routing, guardrails, evaluation, observability.",
+            "Multi-tenancy: isolation model, per-tenant keys, quotas, data boundaries, chargeback.",
+            "Guardrails as a shared service: PII detection, prompt injection defence, output policy.",
+            "Developer experience: self-service onboarding, templates, golden paths, documented APIs."
+          ],
+          terms: ["gateway", "multi-tenant", "guardrails", "quotas", "isolation", "self-service", "golden path", "chargeback"],
+          model: "I design it in layers behind a single gateway. The gateway handles authentication, tenant identity, quotas, model routing and logging, so no application talks to a model provider directly. Behind it, shared services for orchestration, retrieval, guardrails and evaluation, with pluggable providers and vector stores. Multi-tenancy drives the isolation model: logical isolation with per-tenant keys, namespaces and encryption for most clients, physical isolation for the most regulated; quotas and chargeback make cost visible per tenant. Guardrails are a shared service — PII detection, prompt-injection filtering, output policy — so every application inherits the same controls rather than reimplementing them. On top sits developer experience: a self-service portal, templates for the common patterns like RAG assistants, and clear documentation, because adoption is the platform's real success metric. Governance wraps the whole thing: model registry, evaluation gates and an audit trail for every deployment.",
+          follow: [
+            "When do you choose physical isolation over logical?",
+            "How do you version and release shared prompts across tenants?",
+            "How do you prevent teams bypassing the gateway?",
+            "What would you build first if you had one quarter?"
+          ]
+        },
+        {
+          id: "ai-13",
+          cat: "Architecture",
+          q: "Fine-tuning, RAG or prompt engineering — how do you choose, and in what order?",
+          insight: "They want the escalation ladder and the cost of getting it wrong. Most business problems are solved before fine-tuning.",
+          hint: [
+            "Order: prompt engineering, then retrieval, then fine-tuning, then pre-training almost never.",
+            "RAG adds knowledge; fine-tuning shapes behaviour, format and tone, not facts.",
+            "Fine-tuning costs: data curation, training runs, evaluation, re-tuning on model upgrades.",
+            "Decide on evidence: measure the baseline, define the gap, then pick the cheapest lever that closes it."
+          ],
+          terms: ["prompt engineering", "rag", "fine-tuning", "behaviour", "knowledge", "baseline", "curation", "latency"],
+          model: "My ladder is prompt engineering first, then retrieval, then fine-tuning, and pre-training only in exceptional cases. RAG is for knowledge — giving the model facts it was never trained on and keeping them current. Fine-tuning is for behaviour: consistent format, domain tone, a narrow task done at high volume or low latency. The mistake I see is fine-tuning to inject facts, which produces a model that is confidently stale. So I always establish a measured baseline with good prompts and retrieval, define the gap in numbers, and then pick the cheapest lever that closes it. Fine-tuning only makes sense when the evaluation shows behaviour — not knowledge — is the problem, and I budget for the lifecycle cost: curated data, training, evals and re-tuning every time the base model moves. That combination is what makes the decision defensible to a client's architecture board.",
+          follow: [
+            "What data would you need before agreeing to fine-tune?",
+            "Can you give an example where prompt engineering beat a model upgrade?",
+            "How do you keep a fine-tuned model current?",
+            "What is the risk of fine-tuning on synthetic data?"
+          ]
+        },
+        {
+          id: "ai-14",
+          cat: "Vendor & Delivery",
+          q: "How do you run a build-versus-buy and vendor evaluation for AI tooling — vector databases, orchestration, evaluation platforms?",
+          insight: "Architects in contract roles are often asked to select tooling. They want a structured, evidence-based process with exit criteria.",
+          hint: [
+            "Start from requirements and constraints: scale, latency, residency, support, budget.",
+            "Weighted scoring with a proof of concept on the client's own data, not a vendor demo.",
+            "Check the commercial terms: pricing model, lock-in, exit plan, security posture.",
+            "Decide with a documented recommendation and an owned exit strategy."
+          ],
+          terms: ["weighted scoring", "poc", "lock-in", "tco", "residency", "support", "exit strategy", "security"],
+          model: "I start with requirements the business agrees on: scale, latency, data residency, security posture, support model and budget. Then I shortlist three vendors and run a scored evaluation weighted by those requirements, and critically a proof of concept on the client's own data with their own questions — vendor demos are marketing, not evidence. I look hard at the commercial model: is pricing predictable at our volume, what happens at renewal, how portable is our data and prompts, and what is the realistic exit plan if we leave. For vector databases the sticky part is the index and the embedding model contract, so I insist on the ability to export and re-embed. I document the recommendation with the trade-offs, the total cost of ownership over three years, and the conditions under which we would revisit. And I keep an abstraction at the boundary — the same discipline as the model gateway — so a wrong vendor decision is recoverable rather than fatal.",
+          follow: [
+            "What has made you walk away from a vendor?",
+            "How do you evaluate a vendor's security claims?",
+            "How do you handle a decision that the business makes against your recommendation?",
+            "What is in a good exit plan for a vector store?"
+          ]
+        },
+        {
+          id: "ai-15",
+          cat: "Operations",
+          q: "Describe your MLOps experience — CI/CD for models and prompts, deployment patterns and feature stores.",
+          insight: "They are checking you can operate, not just design. In 2026 that means prompts and evals versioned like code, plus governance of model artefacts.",
+          hint: [
+            "Everything as code: prompts, evals, configs, infrastructure, model artefacts.",
+            "Deployment patterns: shadow, canary, A/B, with evaluation gates and fast rollback.",
+            "Feature and embedding pipelines: online and offline consistency, versioned datasets.",
+            "Model registry, lineage, approvals and drift monitoring as first-class capabilities."
+          ],
+          terms: ["ci/cd", "canary", "shadow", "model registry", "lineage", "prompt versioning", "feature store", "rollback"],
+          model: "I treat prompts, evaluation sets and model configuration as versioned code in Git, and the pipeline runs the evaluation suite on every pull request. A change that regresses faithfulness or task accuracy does not merge. Deployment follows the same patterns as service code: shadow mode to compare a new model or prompt against production traffic without user impact, then canary to a small cohort, then progressive rollout with automated rollback on quality or latency SLIs. Model artefacts live in a registry with lineage — which data, which base model, which evaluation run approved it — and approvals are recorded for audit. For feature and embedding pipelines the hard part is online and offline consistency, so I use a feature store where it exists or a versioned embedding pipeline with the same transformation code in both paths. Drift monitoring closes the loop and feeds retraining or re-tuning decisions.",
+          follow: [
+            "How do you roll back a prompt-only change?",
+            "What do you do when online features drift from offline training features?",
+            "How do you test a model update with no labelled data yet?",
+            "Who approves a model release in a regulated client?"
+          ]
+        },
+        {
+          id: "ai-16",
+          cat: "Business & Stakeholders",
+          q: "How do you get stakeholders to adopt an AI solution and how do you measure ROI?",
+          insight: "Architect roles fail without adoption. They want change management plus a defensible value case, not just accuracy metrics.",
+          hint: [
+            "Anchor on a business problem with a number attached, agreed before build.",
+            "Design for adoption: workflow integration, training, champions, low-friction UX.",
+            "Measure value: time saved, cost per transaction, revenue uplift, risk reduction.",
+            "Track leading indicators — weekly active use, task completion — not just model quality."
+          ],
+          terms: ["roi", "adoption", "workflow", "baseline", "time saved", "champions", "leading indicators", "benefit case"],
+          model: "I start with the business problem and the baseline number before any build: how many hours does this task take today, what does it cost, what is the error rate. That becomes the benefit case we agree with the sponsor. On adoption I design for the workflow, not the model — if users have to leave their system or write prompts, adoption dies. So I integrate into the tools they already use, keep the interaction simple, and run a pilot with a friendly team and named champions who give feedback weekly. Measurement has two layers: leading indicators like weekly active users and tasks completed, and outcome metrics like hours saved, cost per transaction and quality or risk improvement. I report in the sponsor's language — money and risk — not token counts, and I am honest when the numbers do not justify scaling. That credibility is what gets the next phase funded.",
+          follow: [
+            "What would you do if adoption stalls after launch?",
+            "How do you attribute a saving when the process also changed?",
+            "How do you handle a sponsor who wants a headline number?",
+            "What is the strongest ROI case you have personally built?"
+          ]
+        },
+        {
+          id: "ai-17",
+          cat: "Behavioural",
+          q: "Tell me about an AI project that failed or underdelivered. What did you learn?",
+          insight: "They are testing honesty and self-awareness. A sanitised non-failure is a red flag at architect level.",
+          hint: [
+            "Pick a real failure with a clear cause, not a humble-brag.",
+            "Distinguish the technical cause from the organisational cause.",
+            "Show what you changed in your own method afterwards.",
+            "End with the generalisable lesson you now design against."
+          ],
+          terms: ["failure", "root cause", "scope", "data quality", "expectation", "lesson", "process"],
+          model: "An AI pilot I led underdelivered badly. The use case was contract review, and the accuracy was fine in the demo but the rollout stalled because the documents were messier than the sample, and legal did not trust an output they could not trace to a clause. The technical fix was better parsing and clause-level citations. The deeper failure was mine: I had validated with the innovation team rather than the people who would use it daily, and I had not defined what good looked like with them before building. I rebuilt it with a legal reviewer in the loop from week one, a golden set they helped label, and clause-level traceability. In the end it landed, but three months late. Now I never start without the real end users in the room and an agreed evaluation set, and I write down the adoption risks alongside the technical ones.",
+          follow: [
+            "How did you manage the sponsor when it slipped?",
+            "What would have caught the data quality issue earlier?",
+            "Did anyone blame you, and how did you handle it?",
+            "How do you decide when to kill a failing pilot?"
+          ]
+        },
+        {
+          id: "ai-18",
+          cat: "Market Awareness",
+          q: "How do you see AI architecture evolving in 2026, and what should an enterprise be planning for now?",
+          insight: "A seniority probe. They want a considered point of view, tied to practical implications, not a list of buzzwords.",
+          hint: [
+            "Name two or three shifts you actually see, with implications.",
+            "Candidates: agentic workflows, model commoditisation, evaluation and governance as the moat.",
+            "Talk about what is overhyped and where you would not invest yet.",
+            "Recommend concrete planning moves for the next 12 months."
+          ],
+          terms: ["agentic", "commoditisation", "evaluation", "governance", "interoperability", "cost curve", "planning"],
+          model: "Three shifts stand out. First, the model layer is commoditising — the differentiator is no longer which model you call, it is your data, retrieval and evaluation quality. Second, agentic workflows are moving from demos to narrow production use, and the blocker is not capability but trust: permissions, auditability and human approval gates. Third, governance is becoming a procurement requirement, with the EU AI Act and UK guidance pushing model documentation and oversight into mainstream enterprise architecture. What I think is overhyped is full autonomy across core systems — I would not put an agent in a position to move money or change production data without deterministic controls. For planning, I would advise enterprises to invest in three things now: an AI gateway with evaluation built in, a governed data and retrieval foundation, and an operating model where risk, security and engineering sit together from day one. That is the investment that survives whatever the next model release looks like.",
+          follow: [
+            "Which of those shifts would change your architecture most?",
+            "What would you not build yet, and why?",
+            "How would you prepare a team that has no AI experience?",
+            "What skill should every architect learn this year?"
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+const STORAGE_KEY = "interviewPrep2026.v1";
+const STRUCTURE_WORDS = ["because","for example","first","then","finally","result","outcome","however","so that","which meant","led to","measured","reduced","increased","i owned","i led","we delivered"];
+const state = {
+  roleIndex: 0,
+  cardIndex: 0,
+  flipped: false,
+  recording: false,
+  chat: {},
+  store: { role: "sd", answers: { sd: {}, ai: {} }, settings: { tts: true, autoAsk: true } }
+};
+const chatKey = (roleKey, id) => roleKey + ":" + id;
+
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      state.store = Object.assign(state.store, parsed);
+      state.store.answers = Object.assign({sd:{}, ai:{}}, parsed.answers || {});
+      state.store.settings = Object.assign({tts:true, autoAsk:true}, parsed.settings || {});
+    }
+    state.roleIndex = Math.max(0, DATA.roles.findIndex(r => r.key === state.store.role));
+  }catch(e){ console.warn("Could not load saved data", e); }
+}
+function saveStore(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state.store)); }
+  catch(e){ toast("Storage unavailable — answers will not persist"); }
+}
+const role = () => DATA.roles[state.roleIndex];
+const card = () => role().questions[state.cardIndex];
+const answerStore = () => state.store.answers[role().key];
+
+const $ = id => document.getElementById(id);
+function el(tag, cls, text){ const n = document.createElement(tag); if(cls) n.className = cls; if(text !== undefined) n.textContent = text; return n; }
+let toastTimer = null;
+function toast(msg){
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+const speechOK = !!SpeechRec;
+const ttsOK = "speechSynthesis" in window;
+let recognition = null;
+let preferredVoice = null;
+
+function pickVoice(){
+  if(!ttsOK) return;
+  const voices = speechSynthesis.getVoices();
+  if(!voices.length) return;
+  preferredVoice = voices.find(v => v.lang === "en-GB" && /female|serena|kate|sonia|libby/i.test(v.name))
+    || voices.find(v => v.lang === "en-GB")
+    || voices.find(v => v.lang && v.lang.startsWith("en"))
+    || voices[0];
+}
+function speak(text, onDone){
+  if(!ttsOK || !state.store.settings.tts || !text) { if(onDone) onDone(); return; }
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-GB"; u.rate = 1.0; u.pitch = 1.0;
+    if(preferredVoice) u.voice = preferredVoice;
+    u.onend = () => { if(onDone) onDone(); };
+    u.onerror = () => { if(onDone) onDone(); };
+    speechSynthesis.speak(u);
+  }catch(e){ if(onDone) onDone(); }
+}
+function stopSpeaking(){ if(ttsOK) try{ speechSynthesis.cancel(); }catch(e){} }
+
+function setupRecognition(){
+  if(!speechOK) return null;
+  const r = new SpeechRec();
+  r.lang = "en-GB";
+  r.continuous = true;
+  r.interimResults = true;
+  r.maxAlternatives = 1;
+  let finalText = "";
+  r.onstart = () => { $("live").textContent = "Listening… speak your answer."; };
+  r.onresult = e => {
+    let interim = "";
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      const t = e.results[i][0].transcript;
+      if(e.results[i].isFinal){ finalText += (finalText ? " " : "") + t.trim(); }
+      else { interim += t; }
+    }
+    if(finalText){
+      const box = $("answer");
+      box.value = (box.dataset.base ? box.dataset.base + " " : "") + finalText;
+      updateWordCount();
+    }
+    $("live").textContent = interim ? "…" + interim : "Listening…";
+  };
+  r.onerror = e => {
+    if(e.error === "not-allowed" || e.error === "service-not-allowed"){ toast("Microphone permission denied"); stopRecording(); }
+    else if(e.error === "no-speech"){ $("live").textContent = "No speech detected — still listening…"; }
+    else { $("live").textContent = "Voice error: " + e.error; }
+  };
+  r.onend = () => {
+    if(state.recording){ try{ r.start(); }catch(e){} }
+    else { $("live").textContent = ""; }
+  };
+  r.__reset = () => { finalText = ""; };
+  return r;
+}
+function startRecording(){
+  if(!speechOK){ toast("Voice transcription needs Chrome or Edge"); return; }
+  recognition = recognition || setupRecognition();
+  const box = $("answer");
+  box.dataset.base = box.value.trim();
+  recognition.__reset();
+  state.recording = true;
+  $("btnMic").classList.add("on");
+  $("btnMic").setAttribute("aria-pressed", "true");
+  $("btnMic").textContent = "■ Stop & transcribe";
+  try{ recognition.start(); }catch(e){}
+}
+function stopRecording(){
+  state.recording = false;
+  $("btnMic").classList.remove("on");
+  $("btnMic").setAttribute("aria-pressed", "false");
+  $("btnMic").textContent = "● Record voice answer";
+  if(recognition){ try{ recognition.stop(); }catch(e){} }
+  $("live").textContent = "";
+  updateWordCount();
+}
+function toggleRecording(){ state.recording ? stopRecording() : startRecording(); }
+
+function updateWordCount(){
+  const v = $("answer").value.trim();
+  const n = v ? v.split(/\s+/).length : 0;
+  $("wordCount").textContent = n + (n === 1 ? " word" : " words");
+}
+
+function renderRoles(){
+  const bar = $("rolebar");
+  bar.innerHTML = "";
+  DATA.roles.forEach((r, i) => {
+    const b = el("button", "roletab" + (i === state.roleIndex ? " active" : ""));
+    b.appendChild(el("strong", null, r.name));
+    b.appendChild(el("span", null, r.sub));
+    b.setAttribute("aria-pressed", i === state.roleIndex ? "true" : "false");
+    b.onclick = () => {
+      if(state.recording) stopRecording();
+      state.roleIndex = i;
+      state.cardIndex = 0; state.flipped = false;
+      state.store.role = r.key; saveStore();
+      renderAll(); askQuestion();
+    };
+    bar.appendChild(b);
+  });
+}
+
+function renderCard(){
+  const r = role(), c = card();
+  $("deckTitle").textContent = r.name + " — flashcards";
+  $("cardCat").textContent = c.cat;
+  $("cardIdx").textContent = (state.cardIndex + 1) + " / " + r.questions.length;
+  const front = $("frontCat"); front.innerHTML = "";
+  front.appendChild(el("span", "chip", c.cat));
+  front.appendChild(el("span", "chip", "Q" + (state.cardIndex + 1)));
+  if(/ir35|compliance/i.test(c.cat)) front.appendChild(el("span", "chip hot", "Inside IR35"));
+  $("frontNum").textContent = "Question " + (state.cardIndex + 1) + " of " + r.questions.length;
+  $("frontQ").textContent = c.q;
+  $("backInsight").textContent = c.insight;
+  const hints = $("backHints"); hints.innerHTML = "";
+  c.hint.forEach(h => hints.appendChild(el("li", null, h)));
+  const terms = $("backTerms"); terms.innerHTML = "";
+  c.terms.forEach(t => terms.appendChild(el("span", "term", t)));
+  $("backModel").textContent = c.model;
+  $("card").classList.toggle("flipped", state.flipped);
+  const saved = answerStore()[c.id];
+  $("answer").value = saved ? saved.answer : "";
+  $("answer").dataset.base = "";
+  updateWordCount();
+  renderDots();
+}
+function renderDots(){
+  const wrap = $("dots"); wrap.innerHTML = "";
+  const store = answerStore();
+  role().questions.forEach((q, i) => {
+    const d = el("button", "dot", String(i + 1));
+    const rec = store[q.id];
+    if(rec) d.classList.add("answered");
+    if(rec && typeof rec.score === "number") d.classList.add("scored");
+    if(i === state.cardIndex) d.classList.add("current");
+    d.title = q.cat + " — " + q.q.slice(0, 70);
+    d.onclick = () => { state.cardIndex = i; state.flipped = false; renderCard(); renderStats(); renderChat(); askQuestion(); };
+    wrap.appendChild(d);
+  });
+}
+function renderStats(){
+  const qs = role().questions;
+  const store = answerStore();
+  const answered = qs.filter(q => store[q.id] && store[q.id].answer && store[q.id].answer.trim()).length;
+  const scored = qs.map(q => store[q.id]).filter(r => r && typeof r.score === "number");
+  const avg = scored.length ? Math.round(scored.reduce((a, b) => a + b.score, 0) / scored.length) : null;
+  $("statProgress").textContent = answered + " / " + qs.length;
+  $("statAnswered").textContent = answered;
+  $("statAvg").textContent = avg === null ? "–" : avg + " / 100";
+  $("statCard").textContent = state.cardIndex + 1;
+  $("statTotal").textContent = qs.length;
+  $("savedCount").textContent = String(answered);
+  renderSaved();
+}
+function renderSaved(){
+  const wrap = $("savedList"); wrap.innerHTML = "";
+  const store = answerStore();
+  const items = role().questions.map((q, i) => ({ q, i, rec: store[q.id] })).filter(x => x.rec && x.rec.answer);
+  if(!items.length){ wrap.appendChild(el("span", "hintline", "Nothing saved yet for this role.")); return; }
+  items.forEach(({ q, i, rec }) => {
+    const it = el("div", "saved-item");
+    const t = el("div", "t");
+    t.appendChild(el("span", null, "Q" + (i + 1) + " · " + q.cat));
+    if(typeof rec.score === "number"){
+      const cls = rec.score >= 75 ? "good" : rec.score >= 50 ? "mid" : "bad";
+      t.appendChild(el("span", "pill " + cls, rec.score + "/100"));
+    }
+    it.appendChild(t);
+    it.appendChild(el("div", "p", rec.answer));
+    it.onclick = () => {
+      state.cardIndex = i; state.flipped = false;
+      renderCard(); renderStats(); renderChat(); askQuestion();
+      $("answer").focus();
+    };
+    wrap.appendChild(it);
+  });
+}
+
+function renderChat(){
+  const chat = $("chat"); chat.innerHTML = "";
+  const key = chatKey(role().key, card().id);
+  const saved = answerStore()[card().id];
+  if(!state.chat[key] && saved && Array.isArray(saved.chat) && saved.chat.length) state.chat[key] = saved.chat;
+  const msgs = state.chat[key] || [];
+  if(!msgs.length){
+    const d = el("div", "msg system");
+    d.appendChild(el("div", "who", "Setup"));
+    d.appendChild(el("div", null, "Answer out loud or in writing, then press Submit to interviewer. You will get acknowledgements, real follow-up probes and a final verdict."));
+    chat.appendChild(d);
+    return;
+  }
+  msgs.forEach(m => chat.appendChild(makeMsg(m.who, m.text, m.cls, m.extra)));
+  chat.scrollTop = chat.scrollHeight;
+}
+function makeMsg(who, text, cls, extra){
+  const d = el("div", "msg " + cls);
+  d.appendChild(el("div", "who", who));
+  d.appendChild(el("div", null, text));
+  if(extra){
+    if(extra.meter !== undefined){
+      const bar = el("div", "scorebar");
+      const m = el("div", "meter"); const i = el("i"); i.style.width = extra.meter + "%"; m.appendChild(i);
+      bar.appendChild(m); bar.appendChild(el("b", null, extra.meter + "/100"));
+      d.appendChild(bar);
+    }
+    if(extra.checks && extra.checks.length){
+      const c = el("div", "checklist");
+      extra.checks.forEach(x => c.appendChild(el("span", "check " + (x.ok ? "ok" : "miss"), (x.ok ? "✓ " : "✗ ") + x.label)));
+      d.appendChild(c);
+    }
+  }
+  return d;
+}
+
+function analyze(a, b){
+  const text = " " + a.toLowerCase() + " ";
+  const words = a.trim() ? a.trim().split(/\s+/).length : 0;
+  const found = b.terms.filter(t => text.includes(t.toLowerCase()));
+  const missing = b.terms.filter(t => !text.includes(t.toLowerCase()));
+  const hasNumbers = /\d/.test(a);
+  const structure = STRUCTURE_WORDS.filter(w => text.includes(w)).length;
+  let score = 0;
+  if(words > 12) score += 10;
+  score += Math.min(30, Math.round(words / 2));
+  score += Math.round((found.length / b.terms.length) * 35);
+  if(hasNumbers) score += 10;
+  score += Math.min(15, structure * 3);
+  score = Math.max(5, Math.min(100, score));
+  return { words, found, missing, hasNumbers, structure, score };
+}
+function pick(arr, seed){ return arr[Math.abs(seed) % arr.length]; }
+
+function submitToInterviewer(){
+  const a = $("answer").value.trim();
+  if(!a){ toast("Add or record an answer first"); return; }
+  if(state.recording) stopRecording();
+  const r = role(), c = card();
+  const key = chatKey(r.key, c.id);
+  const msgs = state.chat[key] || (state.chat[key] = []);
+  const rec = answerStore()[c.id] || {};
+  const probeIndex = rec.probeIndex || 0;
+  const an = analyze(a, c);
+
+  msgs.push({ who: "You", text: a.length > 600 ? a.slice(0, 600) + " …" : a, cls: "candidate" });
+
+  const words = an.words;
+  let opener;
+  if(words < 20) opener = pick([
+    "Thanks — but that was very brief. In a London screening call the recruiter will keep pushing, and a 20-word answer reads as experience on paper only. Let me test the depth.",
+    "That is a headline, not an answer. For a contract at this level the client is paying for the detail behind it."
+  ], probeIndex + words);
+  else if(an.score >= 75) opener = pick([
+    "Good — that is close to interview-ready. Let me stress-test one part of it.",
+    "Thanks, that lands well. I would put you through on that, with one clarification."
+  ], probeIndex + an.score);
+  else if(an.score >= 50) opener = "Thanks, that is a solid base. I would want more specifics before I put you forward, so let me probe.";
+  else opener = "Thanks. There is something there, but a client would not be convinced yet. Let me push on the gaps.";
+
+  const bits = [];
+  if(an.found.length) bits.push("You covered " + an.found.slice(0, 4).join(", ") + ".");
+  if(an.hasNumbers) bits.push("I liked that you quantified it — keep doing that.");
+  else if(words > 25) bits.push("One thing missing: numbers. Rate, years, users, latency, cost. Contract clients buy evidence.");
+  if(an.structure >= 2) bits.push("Your structure came through clearly.");
+  if(an.missing.length) bits.push("I did not hear: " + an.missing.slice(0, 4).join(", ") + ".");
+
+  const observation = bits.join(" ");
+  let extra = null;
+  if(an.found.length || an.missing.length){
+    extra = { checks: c.terms.map(t => ({ label: t, ok: an.found.includes(t) })) };
+  }
+
+  msgs.push({ who: "Interviewer", text: opener + (observation ? " " + observation : ""), cls: "interviewer", extra });
+
+  let nextProbe = probeIndex;
+  if(probeIndex < c.follow.length){
+    msgs.push({ who: "Interviewer", text: "Follow-up: " + c.follow[probeIndex], cls: "interviewer" });
+    nextProbe = probeIndex + 1;
+  } else {
+    const verdict = an.score >= 75
+      ? "That is a strong answer. If the technical stage goes like this, you will be put forward. Keep the numbers and the structure."
+      : an.score >= 50
+        ? "That is a pass at screening level, but the client will want more depth on the points I flagged. Practise this one again and add specifics."
+        : "I would not submit that yet. Rewrite it with the interviewer-intent points on the back of the card, then run it past me again.";
+    const advice = an.missing.length ? " Points to add next time: " + an.missing.join(", ") + "." : "";
+    msgs.push({ who: "Interviewer verdict", text: verdict + advice, cls: "verdict", extra: { meter: an.score, checks: c.terms.map(t => ({ label: t, ok: an.found.includes(t) })) } });
+    nextProbe = 0;
+  }
+
+  const existing = answerStore()[c.id] || {};
+  answerStore()[c.id] = Object.assign(existing, {
+    answer: a,
+    score: an.score,
+    found: an.found,
+    missing: an.missing,
+    probeIndex: nextProbe,
+    updatedAt: new Date().toISOString(),
+    chat: msgs.slice(-14)
+  });
+  saveStore();
+  renderChat(); renderStats(); renderDots();
+
+  const last = msgs[msgs.length - 1];
+  const speakable = msgs.filter(m => m.cls === "interviewer" || m.cls === "verdict").slice(-2).map(m => m.text).join(" ");
+  if(speakable) speak(speakable);
+  toast(last.cls === "verdict" ? "Interviewer gave a verdict — saved with your answer" : "Interviewer responded — saved with your answer");
+}
+
+function askQuestion(){
+  if(!state.store.settings.autoAsk) return;
+  const c = card();
+  speak("Question " + (state.cardIndex + 1) + ". " + c.q);
+}
+
+function renderAll(){
+  renderRoles(); renderCard(); renderStats(); renderChat();
+  $("ttsToggle").checked = state.store.settings.tts;
+  $("autoAsk").checked = state.store.settings.autoAsk;
+}
+
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); toast("Copied to clipboard"); }
+  catch(e){ toast("Copy blocked by browser"); }
+}
+function download(name, text, type){
+  const blob = new Blob([text], { type: type || "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function buildMarkdown(){
+  let out = "# Interview Prep 2026 — London Inside IR35\n\nGenerated " + new Date().toLocaleString("en-GB") + "\n";
+  DATA.roles.forEach(r => {
+    const store = state.store.answers[r.key] || {};
+    const answered = r.questions.filter(q => store[q.id] && store[q.id].answer);
+    out += "\n## " + r.name + " (" + r.sub + ")\n\nProgress: " + answered.length + " / " + r.questions.length + "\n";
+    r.questions.forEach((q, i) => {
+      const rec = store[q.id];
+      out += "\n### Q" + (i + 1) + ". " + q.q + "\n";
+      out += "\n**Category:** " + q.cat + "\n";
+      if(rec && rec.answer){
+        out += "\n**My answer:**\n\n" + rec.answer + "\n";
+        if(typeof rec.score === "number") out += "\n**Interviewer score:** " + rec.score + "/100\n";
+        if(rec.found && rec.found.length) out += "\n**Covered:** " + rec.found.join(", ") + "\n";
+        if(rec.missing && rec.missing.length) out += "\n**Missing:** " + rec.missing.join(", ") + "\n";
+      } else {
+        out += "\n**My answer:** _not answered yet_\n";
+      }
+      out += "\n**Model answer:** " + q.model + "\n";
+      out += "\n**Follow-up probes:** " + q.follow.join(" | ") + "\n";
+    });
+  });
+  return out;
+}
+
+function nextCard(step){
+  if(state.recording) stopRecording();
+  const n = role().questions.length;
+  state.cardIndex = (state.cardIndex + step + n) % n;
+  state.flipped = false;
+  renderCard(); renderStats(); renderChat(); askQuestion();
+}
+function shuffleCard(){
+  if(state.recording) stopRecording();
+  const n = role().questions.length;
+  if(n < 2) return;
+  let i = state.cardIndex;
+  while(i === state.cardIndex) i = Math.floor(Math.random() * n);
+  state.cardIndex = i; state.flipped = false;
+  renderCard(); renderStats(); renderChat(); askQuestion();
+}
+function saveAnswer(silent){
+  const a = $("answer").value.trim();
+  if(!a){ toast("Nothing to save"); return; }
+  const c = card();
+  const existing = answerStore()[c.id] || {};
+  answerStore()[c.id] = Object.assign(existing, { answer: a, updatedAt: new Date().toISOString() });
+  saveStore(); renderStats(); renderDots();
+  if(!silent) toast("Answer saved");
+}
+
+function bind(){
+  $("card").onclick = () => { state.flipped = !state.flipped; $("card").classList.toggle("flipped", state.flipped); };
+  $("card").onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); $("card").click(); } };
+  $("btnPrev").onclick = () => nextCard(-1);
+  $("btnNext").onclick = () => nextCard(1);
+  $("btnShuffle").onclick = shuffleCard;
+  $("btnSpeakQ").onclick = () => speak(card().q);
+  $("btnModel").onclick = () => { state.flipped = true; $("card").classList.add("flipped"); speak(card().model); };
+  $("btnMic").onclick = toggleRecording;
+  $("btnClear").onclick = () => { $("answer").value = ""; $("answer").dataset.base = ""; updateWordCount(); };
+  $("btnSave").onclick = () => saveAnswer(false);
+  $("btnSubmit").onclick = submitToInterviewer;
+  $("btnClearChat").onclick = () => { state.chat[chatKey(role().key, card().id)] = []; renderChat(); };
+  $("btnSaveTranscript").onclick = () => {
+    const msgs = state.chat[chatKey(role().key, card().id)] || [];
+    if(!msgs.length){ toast("No role play to save yet"); return; }
+    const existing = answerStore()[card().id] || {};
+    answerStore()[card().id] = Object.assign(existing, { chat: msgs.slice(-14), updatedAt: new Date().toISOString() });
+    saveStore(); toast("Transcript saved with this question");
+  };
+  $("answer").addEventListener("input", updateWordCount);
+  $("ttsToggle").onchange = e => {
+    state.store.settings.tts = e.target.checked; saveStore();
+    if(!e.target.checked) stopSpeaking();
+  };
+  $("autoAsk").onchange = e => { state.store.settings.autoAsk = e.target.checked; saveStore(); };
+  $("btnExportMd").onclick = () => download("interview-prep-2026.md", buildMarkdown());
+  $("btnExportJson").onclick = () => download("interview-prep-2026.json", JSON.stringify(state.store, null, 2), "application/json");
+  $("btnReset").onclick = () => {
+    if(!confirm("Clear all saved answers for " + role().name + "?")) return;
+    state.store.answers[role().key] = {};
+    Object.keys(state.chat).filter(k => k.startsWith(role().key + ":")).forEach(k => delete state.chat[k]);
+    saveStore(); renderCard(); renderStats(); renderChat();
+    toast("Cleared " + role().name + " answers");
+  };
+  document.addEventListener("keydown", e => {
+    const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+    if(typing) return;
+    if(e.key === "ArrowRight") nextCard(1);
+    if(e.key === "ArrowLeft") nextCard(-1);
+    if(e.key.toLowerCase() === "f") { state.flipped = !state.flipped; $("card").classList.toggle("flipped", state.flipped); }
+    if(e.key.toLowerCase() === "m") toggleRecording();
+  });
+}
+
+function init(){
+  loadStore();
+  const badge = $("voiceBadge");
+  if(speechOK){ badge.textContent = "Voice transcription: ready"; badge.classList.add("live"); }
+  else { badge.textContent = "Voice: use Chrome/Edge"; }
+  $("micHint").textContent = speechOK
+    ? "Voice answers are transcribed in the browser (Chrome/Edge, en-GB) and saved with your answer. Nothing is uploaded."
+    : "This browser cannot transcribe. Open in Chrome or Edge for voice answers, or type instead.";
+  if(ttsOK){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  bind();
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
