@@ -211,6 +211,19 @@
     </div>
   </header>
 
+  <div style="background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(129,140,248,0.22));border:1px solid rgba(56,189,248,0.45);border-radius:var(--radius);padding:14px 18px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:var(--shadow);">
+    <div style="display:flex;align-items:center;gap:14px">
+      <span style="font-size:26px">⚡</span>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff">Morgan Stanley &amp; TCS — AI Engineer 2-Option Animated Quiz Mode</div>
+        <div style="font-size:12.5px;color:var(--muted)">Interactive 2-Choice Flashcards with live scoring, sound FX, and deep technical rationales from the Morgan Stanley portfolio.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="quiz.html" class="btn primary" style="font-weight:600;text-decoration:none;padding:8px 16px;box-shadow:0 4px 15px rgba(56,189,248,0.3)">Launch Animated Quiz (2-Option) →</a>
+    </div>
+  </div>
+
   <div class="rolebar" id="rolebar"></div>
 
   <div class="rolebar">
@@ -1085,6 +1098,166 @@ const DATA = {
             "What would you not build yet, and why?",
             "How would you prepare a team that has no AI experience?",
             "What skill should every architect learn this year?"
+          ]
+        }
+      ]
+    },
+    {
+      key: "mstcs",
+      name: "AI Engineer (Morgan Stanley & TCS)",
+      sub: "Enterprise Banking · London · UK SC & NATO",
+      blurb: "Tier-1 Investment Banking AI Engineering: Production RAG at 10M+ scale, LangGraph agentics, -60% latency benchmarks, and regulated governance.",
+      questions: [
+        {
+          id: "ms-01",
+          cat: "Profile & Governance",
+          q: "Walk me through your enterprise AI engineering profile and how your UK SC & NATO clearance applies to Morgan Stanley / TCS deployments.",
+          insight: "The panel wants to hear that you have delivered production AI in regulated Tier-1 banking, and that your security clearances eliminate onboarding risk for sovereign infrastructure.",
+          hint: [
+            "Highlight production delivery across Goldman Sachs environments.",
+            "State active UK SC (valid to 2028) and NATO secret clearance (valid to 2029).",
+            "Reference RAG architectures at 10M+ document scale.",
+            "Confirm availability for London 3 days on-site contract engagement."
+          ],
+          terms: ["goldman sachs", "clearance", "sc", "nato", "production", "10m", "governance"],
+          model: "I am an enterprise AI engineer specializing in production LLM architectures and RAG systems for Tier-1 investment banking. I hold active UK SC clearance valid to 2028 and NATO clearance to 2029, meaning zero onboarding delay for restricted banking infrastructure and private models. My production track record includes architecting RAG pipelines across Goldman Sachs environments indexing over 10 million enterprise documents, delivering a 60% reduction in retrieval latency and 50% API cost savings through semantic caching. I am fully available for the London 3-day on-site model and comfortable delivering inside IR35 under TCS and Morgan Stanley technical governance.",
+          follow: [
+            "How does your clearance impact where and how models can be deployed?",
+            "What scale of concurrent users did your Goldman Sachs deployment support?",
+            "How do you ensure bank data never leaks to public model APIs?"
+          ]
+        },
+        {
+          id: "ms-02",
+          cat: "Retrieval Engineering",
+          q: "How do you design an enterprise RAG pipeline for Morgan Stanley that handles millions of documents without hallucinating?",
+          insight: "They are testing whether you understand banking retrieval beyond toy vector demos. They want to hear about hybrid search, hierarchical splitting, and precision-first re-ranking.",
+          hint: [
+            "Hybrid search: Dense semantic vectors paired with BM25 keyword matching.",
+            "Context-aware chunking: Hierarchical markdown and semantic document splitting.",
+            "Re-ranking & filtration: Cross-encoder scoring prioritizing precision over recall.",
+            "Access control: Enterprise RBAC filtering before generation."
+          ],
+          terms: ["hybrid", "bm25", "dense", "chunking", "cross-encoder", "precision", "rbac", "hallucination"],
+          model: "I design RAG as a multi-tier filtered pipeline rather than a single vector lookup. Ingestion uses context-aware chunking — hierarchical markdown splitting so tables, headers, and financial footnotes retain their semantic boundaries. Retrieval is hybrid: dense vectors for conceptual search paired with BM25 for exact financial tickers, contract clause numbers, and ISINs. The candidate pool passes through a cross-encoder re-ranker configured to prioritize precision over recall — in banking, returning nothing is far safer than feeding noisy false positives into the generator. Finally, we apply enterprise RBAC filtering at the index level, ensuring users never retrieve context from documents they do not have clearance to inspect.",
+          follow: [
+            "Why prioritize precision over recall in financial RAG?",
+            "How do you benchmark whether BM25 or dense retrieval performs better on tickers?",
+            "How do you handle tables with merged cells and balance sheets?"
+          ]
+        },
+        {
+          id: "ms-03",
+          cat: "Production Benchmarks",
+          q: "What quantified benchmarks and ROI have you achieved in production enterprise AI deployments?",
+          insight: "Contract clients buy measured outcomes, not promises. They want hard numbers on latency, precision, deployment velocity, and cost.",
+          hint: [
+            "-60% retrieval latency via vector search pipeline optimization.",
+            "+40% context precision from domain-specific chunking.",
+            "300% deployment velocity using CI/CD agentic frameworks.",
+            "-50% token API costs via aggressive semantic caching."
+          ],
+          terms: ["60%", "40%", "300%", "50%", "latency", "precision", "caching", "cost"],
+          model: "In my recent banking delivery, we measured four concrete benchmarks. First, we cut retrieval latency by 60% through index optimization and local embedded vector caching. Second, we boosted context precision by 40% using domain-specific chunking instead of blind character slicing. Third, we achieved a 300% increase in deployment velocity using a CI/CD agentic framework that automated unit tests and security reviews. Fourth, we reduced external LLM token API costs by 50% by introducing an aggressive semantic caching layer that intercepts recurring financial queries and serves evaluated responses with zero latency.",
+          follow: [
+            "How does your semantic cache invalidate when banking data updates?",
+            "How do you measure context precision in automated pipelines?",
+            "What was the baseline deployment frequency before the 300% increase?"
+          ]
+        },
+        {
+          id: "ms-04",
+          cat: "Multi-Agent Systems",
+          q: "How do you architect multi-agent systems and prevent hallucinated tool execution in banking workflows?",
+          insight: "They want to know if you can orchestrate agents with state graphs (LangGraph/CrewAI) and enforce deterministic boundaries with schemas and MCP.",
+          hint: [
+            "LangGraph: Cyclic state graphs with checkpoint persistence and deterministic routing.",
+            "ReAct: Schema-enforced function calling patterns (Pydantic) for zero hallucinated inputs.",
+            "MCP Integration: Model Context Protocol for decoupled integrations.",
+            "Human-in-the-loop: Checkpoints requiring human sign-off on transactions."
+          ],
+          terms: ["langgraph", "cyclic", "checkpoint", "deterministic", "schema", "mcp", "hallucinated"],
+          model: "I do not use linear chains for autonomous agents. I build with LangGraph using cyclic state graphs with checkpoint persistence. This allows state to be saved, reviewed, and deterministically routed back if a tool execution fails. To prevent hallucinated tool inputs, I enforce strict schema validation using Pydantic contracts on every function call — if a model outputs an invalid parameter or unknown account identifier, the schema validator intercepts it before execution. Furthermore, I implement the Model Context Protocol (MCP) to standardize tool interfaces, decoupling our banking databases from any specific model vendor, with explicit human-in-the-loop approval gates before any state modification.",
+          follow: [
+            "What happens when an agent enters an infinite loop in LangGraph?",
+            "Why is MCP preferable to proprietary vendor tool calling?",
+            "How do you audit agent actions for banking compliance?"
+          ]
+        },
+        {
+          id: "ms-05",
+          cat: "Developer Acceleration",
+          q: "How do you implement GitHub Copilot Enterprise and Claude Code across development teams safely?",
+          insight: "Morgan Stanley cares deeply about engineering acceleration without secret leakage or unregulated AI code entering core systems.",
+          hint: [
+            "GitHub Copilot Enterprise: Standardized '.github/copilot-instructions' in repos.",
+            "Automated unit and regression test synthesis.",
+            "Pre-commit static security analysis and review agents.",
+            "Claude Code: Terminal agentics for autonomous refactoring with safe coding rules."
+          ],
+          terms: ["copilot", "copilot-instructions", "claude code", "terminal", "secret", "security", "refactoring"],
+          model: "We deploy GitHub Copilot Enterprise with centralized governance: every repository contains a standardized '.github/copilot-instructions' file defining our architectural patterns, preferred libraries, and security rules. We use Copilot for automated unit and regression test scaffolding, which raises coverage without dev toil. For complex refactoring, we leverage Claude Code for terminal agentics — autonomous multi-file edits running inside developer workstations with strict pre-commit static analysis to block secret leakage or insecure dependencies. I back this with structured developer onboarding workshops so teams write prompts that yield compliant code.",
+          follow: [
+            "How do you stop developers from leaking credentials via AI tools?",
+            "What metrics prove Copilot actually improves code quality?",
+            "How do you prevent Copilot from generating vulnerable dependencies?"
+          ]
+        },
+        {
+          id: "ms-06",
+          cat: "Evaluation & Observability",
+          q: "How do you evaluate RAG and model performance to guarantee zero-regression deployments in production?",
+          insight: "In banking, you cannot release an AI update without proof. They want to hear about RAGAS, golden datasets, LangSmith telemetry, and cost-efficient tuning.",
+          hint: [
+            "RAGAS Framework: Faithfulness and answer relevancy tracking.",
+            "Zero regression deployments via CI/CD test gates.",
+            "LangSmith Telemetry: End-to-end trace latency and token cost audits.",
+            "LoRA / QLoRA Tuning: 35% cost optimization for parameter-efficient adaptation."
+          ],
+          terms: ["ragas", "faithfulness", "relevancy", "langsmith", "telemetry", "lora", "qlora", "audit"],
+          model: "We run a dual evaluation harness: offline in CI/CD and online in production. In CI, we use the RAGAS framework running against a golden dataset labelled by financial domain experts. We measure retrieval recall, context precision, answer faithfulness, and answer relevancy — if faithfulness dips below our threshold, the release is blocked. For online observability, we use LangSmith telemetry to record complete execution traces, token consumption, and latency waterfalls for every request, creating a regulatory audit trail. When adapting models to bank domain data, we use parameter-efficient LoRA and QLoRA tuning, which achieved 35% cost optimization compared to full parameter fine-tuning.",
+          follow: [
+            "What is the difference between answer faithfulness and answer relevancy?",
+            "How do you create the golden dataset with domain traders?",
+            "How do you detect silent model degradation from upstream API changes?"
+          ]
+        },
+        {
+          id: "ms-07",
+          cat: "Security & Risk",
+          q: "How do you defend against prompt injection and ensure PII compliance in banking LLM architectures?",
+          insight: "Financial institutions face severe regulatory penalties for data leakage or prompt jailbreaks. They need defense-in-depth.",
+          hint: [
+            "Automated regex and NER (Named Entity Recognition) sanitization at the gateway.",
+            "Injection defense: 95% precision prompt guardrails.",
+            "Air-gapped models and private VPC endpoints.",
+            "UK SC and NATO security protocols."
+          ],
+          terms: ["pii", "ner", "regex", "guardrails", "injection", "95%", "sanitization"],
+          model: "We apply defense-in-depth at the gateway layer before any data reaches the model. First, PII redaction: all incoming queries and retrieved documents pass through automated regex and fine-tuned NER models that sanitize account numbers, customer names, and National Insurance numbers. Second, prompt injection defense: we deploy 95% precision prompt guardrails that analyze syntactic and semantic anomalies to detect jailbreaks and indirect injection embedded in external documents. Finally, we run models in private VPCs with strict egress controls, ensuring zero model data retention and meeting the compliance standards demanded by our UK SC and NATO clearance frameworks.",
+          follow: [
+            "How do you handle indirect prompt injection in third-party PDFs?",
+            "What is your latency overhead for running NER sanitization?",
+            "What happens when the guardrail triggers a false positive on a legitimate prompt?"
+          ]
+        },
+        {
+          id: "ms-08",
+          cat: "Delivery Strategy",
+          q: "What is your 90-day delivery roadmap for Morgan Stanley as an incoming AI Engineer?",
+          insight: "Contractors must hit the ground running. They want a crisp, phased delivery plan that balances speed with banking guardrails.",
+          hint: [
+            "Days 1-30: Discovery & Guardrails (audit repos, models, compliance).",
+            "Days 31-60: RAG & Agent Pipelines (deploy production vector indexes and copilots).",
+            "Days 61-90: Team Enablement & Scale (Copilot mentorship, telemetry governance).",
+            "Inside IR35 contract delivery mindset."
+          ],
+          terms: ["1-30", "31-60", "61-90", "discovery", "guardrails", "pipelines", "enablement", "roadmap"],
+          model: "My 90-day execution roadmap is divided into three distinct phases. Days 1 to 30 focus on Discovery and Guardrails: auditing existing repositories, vector stores, and compliance boundaries, establishing our .github/copilot-instructions, and standing up the RAGAS golden test harness. Days 31 to 60 focus on RAG and Agent Pipelines: deploying our hybrid search vector indexes with BM25, configuring cross-encoder re-rankers, and building LangGraph agent workflows with Pydantic tool validation. Days 61 to 90 focus on Team Enablement and Scale: rolling out Claude Code and Copilot mentorship workshops, embedding LangSmith telemetry dashboards, and delivering audited, production-grade AI services to the business.",
+          follow: [
+            "What quick wins will you deliver in your first two weeks?",
+            "Who are the key stakeholders you engage in Days 1 to 30?",
+            "How do you measure success at the end of the 90-day contract term?"
           ]
         }
       ]

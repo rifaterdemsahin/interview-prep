@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morgan Stanley &amp; TCS — AI Engineer Interview Prep Quiz (Animated 2-Choice Flashcards)</title>
+<meta name="description" content="Animated 2-option interactive flashcard quiz based on Rifat's AI Engineer Portfolio for Morgan Stanley & TCS. Production RAG, Multi-Agent, Benchmarks & Banking Governance.">
+<style>
+  :root {
+    --bg: #070b14;
+    --bg-grad: radial-gradient(1200px 600px at 15% -10%, rgba(56, 125, 255, 0.18), transparent 65%),
+               radial-gradient(1000px 600px at 85% 0%, rgba(138, 77, 255, 0.16), transparent 60%),
+               #070b14;
+    --panel: #0f172a;
+    --panel-sub: #162038;
+    --panel-border: #223254;
+    --panel-border-bright: #3a538a;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #38bdf8;
+    --accent-indigo: #818cf8;
+    --accent-grad: linear-gradient(135deg, #38bdf8, #818cf8);
+    --good: #10b981;
+    --good-bg: rgba(16, 185, 129, 0.16);
+    --good-border: rgba(16, 185, 129, 0.5);
+    --bad: #f43f5e;
+    --bad-bg: rgba(244, 63, 94, 0.15);
+    --bad-border: rgba(244, 63, 94, 0.5);
+    --warn: #f59e0b;
+    --radius: 18px;
+    --radius-sm: 10px;
+    --shadow-lg: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100vh; }
+  body {
+    background: var(--bg-grad);
+    color: var(--text);
+    font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+
+  .app-wrap {
+    width: 100%;
+    max-width: 980px;
+    padding: 24px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Header */
+  header.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 22px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .brand-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .brand-title {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-title span.client {
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn {
+    border: 1px solid var(--panel-border);
+    background: var(--panel-sub);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .btn:hover {
+    border-color: var(--accent);
+    background: #1c2b4c;
+    transform: translateY(-1px);
+  }
+  .btn.primary {
+    background: linear-gradient(135deg, #0284c7, #6366f1);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+  }
+  .btn.primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+  .btn.icon-only {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Badges bar */
+  .badge-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--panel-border);
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-muted);
+  }
+  .tag.highlight {
+    border-color: rgba(56, 189, 248, 0.4);
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.08);
+  }
+  .tag.security {
+    border-color: rgba(16, 185, 129, 0.4);
+    color: var(--good);
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  /* Dashboard / Stats Banner */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--panel-border);
+  }
+  .stat-card.active-stat::after {
+    background: var(--accent-grad);
+  }
+  .stat-label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .stat-val small {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Progress tracker */
+  .progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--panel-sub);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-grad);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Topic filters */
+  .filter-strip {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+  .filter-btn {
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--panel-border);
+    background: rgba(15, 23, 42, 0.5);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .filter-btn:hover {
+    border-color: var(--panel-border-bright);
+    color: var(--text);
+  }
+  .filter-btn.active {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Flashcard Scene & 3D Flip */
+  .card-container {
+    perspective: 1200px;
+    width: 100%;
+    min-height: 480px;
+    position: relative;
+  }
+  .quiz-card {
+    width: 100%;
+    min-height: 480px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+    transform-style: preserve-3d;
+  }
+  .quiz-card.is-flipped {
+    transform: rotateY(180deg);
+  }
+  .quiz-card.shake {
+    animation: shakeAnim 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  @keyframes shakeAnim {
+    10%, 90% { transform: translate3d(-2px, 0, 0); }
+    20%, 80% { transform: translate3d(4px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+    40%, 60% { transform: translate3d(6px, 0, 0); }
+  }
+
+  .card-face {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .card-face.face-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(180deg, #111a31 0%, #0c1424 100%);
+    overflow-y: auto;
+  }
+
+  /* Front Face Design */
+  .card-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+  .card-topic-tag {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .slide-ref-badge {
+    font-size: 11.5px;
+    color: var(--text-dim);
+    background: var(--panel-sub);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--panel-border);
+  }
+
+  .question-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    margin: 10px 0 25px;
+  }
+  .question-num {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+  .question-text {
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #fff;
+    margin: 0;
+  }
+
+  /* Two Options Layout - Strictly 2 choices */
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: auto;
+  }
+  @media (max-width: 680px) {
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .option-btn {
+    border: 1px solid var(--panel-border);
+    background: var(--panel-sub);
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    outline: none;
+  }
+  .option-btn:hover {
+    border-color: var(--accent);
+    background: #192645;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  .option-btn:active {
+    transform: translateY(-1px);
+  }
+
+  .opt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .opt-key {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .opt-letter {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .opt-text {
+    font-size: 14.5px;
+    line-height: 1.4;
+    color: var(--text);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* Option Selected States */
+  .option-btn.selected-correct {
+    background: var(--good-bg) !important;
+    border-color: var(--good) !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.35) !important;
+  }
+  .option-btn.selected-wrong {
+    background: var(--bad-bg) !important;
+    border-color: var(--bad) !important;
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.35) !important;
+  }
+  .option-btn.reveal-correct {
+    border-color: var(--good) !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+  }
+
+  /* Back Face Content */
+  .verdict-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .verdict-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .verdict-pill.correct {
+    background: var(--good-bg);
+    border: 1px solid var(--good-border);
+    color: var(--good);
+  }
+  .verdict-pill.wrong {
+    background: var(--bad-bg);
+    border: 1px solid var(--bad-border);
+    color: var(--bad);
+  }
+
+  .back-details {
+    margin: 18px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .detail-block {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .detail-block h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .detail-block p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #e2e8f0;
+  }
+  .speaking-tip {
+    border-left: 3px solid var(--accent);
+    background: rgba(56, 189, 248, 0.08);
+  }
+  .speaking-tip h4 { color: var(--accent); }
+
+  .slide-citation-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    background: #0d1527;
+    border: 1px dashed var(--panel-border-bright);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 4px;
+  }
+  .slide-view-btn {
+    color: var(--accent);
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .back-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--panel-border);
+    margin-top: auto;
+  }
+  .btn-flip-back {
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px 10px;
+  }
+  .btn-flip-back:hover { color: var(--text); }
+
+  /* Completion Modal / Screen */
+  .completion-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(7, 11, 20, 0.92);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .completion-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .completion-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border-bright);
+    border-radius: var(--radius);
+    max-width: 580px;
+    width: 100%;
+    padding: 36px 30px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--accent);
+    background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 70%);
+    box-shadow: var(--shadow-glow);
+  }
+  .score-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .score-total {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .completion-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .tier-badge {
+    align-self: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(129, 140, 248, 0.15);
+    border: 1px solid rgba(129, 140, 248, 0.4);
+    color: var(--accent-indigo);
+  }
+  .completion-breakdown {
+    text-align: left;
+    background: var(--panel-sub);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid var(--panel-border);
+  }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted);
+  }
+  .breakdown-row b { color: var(--text); }
+
+  /* Slide Modal */
+  .slide-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .slide-modal.active { display: flex; }
+  .slide-modal-content {
+    max-width: 900px;
+    width: 100%;
+    background: var(--panel);
+    border-radius: 14px;
+    border: 1px solid var(--panel-border);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+  }
+  .slide-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--panel-border);
+    background: var(--panel-sub);
+  }
+  .slide-modal-header h3 { margin: 0; font-size: 14px; color: var(--text); }
+  .close-slide-btn {
+    background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer;
+  }
+  .slide-modal-body {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide-modal-body img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 1px solid var(--panel-border);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="app-wrap">
+
+  <!-- Navigation Bar -->
+  <header class="top-nav">
+    <div class="brand-group">
+      <h1 class="brand-title">
+        <span class="client">Morgan Stanley &amp; TCS</span> · AI Engineer
+      </h1>
+      <p class="brand-sub">Animated 2-Option Flashcard Quiz · Production RAG, Multi-Agent &amp; Regulated Governance</p>
+    </div>
+    <div class="nav-actions">
+      <a href="index.html" class="btn" title="Back to Voice Interview Practice">
+        🎙️ Voice Role-Play Decks
+      </a>
+      <button class="btn icon-only" id="soundToggle" title="Toggle Sound FX">
+        🔊 Sound: ON
+      </button>
+      <button class="btn" id="btnRestart">
+        ↺ Restart Quiz
+      </button>
+    </div>
+  </header>
+
+  <!-- Clearance & Role Badges -->
+  <div class="badge-bar">
+    <span class="tag security">🔒 UK SC (2028) &amp; NATO (2029) Cleared</span>
+    <span class="tag highlight">⚡ Tier-1 Banking Experience (Goldman Sachs)</span>
+    <span class="tag">📚 10M+ Doc Scaled RAG</span>
+    <span class="tag">📍 London (3 Days On-Site)</span>
+    <span class="tag">🎯 2-Choice Quick Fire</span>
+  </div>
+
+  <!-- Stats Dashboard -->
+  <div class="stats-bar">
+    <div class="stat-card active-stat">
+      <span class="stat-label">Current Score</span>
+      <span class="stat-val"><span id="statScore">0</span> <small>pts</small></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Accuracy</span>
+      <span class="stat-val"><span id="statAccuracy">100</span><small>%</small></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Streak</span>
+      <span class="stat-val"><span id="statStreak">0</span> <small id="streakFlame"></small></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Progress</span>
+      <span class="stat-val"><span id="statCurrentNum">1</span><small>/ <span id="statTotalNum">20</span></small></span>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-meta">
+      <span id="progressPercent">0% Completed</span>
+      <span id="topicIndicator">Topic: Retrieval Architecture</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- Topic Filter Strip -->
+  <div class="filter-strip" id="filterStrip">
+    <button class="filter-btn active" data-filter="all">All Topics (20)</button>
+    <button class="filter-btn" data-filter="profile">Profile &amp; Clearances</button>
+    <button class="filter-btn" data-filter="retrieval">Retrieval Engineering</button>
+    <button class="filter-btn" data-filter="benchmarks">Benchmarks &amp; ROI</button>
+    <button class="filter-btn" data-filter="agents">Autonomous Agents</button>
+    <button class="filter-btn" data-filter="engineering">Copilot &amp; Claude Code</button>
+    <button class="filter-btn" data-filter="eval">Evals &amp; Observability</button>
+    <button class="filter-btn" data-filter="security">Security &amp; Roadmap</button>
+  </div>
+
+  <!-- Flashcard 3D Stage -->
+  <div class="card-container">
+    <div class="quiz-card" id="quizCard">
+
+      <!-- FRONT FACE -->
+      <div class="card-face face-front">
+        <div class="card-topbar">
+          <div class="card-topic-tag" id="cardTopic">
+            <span>⚡ RETRIEVAL ARCHITECTURE</span>
+          </div>
+          <div class="slide-ref-badge" id="cardSlideBadge">Slide 3</div>
+        </div>
+
+        <div class="question-body">
+          <div class="question-num" id="cardQNum">QUESTION 1 OF 20</div>
+          <h2 class="question-text" id="cardQuestion">
+            Loading technical question...
+          </h2>
+        </div>
+
+        <!-- STRICTLY 2 OPTIONS -->
+        <div class="options-grid">
+          <button class="option-btn" id="btnOptA" data-opt="A">
+            <div class="opt-header">
+              <span class="opt-letter">Option A</span>
+              <span class="opt-key">Key: 1 / A</span>
+            </div>
+            <p class="opt-text" id="textOptA">Option A loading...</p>
+          </button>
+
+          <button class="option-btn" id="btnOptB" data-opt="B">
+            <div class="opt-header">
+              <span class="opt-letter">Option B</span>
+              <span class="opt-key">Key: 2 / B</span>
+            </div>
+            <p class="opt-text" id="textOptB">Option B loading...</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- BACK FACE (REVEALED ON ANSWER) -->
+      <div class="card-face face-back">
+        <div class="verdict-header">
+          <div class="verdict-pill" id="verdictPill">
+            <span id="verdictIcon">✅</span>
+            <span id="verdictTitle">CORRECT (+10 PTS)</span>
+          </div>
+          <div class="slide-ref-badge" id="backSlideBadge">Portfolio Slide 3</div>
+        </div>
+
+        <div class="back-details">
+          <div class="detail-block">
+            <h4>💡 Engineering Rationale &amp; Banking Context</h4>
+            <p id="rationaleText">Technical explanation here...</p>
+          </div>
+
+          <div class="detail-block speaking-tip">
+            <h4>🎙️ Interview Soundbite (What to say to Morgan Stanley)</h4>
+            <p id="speakingTipText">Verbal talking point...</p>
+          </div>
+
+          <div class="slide-citation-row">
+            <div>
+              <strong>Portfolio Evidence:</strong> <span id="slideEvidence">"Dense semantic vectors paired with BM25 keyword matching"</span>
+            </div>
+            <button class="slide-view-btn" id="btnViewSlide">🖼️ View Portfolio Slide</button>
+          </div>
+        </div>
+
+        <div class="back-actions">
+          <button class="btn-flip-back" id="btnFlipBack">
+            ↺ Re-read Question
+          </button>
+          <button class="btn primary" id="btnNextCard">
+            Next Flashcard →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Score Completion Modal -->
+  <div class="completion-overlay" id="completionModal">
+    <div class="completion-card">
+      <div class="score-circle">
+        <span class="score-number" id="finalScoreVal">180</span>
+        <span class="score-total">/ <span id="finalMaxVal">200</span> pts</span>
+      </div>
+      <h2 class="completion-title" id="finalTitle">Tier-1 Principal AI Engineer!</h2>
+      <div class="tier-badge" id="finalBadge">Ready for Morgan Stanley Panel</div>
+
+      <div class="completion-breakdown">
+        <div class="breakdown-row"><span>Total Questions:</span> <b id="breakTotal">20</b></div>
+        <div class="breakdown-row"><span>Correct Answers:</span> <b id="breakCorrect" style="color:var(--good)">18</b></div>
+        <div class="breakdown-row"><span>Incorrect Misses:</span> <b id="breakMissed" style="color:var(--bad)">2</b></div>
+        <div class="breakdown-row"><span>Max Streak:</span> <b id="breakStreak" style="color:var(--warn)">8</b></div>
+        <div class="breakdown-row"><span>Overall Accuracy:</span> <b id="breakAccuracy">90%</b></div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn primary" id="btnRetryMissed">
+          ⚡ Review Missed Cards Only
+        </button>
+        <button class="btn" id="btnRestartFull">
+          ↺ Retake Full Quiz
+        </button>
+        <a href="index.html" class="btn">
+          🎙️ Go to Live Voice Interviewer
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Modal Preview -->
+  <div class="slide-modal" id="slideModal">
+    <div class="slide-modal-content">
+      <div class="slide-modal-header">
+        <h3 id="slideModalTitle">Slide Reference</h3>
+        <button class="close-slide-btn" id="btnCloseSlideModal">&times;</button>
+      </div>
+      <div class="slide-modal-body">
+        <img id="slideModalImg" src="" alt="Slide Reference">
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Morgan Stanley &amp; TCS AI Engineering Portfolio Prep · Candidate: Rifat · London Inside IR35 ·
+    <a href="index.html">Switch to Voice Roleplay</a>
+  </footer>
+
+</div>
+
+<script>
+// --- QUESTION BANK: 20 AUTHENTIC 2-CHOICE QUESTIONS SOURCED FROM THE PDF ---
+const QUESTIONS = [
+  {
+    id: "q-01",
+    category: "profile",
+    topicName: "Profile & Security Clearances",
+    slideNum: 1,
+    slideImg: "extracted_pages/page_1.png",
+    question: "A client compliance officer asks why UK SC & NATO clearance is crucial for an enterprise AI Engineer working on Morgan Stanley / TCS deployments. What is the direct answer?",
+    optA: {
+      text: "It satisfies strict Tier-1 banking security requirements to handle proprietary data, restricted sovereign infrastructure, and air-gapped financial models.",
+      isCorrect: true
+    },
+    optB: {
+      text: "It permits unmonitored deployment of external closed-source LLMs directly into cloud endpoints without legal review.",
+      isCorrect: false
+    },
+    rationale: "UK SC (Security Check) and NATO clearances are premier credentials for Tier-1 investment banking. In regulated financial firms like Morgan Stanley, developers interacting with core banking infrastructure, proprietary customer records, or algorithmic systems require vetted security standing to prevent insider threats and comply with national regulatory frameworks.",
+    speakingTip: "Highlight: 'I hold active UK SC valid to 2028 and NATO clearance to 2029. This means zero onboarding friction for restricted sovereign data, air-gapped models, and high-security banking zones.'",
+    evidence: "Candidate: Rifat · Role: AI Engineer · Client: TCS / Morgan Stanley · Clearance: UK SC & NATO"
+  },
+  {
+    id: "q-02",
+    category: "profile",
+    topicName: "Production Banking Scale",
+    slideNum: 2,
+    slideImg: "extracted_pages/page_2.png",
+    question: "In Tier-1 investment banking environments (such as Goldman Sachs), what scale of document indexing did Rifat's production RAG systems support?",
+    optA: {
+      text: "Up to 50,000 documents using in-memory flat JSON files without vector indexing.",
+      isCorrect: false
+    },
+    optB: {
+      text: "Enterprise RAG systems indexing over 10 Million enterprise documents with strict multi-tenant access control.",
+      isCorrect: true
+    },
+    rationale: "At Goldman Sachs and tier-1 banking scale, enterprise knowledge is fragmented across millions of research papers, regulatory filings, trading histories, and SharePoint records. Rifat's architectures index over 10M documents with enterprise RBAC (Role-Based Access Control) ensuring confidentiality.",
+    speakingTip: "'I have battle-tested RAG delivery in Tier-1 banking (Goldman Sachs environments) supporting high-concurrency indexing across 10M+ enterprise documents.'",
+    evidence: "Core Profile Summary: Investment Banking (Goldman Sachs) · RAG at Scale: Systems indexing over 10M enterprise documents."
+  },
+  {
+    id: "q-03",
+    category: "retrieval",
+    topicName: "Hybrid Search Architecture",
+    slideNum: 3,
+    slideImg: "extracted_pages/page_3.png",
+    question: "Why does the architecture mandate Hybrid Search (dense semantic vectors paired with BM25 keyword matching) instead of vector-only search?",
+    optA: {
+      text: "Dense vectors capture conceptual intent, while BM25 guarantees precision on exact financial tickers, ISIN codes, and regulatory clauses that vector embeddings blur.",
+      isCorrect: true
+    },
+    optB: {
+      text: "BM25 is merely a cheap fallback to use when vector search API limits are exceeded.",
+      isCorrect: false
+    },
+    rationale: "Dense semantic vector search excels at conceptual matching but frequently hallucinates or fails on exact keyword matching, financial acronyms (e.g. EBITDA, SOFR, ISIN), and specific paragraph numbers. Pairing dense embeddings with BM25 keyword search via Reciprocal Rank Fusion (RRF) gives the best of both worlds.",
+    speakingTip: "'In banking, close isn't good enough. BM25 catches exact identifiers and contract clauses; dense vectors catch semantics. Combining them gives audited retrieval accuracy.'",
+    evidence: "Retrieval Engineering: Hybrid Search Retrieval (Dense semantic vectors paired with BM25 keyword matching)."
+  },
+  {
+    id: "q-04",
+    category: "retrieval",
+    topicName: "Context-Aware Chunking",
+    slideNum: 3,
+    slideImg: "extracted_pages/page_3.png",
+    question: "When processing complex financial PDFs, balance sheets, and compliance circulars, which chunking methodology prevents fragmentation?",
+    optA: {
+      text: "Hierarchical markdown and semantic document splitting preserving structural boundaries.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Blind fixed-character chunking (e.g. slicing strictly every 500 characters regardless of syntax).",
+      isCorrect: false
+    },
+    rationale: "Fixed-token or fixed-character slicing arbitrarily cuts tables, sentences, and financial balance sheets in half, causing severe context fragmentation. Hierarchical markdown and semantic splitting preserve table headers, parent sections, and document hierarchy so the LLM receives complete context.",
+    speakingTip: "'I use context-aware hierarchical markdown splitting. This preserves table structures and semantic headers, avoiding the hallucination caused by naive character slicing.'",
+    evidence: "Context-Aware Chunking: Hierarchical markdown and semantic document splitting."
+  },
+  {
+    id: "q-05",
+    category: "retrieval",
+    topicName: "Re-Ranking & Filtration",
+    slideNum: 3,
+    slideImg: "extracted_pages/page_3.png",
+    question: "In banking RAG architectures, why does the cross-encoder re-ranking stage explicitly prioritize precision over recall?",
+    optA: {
+      text: "Because injecting noisy false positives into the generation context window causes hallucinated financial guidance and breaches audit compliance.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Because cross-encoders cannot process more than two documents at a time due to hardware limitations.",
+      isCorrect: false
+    },
+    rationale: "In financial engineering, a false positive context fed into an LLM can trigger erroneous trade reconciliations or hallucinated regulatory advice. Cross-encoder scoring re-ranks the top candidates to guarantee only high-confidence, verified context reaches the model prompt.",
+    speakingTip: "'In banking RAG, precision trumps recall. I tune the cross-encoder to aggressively filter out marginally relevant context before it pollutes the generator.'",
+    evidence: "Re-Ranking & Filtration: Cross-encoder scoring prioritizing precision over recall."
+  },
+  {
+    id: "q-06",
+    category: "benchmarks",
+    topicName: "Measured Benchmarks - Latency",
+    slideNum: 4,
+    slideImg: "extracted_pages/page_4.png",
+    question: "What quantified retrieval latency reduction was achieved through Rifat's vector search pipeline optimization?",
+    optA: {
+      text: "-15% retrieval latency reduction.",
+      isCorrect: false
+    },
+    optB: {
+      text: "-60% retrieval latency reduction.",
+      isCorrect: true
+    },
+    rationale: "Through optimized indexing, HNSW index parameter tuning, and low-latency embedded caching, retrieval latency was slashed by 60%, critical for interactive trader copilots where sub-second latency is mandatory.",
+    speakingTip: "'By optimizing the vector search pipelines and indexing tier, we achieved a 60% reduction in end-to-end retrieval latency in production.'",
+    evidence: "Measured Production Benchmarks: -60% Retrieval Latency (Optimised vector search pipelines)."
+  },
+  {
+    id: "q-07",
+    category: "benchmarks",
+    topicName: "Measured Benchmarks - Precision",
+    slideNum: 4,
+    slideImg: "extracted_pages/page_4.png",
+    question: "What was the measured context precision improvement gained from implementing domain-specific chunking strategies?",
+    optA: {
+      text: "+40% Context Precision improvement.",
+      isCorrect: true
+    },
+    optB: {
+      text: "+5% marginal gain.",
+      isCorrect: false
+    },
+    rationale: "Switching from generic chunking to domain-specific hierarchical splitting produced a +40% increase in context precision, ensuring retrieved chunks directly answer the specific banking query without irrelevant noise.",
+    speakingTip: "'Domain-specific chunking delivered a 40% boost in context precision, drastically cutting token waste and generation errors.'",
+    evidence: "+40% Context Precision: Domain-specific chunking strategies."
+  },
+  {
+    id: "q-08",
+    category: "benchmarks",
+    topicName: "Measured Benchmarks - API Cost",
+    slideNum: 4,
+    slideImg: "extracted_pages/page_4.png",
+    question: "How did the architecture achieve a -50% reduction in token API costs across enterprise deployments?",
+    optA: {
+      text: "By implementing aggressive semantic caching layers for recurring queries and common embedding calculations.",
+      isCorrect: true
+    },
+    optB: {
+      text: "By truncating all prompts to under 50 tokens and ignoring context history.",
+      isCorrect: false
+    },
+    rationale: "Enterprise financial questions frequently share similar semantic vectors (e.g. recurring compliance questions, risk definitions). Aggressive semantic caching intercepts duplicate or near-identical semantic queries, serving cached evaluations instantly and halving external API spend.",
+    speakingTip: "'I instituted semantic caching layers that reduced token API costs by 50% while simultaneously providing instant zero-latency responses for recurring queries.'",
+    evidence: "-50% Token API Costs: Aggressive semantic caching layers."
+  },
+  {
+    id: "q-09",
+    category: "benchmarks",
+    topicName: "Deployment Velocity",
+    slideNum: 4,
+    slideImg: "extracted_pages/page_4.png",
+    question: "What measured deployment acceleration was recorded through the Goldman Sachs CI/CD agentic framework?",
+    optA: {
+      text: "300% Deployment Rate acceleration.",
+      isCorrect: true
+    },
+    optB: {
+      text: "20% minor acceleration.",
+      isCorrect: false
+    },
+    rationale: "By introducing agentic CI/CD pipelines with automated test synthesis and pre-commit security analysis, release velocity tripled (300% deployment rate) without sacrificing banking compliance checks.",
+    speakingTip: "'Our agentic CI/CD framework achieved a 300% increase in deployment velocity at Goldman Sachs by automating test scaffolding and static security gates.'",
+    evidence: "300% Deployment Rate: Goldman Sachs CI/CD agentic framework."
+  },
+  {
+    id: "q-10",
+    category: "agents",
+    topicName: "LangGraph State Graphs",
+    slideNum: 5,
+    slideImg: "extracted_pages/page_5.png",
+    question: "Why are LangGraph cyclic state graphs preferred over single-pass linear pipelines for multi-agent financial workflows?",
+    optA: {
+      text: "They enable cyclic state loops with checkpoint persistence and deterministic routing for human-in-the-loop review.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Linear pipelines run faster because they discard state and prevent retries.",
+      isCorrect: false
+    },
+    rationale: "Complex financial tasks (reconciliations, multi-source research) are non-linear; they require iterative self-correction, retries, and human approval gates. LangGraph provides cyclic state management with persistent checkpointing so workflows can pause, resume, and backtrack deterministically.",
+    speakingTip: "'I build with LangGraph because banking agents cannot run open-loop. Cyclic graphs with checkpoint persistence allow deterministic state routing and human-in-the-loop signoff.'",
+    evidence: "Autonomous Systems: LangGraph & CrewAI: Cyclic state graphs with checkpoint persistence. Deterministic routing."
+  },
+  {
+    id: "q-11",
+    category: "agents",
+    topicName: "Zero Hallucinated Tool Inputs",
+    slideNum: 5,
+    slideImg: "extracted_pages/page_5.png",
+    question: "In ReAct agentic architectures, how does Rifat ensure zero hallucinated inputs when agents invoke backend banking tools?",
+    optA: {
+      text: "Through schema-enforced function calling patterns (Pydantic / JSON Schema) that validate types and bounds prior to execution.",
+      isCorrect: true
+    },
+    optB: {
+      text: "By letting the LLM execute arbitrary string commands directly into bash terminals.",
+      isCorrect: false
+    },
+    rationale: "In banking, an agent hallucinating an account number or currency parameter could cause catastrophic errors. Schema-enforced function calling ensures all parameters are strictly validated against strongly typed data schemas before execution.",
+    speakingTip: "'We enforce schema-strict function calling with Pydantic contracts at the boundary, ensuring zero hallucinated parameters before any tool or API is invoked.'",
+    evidence: "ReAct & Tool Use: Schema-enforced function calling patterns. Zero hallucinated inputs."
+  },
+  {
+    id: "q-12",
+    category: "agents",
+    topicName: "Model Context Protocol (MCP)",
+    slideNum: 5,
+    slideImg: "extracted_pages/page_5.png",
+    question: "What is the strategic purpose of integrating the Model Context Protocol (MCP) into enterprise banking architectures?",
+    optA: {
+      text: "It standardizes tool and resource execution into decoupled integrations, preventing vendor lock-in to specific model providers.",
+      isCorrect: true
+    },
+    optB: {
+      text: "It forces all LLMs to run in a single container without network access.",
+      isCorrect: false
+    },
+    rationale: "Model Context Protocol (MCP) establishes an open standard for how AI applications expose tools and context to LLMs. This decouples enterprise databases and proprietary tools from any single AI vendor.",
+    speakingTip: "'MCP integration provides decoupled tool execution. It means Morgan Stanley's proprietary data connectors remain independent of the underlying LLM provider.'",
+    evidence: "MCP Integration: Model Context Protocol tool execution. Decoupled integrations."
+  },
+  {
+    id: "q-13",
+    category: "engineering",
+    topicName: "GitHub Copilot Governance",
+    slideNum: 6,
+    slideImg: "extracted_pages/page_6.png",
+    question: "How does Rifat standardize engineering rules and compliance policies across development teams using GitHub Copilot Enterprise?",
+    optA: {
+      text: "Through standardized repository-level '.github/copilot-instructions' files enforcing coding standards, unit tests, and security boundaries.",
+      isCorrect: true
+    },
+    optB: {
+      text: "By relying on individual engineers to manually configure their own local IDE settings.",
+      isCorrect: false
+    },
+    rationale: "Enterprise code governance requires consistency. Centralized `.github/copilot-instructions` files dictate project conventions, approved libraries, testing patterns, and compliance rules directly into Copilot's prompt context for all developers.",
+    speakingTip: "'I standardize repository governance via .github/copilot-instructions, ensuring Copilot adheres to tier-1 security rules, test scaffolding, and architectural patterns automatically.'",
+    evidence: "GitHub Copilot Enterprise: Custom Instructions: Standardised repository '.github/copilot-instructions'."
+  },
+  {
+    id: "q-14",
+    category: "engineering",
+    topicName: "Claude Code & Terminal Agentics",
+    slideNum: 6,
+    slideImg: "extracted_pages/page_6.png",
+    question: "Which terminal agentic capability is emphasized for autonomous multi-file refactoring and mentorship?",
+    optA: {
+      text: "Claude Code terminal agentics with safe coding rules that actively prevent secret leakage.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Manual copy-pasting of code files into public consumer chat interfaces.",
+      isCorrect: false
+    },
+    rationale: "Claude Code enables autonomous multi-file refactoring workflows directly within secure developer terminal environments. Coupled with enterprise mentorship workshops and secret leakage guardrails, it dramatically accelerates developer velocity safely.",
+    speakingTip: "'We leverage Claude Code for terminal agentics — autonomous multi-file refactoring with strict pre-commit security gates to eliminate secret leakage.'",
+    evidence: "Claude Code & Mentorship: Terminal Agentics: Autonomous multi-file refactoring workflows. Governance Rules: Safe coding practices preventing secret leakage."
+  },
+  {
+    id: "q-15",
+    category: "eval",
+    topicName: "RAGAS Evaluation Framework",
+    slideNum: 7,
+    slideImg: "extracted_pages/page_7.png",
+    question: "Which evaluation framework is deployed to track Faithfulness and Answer Relevancy to guarantee zero regression deployments?",
+    optA: {
+      text: "RAGAS Framework integrated into CI/CD regression pipelines.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Subjective developer opinions based on single-prompt test runs.",
+      isCorrect: false
+    },
+    rationale: "RAGAS evaluates retrieval and generation independently: checking whether answers are faithful to the retrieved context (zero hallucination) and relevant to the user query. Running RAGAS in CI/CD ensures zero silent regressions when prompts or models are updated.",
+    speakingTip: "'I deploy RAGAS in CI to monitor faithfulness and answer relevancy metrics on golden datasets, guaranteeing zero regression deployments.'",
+    evidence: "Evaluation & Observability: RAGAS Framework (Faithfulness and answer relevancy tracking. Zero regression deployments)."
+  },
+  {
+    id: "q-16",
+    category: "eval",
+    topicName: "LangSmith Telemetry",
+    slideNum: 7,
+    slideImg: "extracted_pages/page_7.png",
+    question: "How does the architecture maintain end-to-end trace latency, token audits, and full compliance audit trails?",
+    optA: {
+      text: "Via LangSmith Telemetry providing full trace audits, latency waterfalls, and granular token cost accounting.",
+      isCorrect: true
+    },
+    optB: {
+      text: "By using print statements written to temporary local terminal windows that are discarded.",
+      isCorrect: false
+    },
+    rationale: "Banking audit standards require a complete trace of every LLM call, prompt version, retrieved chunk, and tool execution. LangSmith telemetry provides end-to-end observability, token accounting, and the full audit trail needed for model risk review.",
+    speakingTip: "'LangSmith telemetry gives us full auditability: end-to-end trace latency, exact token cost audits, and compliance records required by model risk governance.'",
+    evidence: "LangSmith Telemetry: End-to-end trace latency and token cost audit. Full audit trail."
+  },
+  {
+    id: "q-17",
+    category: "eval",
+    topicName: "LoRA / QLoRA Adaptation",
+    slideNum: 7,
+    slideImg: "extracted_pages/page_7.png",
+    question: "How did parameter-efficient LoRA / QLoRA tuning optimize costs when adapting models to private banking domain data?",
+    optA: {
+      text: "35% cost optimization compared to full parameter fine-tuning.",
+      isCorrect: true
+    },
+    optB: {
+      text: "No cost benefit, only a marginal 1% memory reduction.",
+      isCorrect: false
+    },
+    rationale: "Full parameter fine-tuning on hundreds of billions of weights is cost-prohibitive and introduces catastrophic forgetting. LoRA/QLoRA adapts low-rank adapter matrices on private enterprise data, cutting compute cost by 35% while retaining baseline safety.",
+    speakingTip: "'We used LoRA/QLoRA for parameter-efficient adaptation on private data, yielding a 35% cost optimization while preserving model governance baselines.'",
+    evidence: "LoRA / QLoRA Tuning: Parameter-efficient adaptation on private data. 35% cost optimization."
+  },
+  {
+    id: "q-18",
+    category: "security",
+    topicName: "PII Redaction & Sanitization",
+    slideNum: 8,
+    slideImg: "extracted_pages/page_8.png",
+    question: "How is customer PII (Personally Identifiable Information) and bank account numbers scrubbed in regulated financial RAG pipelines?",
+    optA: {
+      text: "Automated regex and NER (Named Entity Recognition) sanitization at the gateway layer before tokenization.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Relying on system prompts instructing the LLM to 'please forget' account numbers.",
+      isCorrect: false
+    },
+    rationale: "System prompts are easily bypassed and do not prevent data from being transmitted to model servers. Automated regex combined with fine-tuned NER models scrubs names, account numbers, and sensitive identifiers at the gateway before LLM exposure.",
+    speakingTip: "'We deploy automated regex and NER sanitization in the gateway pipeline. Sensitive customer PII is redacted deterministically before data ever touches an LLM.'",
+    evidence: "Enterprise Risk & Compliance: PII Redaction: Automated regex and NER sanitization."
+  },
+  {
+    id: "q-19",
+    category: "security",
+    topicName: "Prompt Injection Defense",
+    slideNum: 8,
+    slideImg: "extracted_pages/page_8.png",
+    question: "What benchmarked precision is enforced by Rifat's prompt guardrail architecture against adversarial injection and jailbreaks?",
+    optA: {
+      text: "95% precision prompt guardrails.",
+      isCorrect: true
+    },
+    optB: {
+      text: "40% best-effort keyword filter.",
+      isCorrect: false
+    },
+    rationale: "Prompt injection (both direct and indirect via retrieved malicious documents) is a top OWASP LLM risk. The architecture enforces 95% precision guardrails utilizing classified input/output filtering to neutralize jailbreak vectors.",
+    speakingTip: "'We maintain 95% precision prompt guardrails defending against indirect prompt injection and adversarial jailbreaks in high-stakes financial workflows.'",
+    evidence: "Injection Defense: 95% precision prompt guardrails."
+  },
+  {
+    id: "q-20",
+    category: "security",
+    topicName: "Morgan Stanley 90-Day Roadmap",
+    slideNum: 9,
+    slideImg: "extracted_pages/page_9.png",
+    question: "According to the execution roadmap, what is the strategic focus of DAYS 1–30 versus DAYS 31–60 on the Morgan Stanley delivery programme?",
+    optA: {
+      text: "Days 1–30: Discovery & Guardrails (audit repos/compliance); Days 31–60: RAG & Agent Pipelines production deployment.",
+      isCorrect: true
+    },
+    optB: {
+      text: "Days 1–30: Replacing all core banking engines; Days 31–60: Writing documentation only.",
+      isCorrect: false
+    },
+    rationale: "A disciplined banking delivery starts with audit and risk boundaries (Days 1–30: Discovery & Guardrails), followed by pipeline rollout (Days 31–60: RAG & Agent Pipelines), and finishes with enterprise mentorship and scaling (Days 61–90).",
+    speakingTip: "'My 90-day plan is structured: Days 1–30 for Discovery and Guardrails audit; Days 31–60 deploying production RAG and agent pipelines; Days 61–90 scaling Copilot enablement and governance.'",
+    evidence: "Execution Strategy: DAYS 1-30 Discovery & Guardrails · DAYS 31-60 RAG & Agent Pipelines · DAYS 61-90 Team Enablement & Scale."
+  }
+];
+
+// --- APP STATE ---
+const state = {
+  currentIdx: 0,
+  score: 0,
+  streak: 0,
+  maxStreak: 0,
+  answeredCount: 0,
+  correctCount: 0,
+  missedList: [],
+  soundEnabled: true,
+  filter: "all",
+  activeQuestions: [...QUESTIONS],
+  isFlipped: false,
+  isReviewingMissed: false
+};
+
+// Web Audio synthesizer for pleasant UI sound effects (Zero external files required)
+const AudioFX = {
+  ctx: null,
+  init() {
+    if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  },
+  playCorrect() {
+    if (!state.soundEnabled) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); // E5
+      osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.16); // G5
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch(e) {}
+  },
+  playWrong() {
+    if (!state.soundEnabled) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.25);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+      osc.start(now);
+      osc.stop(now + 0.25);
+    } catch(e) {}
+  },
+  playFlip() {
+    if (!state.soundEnabled) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(480, now + 0.09);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } catch(e) {}
+  }
+};
+
+// DOM references
+const $ = id => document.getElementById(id);
+const quizCard = $("quizCard");
+const btnOptA = $("btnOptA");
+const btnOptB = $("btnOptB");
+const textOptA = $("textOptA");
+const textOptB = $("textOptB");
+const cardTopic = $("cardTopic");
+const cardSlideBadge = $("cardSlideBadge");
+const cardQNum = $("cardQNum");
+const cardQuestion = $("cardQuestion");
+const verdictPill = $("verdictPill");
+const verdictIcon = $("verdictIcon");
+const verdictTitle = $("verdictTitle");
+const backSlideBadge = $("backSlideBadge");
+const rationaleText = $("rationaleText");
+const speakingTipText = $("speakingTipText");
+const slideEvidence = $("slideEvidence");
+const statScore = $("statScore");
+const statAccuracy = $("statAccuracy");
+const statStreak = $("statStreak");
+const streakFlame = $("streakFlame");
+const statCurrentNum = $("statCurrentNum");
+const statTotalNum = $("statTotalNum");
+const progressPercent = $("progressPercent");
+const progressFill = $("progressFill");
+const topicIndicator = $("topicIndicator");
+const filterStrip = $("filterStrip");
+const btnNextCard = $("btnNextCard");
+const btnFlipBack = $("btnFlipBack");
+const soundToggle = $("soundToggle");
+const btnRestart = $("btnRestart");
+const btnViewSlide = $("btnViewSlide");
+const slideModal = $("slideModal");
+const slideModalTitle = $("slideModalTitle");
+const slideModalImg = $("slideModalImg");
+const btnCloseSlideModal = $("btnCloseSlideModal");
+const completionModal = $("completionModal");
+
+// Render Current Card
+function renderCard() {
+  state.isFlipped = false;
+  quizCard.classList.remove("is-flipped", "shake");
+
+  // Reset option buttons
+  btnOptA.className = "option-btn";
+  btnOptB.className = "option-btn";
+  btnOptA.disabled = false;
+  btnOptB.disabled = false;
+
+  const q = state.activeQuestions[state.currentIdx];
+  if (!q) {
+    showCompletionScreen();
+    return;
+  }
+
+  // Update card text
+  cardTopic.innerHTML = `<span>⚡ ${q.topicName.toUpperCase()}</span>`;
+  cardSlideBadge.textContent = `Slide ${q.slideNum}`;
+  cardQNum.textContent = `QUESTION ${state.currentIdx + 1} OF ${state.activeQuestions.length}`;
+  cardQuestion.textContent = q.question;
+
+  textOptA.textContent = q.optA.text;
+  textOptB.textContent = q.optB.text;
+
+  // Back face details
+  backSlideBadge.textContent = `Portfolio Slide ${q.slideNum}`;
+  rationaleText.textContent = q.rationale;
+  speakingTipText.textContent = q.speakingTip;
+  slideEvidence.textContent = `"${q.evidence}"`;
+
+  // Update dashboard numbers
+  statCurrentNum.textContent = state.currentIdx + 1;
+  statTotalNum.textContent = state.activeQuestions.length;
+  topicIndicator.textContent = `Topic: ${q.topicName}`;
+
+  const pct = Math.round((state.currentIdx / state.activeQuestions.length) * 100);
+  progressPercent.textContent = `${pct}% Completed`;
+  progressFill.style.width = `${pct}%`;
+}
+
+// Handle Option Selection (Strictly 2 Choices)
+function handleOptionSelect(chosenOpt) {
+  if (state.isFlipped) return;
+
+  const q = state.activeQuestions[state.currentIdx];
+  const isCorrect = (chosenOpt === "A" && q.optA.isCorrect) || (chosenOpt === "B" && q.optB.isCorrect);
+
+  btnOptA.disabled = true;
+  btnOptB.disabled = true;
+
+  state.answeredCount++;
+
+  if (isCorrect) {
+    state.score += 10;
+    state.correctCount++;
+    state.streak++;
+    if (state.streak > state.maxStreak) state.maxStreak = state.streak;
+
+    AudioFX.playCorrect();
+
+    if (chosenOpt === "A") btnOptA.classList.add("selected-correct");
+    else btnOptB.classList.add("selected-correct");
+
+    verdictPill.className = "verdict-pill correct";
+    verdictIcon.textContent = "✅";
+    verdictTitle.textContent = "EXACT MATCH (+10 PTS)";
+  } else {
+    state.streak = 0;
+    state.missedList.push(q);
+    AudioFX.playWrong();
+
+    if (chosenOpt === "A") {
+      btnOptA.classList.add("selected-wrong");
+      btnOptB.classList.add("reveal-correct");
+    } else {
+      btnOptB.classList.add("selected-wrong");
+      btnOptA.classList.add("reveal-correct");
+    }
+
+    quizCard.classList.add("shake");
+    verdictPill.className = "verdict-pill wrong";
+    verdictIcon.textContent = "❌";
+    verdictTitle.textContent = "INCORRECT (REVIEW)";
+  }
+
+  // Update Stats
+  statScore.textContent = state.score;
+  statStreak.textContent = state.streak;
+  streakFlame.textContent = state.streak >= 3 ? "🔥" : "";
+  const acc = Math.round((state.correctCount / state.answeredCount) * 100);
+  statAccuracy.textContent = isNaN(acc) ? 100 : acc;
+
+  // Flip after subtle pause
+  setTimeout(() => {
+    state.isFlipped = true;
+    quizCard.classList.add("is-flipped");
+    AudioFX.playFlip();
+  }, 450);
+}
+
+// Next Card Transition
+function nextCard() {
+  if (state.currentIdx + 1 < state.activeQuestions.length) {
+    state.currentIdx++;
+    renderCard();
+  } else {
+    showCompletionScreen();
+  }
+}
+
+// Flip back to review question
+function flipBack() {
+  state.isFlipped = false;
+  quizCard.classList.remove("is-flipped");
+  AudioFX.playFlip();
+}
+
+// Show Completion / Score Report
+function showCompletionScreen() {
+  progressFill.style.width = "100%";
+  progressPercent.textContent = "100% Completed";
+
+  const totalPossible = state.activeQuestions.length * 10;
+  const acc = Math.round((state.correctCount / Math.max(1, state.answeredCount)) * 100);
+
+  $("finalScoreVal").textContent = state.score;
+  $("finalMaxVal").textContent = totalPossible;
+  $("breakTotal").textContent = state.activeQuestions.length;
+  $("breakCorrect").textContent = state.correctCount;
+  $("breakMissed").textContent = state.missedList.length;
+  $("breakStreak").textContent = state.maxStreak;
+  $("breakAccuracy").textContent = `${acc}%`;
+
+  const finalTitle = $("finalTitle");
+  const finalBadge = $("finalBadge");
+
+  if (acc >= 90) {
+    finalTitle.textContent = "Principal AI Engineer — Ready for Morgan Stanley!";
+    finalBadge.textContent = "🌟 Tier-1 Elite Scoring (90%+)";
+  } else if (acc >= 75) {
+    finalTitle.textContent = "Strong Senior AI Delivery Profile!";
+    finalBadge.textContent = "🎯 Solid Banking Knowledge (75%+)";
+  } else {
+    finalTitle.textContent = "Good Foundation — Recommend Topic Review";
+    finalBadge.textContent = "📚 Recommended Refresher";
+  }
+
+  const btnRetry = $("btnRetryMissed");
+  if (state.missedList.length === 0) {
+    btnRetry.style.display = "none";
+  } else {
+    btnRetry.style.display = "inline-flex";
+    btnRetry.textContent = `⚡ Review ${state.missedList.length} Missed Question${state.missedList.length > 1 ? "s" : ""}`;
+  }
+
+  completionModal.classList.add("active");
+}
+
+// Topic Filtering
+function applyFilter(cat) {
+  state.filter = cat;
+  if (cat === "all") {
+    state.activeQuestions = [...QUESTIONS];
+  } else {
+    state.activeQuestions = QUESTIONS.filter(q => q.category === cat);
+  }
+  state.currentIdx = 0;
+  state.score = 0;
+  state.streak = 0;
+  state.answeredCount = 0;
+  state.correctCount = 0;
+  state.missedList = [];
+  statScore.textContent = "0";
+  statAccuracy.textContent = "100";
+  statStreak.textContent = "0";
+  streakFlame.textContent = "";
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.filter === cat);
+  });
+
+  completionModal.classList.remove("active");
+  renderCard();
+}
+
+// Reset Quiz
+function resetQuiz() {
+  applyFilter(state.filter);
+}
+
+// Review Missed Only
+function reviewMissed() {
+  if (state.missedList.length === 0) return;
+  state.activeQuestions = [...state.missedList];
+  state.currentIdx = 0;
+  state.isReviewingMissed = true;
+  state.missedList = [];
+  completionModal.classList.remove("active");
+  renderCard();
+}
+
+// View Slide Modal
+function openSlideModal() {
+  const q = state.activeQuestions[state.currentIdx];
+  if (!q) return;
+  slideModalTitle.textContent = `Portfolio Slide ${q.slideNum}: ${q.topicName}`;
+  slideModalImg.src = q.slideImg;
+  slideModal.classList.add("active");
+}
+function closeSlideModal() {
+  slideModal.classList.remove("active");
+}
+
+// Event Listeners
+btnOptA.addEventListener("click", () => handleOptionSelect("A"));
+btnOptB.addEventListener("click", () => handleOptionSelect("B"));
+btnNextCard.addEventListener("click", nextCard);
+btnFlipBack.addEventListener("click", flipBack);
+btnRestart.addEventListener("click", resetQuiz);
+$("btnRestartFull").addEventListener("click", () => applyFilter("all"));
+$("btnRetryMissed").addEventListener("click", reviewMissed);
+
+btnViewSlide.addEventListener("click", openSlideModal);
+btnCloseSlideModal.addEventListener("click", closeSlideModal);
+slideModal.addEventListener("click", e => {
+  if (e.target === slideModal) closeSlideModal();
+});
+
+filterStrip.addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if (btn && btn.dataset.filter) {
+    applyFilter(btn.dataset.filter);
+  }
+});
+
+// Sound Toggle
+soundToggle.addEventListener("click", () => {
+  state.soundEnabled = !state.soundEnabled;
+  soundToggle.textContent = state.soundEnabled ? "🔊 Sound: ON" : "🔇 Sound: OFF";
+  if (state.soundEnabled) AudioFX.init();
+});
+
+// Keyboard Shortcuts: 1/A for Option A, 2/B for Option B, Space/Enter for Next
+window.addEventListener("keydown", e => {
+  if (slideModal.classList.contains("active")) {
+    if (e.key === "Escape") closeSlideModal();
+    return;
+  }
+  if (completionModal.classList.contains("active")) {
+    if (e.key === "Enter" || e.key === "r") resetQuiz();
+    return;
+  }
+
+  const key = e.key.toLowerCase();
+  if (!state.isFlipped) {
+    if (key === "1" || key === "a") {
+      handleOptionSelect("A");
+    } else if (key === "2" || key === "b") {
+      handleOptionSelect("B");
+    }
+  } else {
+    if (key === "enter" || key === " " || key === "arrowright") {
+      e.preventDefault();
+      nextCard();
+    } else if (key === "f" || key === "escape") {
+      flipBack();
+    }
+  }
+});
+
+// Initialize on Load
+renderCard();
+</script>
+</body>
+</html>
