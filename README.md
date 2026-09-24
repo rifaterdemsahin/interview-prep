@@ -6,11 +6,11 @@ Live: **https://rifaterdemsahin.github.io/interview-prep/**
 
 ## Tracks
 
-| Track | Questions | Focus |
-| --- | --- | --- |
-| **Morgan Stanley & TCS AI Engineer** | **20 (Quiz) + 8 (Decks)** | **Tier-1 Banking AI, 10M+ RAG, LangGraph Agentics, Benchmarks (-60% latency, 300% deploy), UK SC & NATO** |
-| Software Developer | 18 | Recruiter screen, IR35/commercials, technical depth, behavioural |
-| AI Architect | 18 | Enterprise LLM architecture, RAG, agents, evals, governance, commercials |
+| Track | Created | Questions | Focus |
+| --- | --- | --- | --- |
+| **Software Developer** | 18 Sep 2026 | 18 | Recruiter screen, IR35/commercials, technical depth, behavioural |
+| **AI Architect** | 18 Sep 2026 | 18 | Enterprise LLM architecture, RAG, agents, evals, governance, commercials |
+| **AI Engineer (Morgan Stanley & TCS)** | 24 Sep 2026 | **20 (Quiz) + 8 (Decks)** | **Tier-1 Banking AI, 10M+ RAG, LangGraph Agentics, Benchmarks (-60% latency, 300% deploy), UK SC & NATO** |
 
 ## ⚡ Animated 2-Option Quiz Mode (`quiz.html`)
 
