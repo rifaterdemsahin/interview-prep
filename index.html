@@ -99,6 +99,46 @@
   .btn.rec{border-color:rgba(255,107,122,.55);color:var(--bad)}
   .btn.rec.on{background:rgba(255,107,122,.16);border-color:var(--bad)}
   .btn.small{padding:5px 9px;font-size:12px}
+  #btnPrev, .btn-prev{
+    background:linear-gradient(135deg,rgba(56,189,248,0.22),rgba(37,99,235,0.38));
+    border:1px solid rgba(56,189,248,0.65);
+    color:#7dd3fc;
+    font-weight:600;
+    box-shadow:0 2px 8px rgba(56,189,248,0.2);
+  }
+  #btnPrev:hover:not(:disabled), .btn-prev:hover:not(:disabled){
+    background:linear-gradient(135deg,rgba(56,189,248,0.38),rgba(37,99,235,0.6));
+    border-color:#38bdf8;
+    color:#ffffff;
+    box-shadow:0 0 14px rgba(56,189,248,0.45);
+    transform:translateY(-1px);
+  }
+  #btnNext, .btn-next{
+    background:linear-gradient(135deg,#10b981,#059669);
+    border:1px solid rgba(16,185,129,0.85);
+    color:#ffffff;
+    font-weight:600;
+    box-shadow:0 3px 12px rgba(16,185,129,0.35);
+  }
+  #btnNext:hover:not(:disabled), .btn-next:hover:not(:disabled){
+    background:linear-gradient(135deg,#34d399,#10b981);
+    box-shadow:0 0 16px rgba(52,211,153,0.55);
+    border-color:#34d399;
+    transform:translateY(-1px);
+  }
+  #btnShuffle, .btn-shuffle{
+    background:linear-gradient(135deg,#8b5cf6,#d946ef);
+    border:1px solid rgba(217,70,239,0.75);
+    color:#ffffff;
+    font-weight:600;
+    box-shadow:0 3px 12px rgba(217,70,239,0.35);
+  }
+  #btnShuffle:hover:not(:disabled), .btn-shuffle:hover:not(:disabled){
+    background:linear-gradient(135deg,#a78bfa,#e879f9);
+    box-shadow:0 0 16px rgba(232,121,249,0.55);
+    border-color:#e879f9;
+    transform:translateY(-1px);
+  }
 
   .deckmeta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);margin-bottom:8px}
   .card{perspective:1400px;cursor:pointer;user-select:none}
@@ -251,9 +291,9 @@
         <div class="hd">
           <h2 id="deckTitle">Flashcards</h2>
           <div class="toolbar">
-            <button class="btn small" id="btnPrev">← Prev</button>
-            <button class="btn small" id="btnNext">Next →</button>
-            <button class="btn small" id="btnShuffle">Shuffle</button>
+            <button class="btn small btn-prev" id="btnPrev">← Prev</button>
+            <button class="btn small btn-next" id="btnNext">Next →</button>
+            <button class="btn small btn-shuffle" id="btnShuffle">🔀 Shuffle</button>
           </div>
         </div>
         <div class="bd">
