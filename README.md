@@ -29,6 +29,16 @@ Ingest interview transcripts and evaluate performance against London Inside IR35
 - **Interactive Self-Scoring Rubric**: Calibrate sliders across 5 dimensions (0–20 pts each, 100 max) with automated tier rating.
 - **Actionable Feedback Report**: Identifies key candidate strengths and targeted improvement areas with 1-click Markdown download.
 
+## 🗺️ Enterprise AI Tech Stack Mindmap (`mindmap.html`)
+
+Support document for the **Morgan Stanley & TCS AI Engineer** role covering the 5 core pillars of enterprise banking AI:
+1. **Retrieval & Vector DBs**: Hybrid Search (Dense + BM25), Context-Aware Chunking, Cross-Encoder Re-Ranking, and Vector DB Stack (Pinecone, Qdrant, Milvus, Weaviate, FAISS).
+2. **Autonomous Systems**: LangGraph Cyclic State Graphs with checkpointing, CrewAI routing, ReAct Pydantic schema-enforced tool calling, and MCP integration.
+3. **Developer Acceleration**: GitHub Copilot Enterprise (`.github/copilot-instructions`, test synthesis, review agents) and Claude Code terminal agentics.
+4. **Evaluation & Observability**: RAGAS faithfulness/relevancy tracking, LangSmith telemetry traces/cost audits, and LoRA/QLoRA parameter-efficient adaptation.
+5. **Security & Compliance**: PII regex/NER sanitization, 95% prompt injection defense, and active UK SC (2028) & NATO (2029) clearances.
+- **Architectural Rationale Comments**: Each pillar contains deep commentary explaining why these standards are enforced in Tier-1 banking.
+
 ## Features
 
 - **Role selection** at the top — switch between Software Developer and AI Architect decks.
