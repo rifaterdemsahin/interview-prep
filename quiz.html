@@ -725,6 +725,9 @@
       <a href="index.html" class="btn" title="Back to Voice Interview Practice">
         🎙️ Voice Role-Play Decks
       </a>
+      <button class="btn primary" id="btnCollectQuizAnswers" title="Collect questions, answers, and verbal talking points">
+        📋 Collect Answers
+      </button>
       <button class="btn icon-only" id="soundToggle" title="Toggle Sound FX">
         🔊 Sound: ON
       </button>
@@ -891,12 +894,46 @@
         <button class="btn primary" id="btnRetryMissed">
           ⚡ Review Missed Cards Only
         </button>
+        <button class="btn primary" id="btnCollectFinal">
+          📋 Collect My Answers &amp; Report
+        </button>
         <button class="btn" id="btnRestartFull">
           ↺ Retake Full Quiz
         </button>
         <a href="index.html" class="btn">
           🎙️ Go to Live Voice Interviewer
         </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Answers Collection Modal -->
+  <div class="completion-overlay" id="quizCollectModal">
+    <div class="completion-card" style="max-width:860px;text-align:left;max-height:85vh;overflow-y:auto;padding:26px">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--panel-border);padding-bottom:14px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:24px">📋</span>
+          <div>
+            <h2 style="margin:0;font-size:18px;color:#fff">Morgan Stanley &amp; TCS — Collected Technical Answers</h2>
+            <div style="font-size:12.5px;color:var(--text-muted)">Portfolio Architectural Cards, Slide Citations &amp; Interview Soundbites</div>
+          </div>
+        </div>
+        <button class="btn icon-only" id="btnCloseQuizCollect" style="font-size:20px">&times;</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <div style="font-size:13px;color:var(--text-muted)">
+          Current Score: <b id="quizCollectScore" style="color:var(--accent)">0 / 200 pts</b> · Accuracy: <b id="quizCollectAcc">0%</b>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn small primary" id="btnCopyQuizCollect">📋 Copy All Text</button>
+          <button class="btn small" id="btnDownloadQuizCollect">📥 Download Markdown</button>
+          <button class="btn small" id="btnPrintQuizCollect">🖨️ Print / PDF</button>
+        </div>
+      </div>
+
+      <div id="quizCollectList" style="display:flex;flex-direction:column;gap:14px">
+        <!-- Rendered items -->
       </div>
     </div>
   </div>
@@ -1673,8 +1710,98 @@ soundToggle.addEventListener("click", () => {
   if (state.soundEnabled) AudioFX.init();
 });
 
+// Quiz Collection Logic
+function openQuizCollectModal() {
+  renderQuizCollect();
+  $("quizCollectModal").classList.add("active");
+}
+function closeQuizCollectModal() {
+  $("quizCollectModal").classList.remove("active");
+}
+
+function renderQuizCollect() {
+  const list = $("quizCollectList");
+  list.innerHTML = "";
+  $("quizCollectScore").textContent = state.score + " / " + (QUESTIONS.length * 10) + " pts";
+  const acc = Math.round((state.correctCount / Math.max(1, state.answeredCount)) * 100);
+  $("quizCollectAcc").textContent = (state.answeredCount ? acc : 0) + "%";
+
+  QUESTIONS.forEach((q, idx) => {
+    const card = document.createElement("div");
+    card.style.cssText = "background:var(--panel-sub);border:1px solid var(--panel-border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px";
+
+    const top = document.createElement("div");
+    top.style.cssText = "display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--accent);font-weight:700";
+    top.innerHTML = `<span>Q${idx + 1}: ${q.topicName.toUpperCase()}</span><span>Slide ${q.slideNum}</span>`;
+    card.appendChild(top);
+
+    const question = document.createElement("div");
+    question.style.cssText = "font-size:14px;font-weight:600;color:#fff";
+    question.textContent = q.question;
+    card.appendChild(question);
+
+    const correctAns = q.optA.isCorrect ? q.optA.text : q.optB.text;
+    const ansBox = document.createElement("div");
+    ansBox.style.cssText = "background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.4);border-radius:8px;padding:10px 12px;font-size:13px;color:#a7f3d0";
+    ansBox.innerHTML = `<strong>✅ Architecture Standard:</strong> ${correctAns}`;
+    card.appendChild(ansBox);
+
+    const tipBox = document.createElement("div");
+    tipBox.style.cssText = "background:rgba(56,189,248,0.08);border-left:3px solid var(--accent);padding:8px 12px;font-size:12.5px;color:#e2e8f0;border-radius:4px";
+    tipBox.innerHTML = `<strong>🎙️ Verbal Interview Point:</strong> ${q.speakingTip}`;
+    card.appendChild(tipBox);
+
+    list.appendChild(card);
+  });
+}
+
+function getQuizCollectedText() {
+  let out = "# Morgan Stanley & TCS — AI Engineer Interview Prep\n";
+  out += "Generated: " + new Date().toLocaleString("en-GB") + "\n";
+  out += "Score: " + state.score + " / " + (QUESTIONS.length * 10) + " pts (" + state.correctCount + "/" + state.answeredCount + " answered)\n\n";
+
+  QUESTIONS.forEach((q, idx) => {
+    const correctAns = q.optA.isCorrect ? q.optA.text : q.optB.text;
+    out += `### Q${idx + 1}. [Slide ${q.slideNum}: ${q.topicName}]\n`;
+    out += `**Question:** ${q.question}\n\n`;
+    out += `**✅ Correct Architecture Standard:**\n${correctAns}\n\n`;
+    out += `**💡 Rationale:** ${q.rationale}\n\n`;
+    out += `**🎙️ Speaking Point:** ${q.speakingTip}\n\n---\n\n`;
+  });
+  return out;
+}
+
+$("btnCollectQuizAnswers").addEventListener("click", openQuizCollectModal);
+$("btnCollectFinal").addEventListener("click", openQuizCollectModal);
+$("btnCloseQuizCollect").addEventListener("click", closeQuizCollectModal);
+$("quizCollectModal").addEventListener("click", e => {
+  if (e.target === $("quizCollectModal")) closeQuizCollectModal();
+});
+$("btnCopyQuizCollect").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(getQuizCollectedText());
+    alert("Copied all 20 question answers & talking points to clipboard!");
+  } catch(e) {
+    alert("Copy failed - browser permissions");
+  }
+});
+$("btnDownloadQuizCollect").addEventListener("click", () => {
+  const blob = new Blob([getQuizCollectedText()], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "morgan-stanley-ai-engineer-answers.md";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+});
+$("btnPrintQuizCollect").addEventListener("click", () => window.print());
+
 // Keyboard Shortcuts: 1/A for Option A, 2/B for Option B, Space/Enter for Next
 window.addEventListener("keydown", e => {
+  if ($("quizCollectModal").classList.contains("active")) {
+    if (e.key === "Escape") closeQuizCollectModal();
+    return;
+  }
   if (slideModal.classList.contains("active")) {
     if (e.key === "Escape") closeSlideModal();
     return;

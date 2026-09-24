@@ -233,6 +233,47 @@
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  /* Collect Answers Modal */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(7,11,20,0.88);backdrop-filter:blur(8px);
+    z-index:999;display:none;align-items:center;justify-content:center;padding:16px;
+  }
+  .modal-overlay.active{display:flex}
+  .modal-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    max-width:960px;width:100%;max-height:90vh;display:flex;flex-direction:column;
+    box-shadow:0 25px 65px rgba(0,0,0,0.7);overflow:hidden;
+  }
+  .modal-hd{
+    display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
+    background:var(--panel-2);border-bottom:1px solid var(--line);
+  }
+  .modal-bar{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    padding:10px 18px;background:#0d1425;border-bottom:1px solid var(--line);font-size:13px;
+  }
+  .modal-bd{
+    padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;
+  }
+  .collect-card{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .collect-card:hover{border-color:#3a4d7c}
+  .collect-q{font-weight:600;font-size:14px;color:#fff;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .collect-ans{
+    background:#0d1425;border:1px solid var(--line);border-radius:8px;padding:12px;
+    font-size:13.5px;line-height:1.55;color:#e2e8f0;white-space:pre-wrap;
+  }
+  .collect-model{
+    background:rgba(79,140,255,0.08);border:1px dashed rgba(79,140,255,0.3);border-radius:8px;
+    padding:10px 12px;font-size:12.5px;color:var(--muted);line-height:1.5;display:none;
+  }
+  .collect-model.show{display:block}
+  .collect-meta{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:12px;color:var(--muted);
+  }
   footer.ft{margin-top:20px;color:var(--muted);font-size:12px;text-align:center;line-height:1.7}
 </style>
 </head>
@@ -278,6 +319,7 @@
     <div class="switches">
       <label><input type="checkbox" id="ttsToggle" checked> Interviewer speaks</label>
       <label><input type="checkbox" id="autoAsk" checked> Ask question aloud on card</label>
+      <button class="btn small primary" id="btnCollectAnswersTop" style="font-weight:600;background:linear-gradient(135deg,#0284c7,#6366f1);border:none;box-shadow:0 2px 10px rgba(99,102,241,0.35)">📋 Collect All My Answers</button>
       <button class="btn small ghost" id="btnExportMd">Export Markdown</button>
       <button class="btn small ghost" id="btnExportJson">Export JSON</button>
       <button class="btn small danger" id="btnReset">Reset role</button>
@@ -331,7 +373,10 @@
       <section class="panel">
         <div class="hd">
           <h2>Saved answers</h2>
-          <span class="badge" id="savedCount">0</span>
+          <div class="toolbar">
+            <button class="btn small primary" id="btnCollectAnswersPanel" style="font-weight:600">📋 Collect all</button>
+            <span class="badge" id="savedCount">0</span>
+          </div>
         </div>
         <div class="bd">
           <div class="saved" id="savedList"><span class="hintline">Nothing saved yet for this role.</span></div>
@@ -403,6 +448,39 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="collectModal" aria-hidden="true">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px">📋</span>
+        <div>
+          <h3 style="margin:0;font-size:16px;color:#fff">Collected Interview Answers</h3>
+          <span style="font-size:12px;color:var(--muted)" id="collectMeta">Aggregating answers across your interview prep</span>
+        </div>
+      </div>
+      <button class="btn small ghost" id="btnCloseCollectModal" style="font-size:20px;padding:2px 8px;line-height:1" title="Close (Esc)">&times;</button>
+    </div>
+    <div class="modal-bar">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <label style="color:var(--muted);font-size:12.5px">Filter:</label>
+        <select id="collectFilterRole" style="background:#0d1425;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:12.5px;cursor:pointer">
+          <option value="current">Current Role Only</option>
+          <option value="all">All Roles Combined</option>
+        </select>
+        <span class="badge" id="collectStatsBadge">0 answers</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn small primary" id="btnCopyAllAnswers">📋 Copy All Text</button>
+        <button class="btn small ghost" id="btnDownloadMdAnswers">📥 Markdown</button>
+        <button class="btn small ghost" id="btnPrintAnswers">🖨️ Print / PDF</button>
+      </div>
+    </div>
+    <div class="modal-bd" id="collectList">
+      <!-- Items dynamically populated -->
+    </div>
+  </div>
+</div>
 
 <script>
 const DATA = {
@@ -1743,6 +1821,133 @@ function saveAnswer(silent){
   if(!silent) toast("Answer saved");
 }
 
+function openCollectModal(){
+  renderCollectedAnswers();
+  $("collectModal").classList.add("active");
+  $("collectModal").setAttribute("aria-hidden", "false");
+}
+function closeCollectModal(){
+  $("collectModal").classList.remove("active");
+  $("collectModal").setAttribute("aria-hidden", "true");
+}
+
+function renderCollectedAnswers(){
+  const filter = $("collectFilterRole").value;
+  const list = $("collectList");
+  list.innerHTML = "";
+
+  const rolesToScan = filter === "all" ? DATA.roles : [role()];
+  let totalAnswered = 0;
+  let totalScore = 0;
+  let scoredCount = 0;
+  let totalWords = 0;
+
+  rolesToScan.forEach(r => {
+    const store = state.store.answers[r.key] || {};
+    const answeredQs = r.questions.filter(q => store[q.id] && store[q.id].answer && store[q.id].answer.trim());
+
+    if(filter === "all" && answeredQs.length > 0){
+      const header = el("div", null);
+      header.style.cssText = "font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-top:10px;padding-bottom:5px;border-bottom:1px solid var(--line)";
+      header.textContent = r.name + " (" + answeredQs.length + " / " + r.questions.length + " answered)";
+      list.appendChild(header);
+    }
+
+    answeredQs.forEach((q, idx) => {
+      totalAnswered++;
+      const rec = store[q.id];
+      const words = rec.answer.trim().split(/\s+/).length;
+      totalWords += words;
+
+      if(typeof rec.score === "number"){
+        totalScore += rec.score;
+        scoredCount++;
+      }
+
+      const card = el("div", "collect-card");
+      
+      const qRow = el("div", "collect-q");
+      const qLeft = el("div", null, "Q" + (idx + 1) + ". " + q.q);
+      qRow.appendChild(qLeft);
+
+      if(typeof rec.score === "number"){
+        const cls = rec.score >= 75 ? "good" : rec.score >= 50 ? "mid" : "bad";
+        qRow.appendChild(el("span", "pill " + cls, rec.score + "/100"));
+      }
+      card.appendChild(qRow);
+
+      const meta = el("div", "collect-meta");
+      meta.innerHTML = "<span><strong>Category:</strong> " + q.cat + " · <em>" + words + " words</em></span>";
+      card.appendChild(meta);
+
+      const ansBox = el("div", "collect-ans", rec.answer);
+      card.appendChild(ansBox);
+
+      const actions = el("div", "collect-meta");
+      const btnToggleModel = el("button", "btn small ghost", "💡 View Model Answer");
+      const modelBox = el("div", "collect-model", "Model answer: " + q.model);
+      btnToggleModel.onclick = () => {
+        modelBox.classList.toggle("show");
+        btnToggleModel.textContent = modelBox.classList.contains("show") ? "Hide Model Answer" : "💡 View Model Answer";
+      };
+      actions.appendChild(btnToggleModel);
+
+      if(rec.found && rec.found.length){
+        actions.appendChild(el("span", "hintline", "✓ Covered: " + rec.found.join(", ")));
+      }
+      card.appendChild(actions);
+      card.appendChild(modelBox);
+
+      list.appendChild(card);
+    });
+  });
+
+  const avg = scoredCount ? Math.round(totalScore / scoredCount) : null;
+  $("collectStatsBadge").textContent = totalAnswered + " answered" + (avg !== null ? " · Avg score: " + avg + "/100" : "") + " · " + totalWords + " words";
+
+  if(totalAnswered === 0){
+    const empty = el("div", null);
+    empty.style.cssText = "text-align:center;padding:40px 20px;color:var(--muted)";
+    empty.innerHTML = `
+      <div style="font-size:36px;margin-bottom:10px">📝</div>
+      <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px">No answers saved yet</div>
+      <div style="font-size:13px;max-width:440px;margin:0 auto">Type or speak your answer in the <strong>Your answer</strong> panel and click <strong>Save answer</strong> or <strong>Submit to interviewer</strong> to collect them all here.</div>
+    `;
+    list.appendChild(empty);
+  }
+}
+
+function getCollectedText(){
+  const filter = $("collectFilterRole").value;
+  const rolesToScan = filter === "all" ? DATA.roles : [role()];
+  let out = "# Interview Prep 2026 — Collected Answers\nGenerated: " + new Date().toLocaleString("en-GB") + "\n\n";
+
+  rolesToScan.forEach(r => {
+    const store = state.store.answers[r.key] || {};
+    const answeredQs = r.questions.filter(q => store[q.id] && store[q.id].answer && store[q.id].answer.trim());
+    out += "## " + r.name + " (" + r.sub + ")\n";
+    out += "Progress: " + answeredQs.length + " / " + r.questions.length + " questions answered\n\n";
+
+    if(!answeredQs.length){
+      out += "*(No answers saved yet for this track)*\n\n";
+      return;
+    }
+
+    answeredQs.forEach((q, idx) => {
+      const rec = store[q.id];
+      out += "### Q" + (idx + 1) + ". " + q.q + "\n";
+      out += "- **Category:** " + q.cat + "\n";
+      if(typeof rec.score === "number") out += "- **Score:** " + rec.score + "/100\n";
+      if(rec.found && rec.found.length) out += "- **Covered Keywords:** " + rec.found.join(", ") + "\n";
+      if(rec.missing && rec.missing.length) out += "- **Missing Keywords:** " + rec.missing.join(", ") + "\n";
+      out += "\n**My Answer:**\n\n" + rec.answer + "\n\n";
+      out += "**Model Answer:**\n\n" + q.model + "\n\n---\n\n";
+    });
+  });
+
+  return out;
+}
+
 function bind(){
   $("card").onclick = () => { state.flipped = !state.flipped; $("card").classList.toggle("flipped", state.flipped); };
   $("card").onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); $("card").click(); } };
@@ -1778,7 +1983,30 @@ function bind(){
     saveStore(); renderCard(); renderStats(); renderChat();
     toast("Cleared " + role().name + " answers");
   };
+
+  // Collect All Answers Event Bindings
+  $("btnCollectAnswersTop").onclick = openCollectModal;
+  $("btnCollectAnswersPanel").onclick = openCollectModal;
+  $("btnCloseCollectModal").onclick = closeCollectModal;
+  $("collectFilterRole").onchange = renderCollectedAnswers;
+  $("btnCopyAllAnswers").onclick = async () => {
+    const text = getCollectedText();
+    await copyText(text);
+  };
+  $("btnDownloadMdAnswers").onclick = () => {
+    download("interview-prep-collected-answers.md", getCollectedText());
+  };
+  $("btnPrintAnswers").onclick = () => window.print();
+
+  $("collectModal").onclick = e => {
+    if(e.target === $("collectModal")) closeCollectModal();
+  };
+
   document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && $("collectModal").classList.contains("active")){
+      closeCollectModal();
+      return;
+    }
     const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
     if(typing) return;
     if(e.key === "ArrowRight") nextCard(1);
