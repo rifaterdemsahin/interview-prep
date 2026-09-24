@@ -285,6 +285,11 @@
       <h1>Interview Prep 2026 · London Contract Market</h1>
       <p>Flashcards, voice answers and live interviewer role-play for the UK contract market.</p>
     </div>
+    <nav class="top-menu" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <a href="index.html" class="btn small" style="background:rgba(79,140,255,.25);border-color:var(--accent);color:#fff;font-weight:600">🎙️ Role-Play Decks</a>
+      <a href="quiz.html" class="btn small" style="font-weight:500">⚡ 2-Choice Quiz</a>
+      <a href="feedback.html" class="btn small primary" style="font-weight:600;background:linear-gradient(135deg,#10b981,#0284c7);border:none;box-shadow:0 2px 10px rgba(16,185,129,.35)">📊 Feedback &amp; Self-Scoring</a>
+    </nav>
     <div class="badges">
       <span class="badge ir35">Inside IR35 focus</span>
       <span class="badge">Umbrella / PAYE engagement</span>
@@ -428,13 +433,63 @@
         </div>
       </section>
 
-      <section class="panel">
-        <div class="hd"><h2>How to use this for a London Inside IR35 interview</h2></div>
-        <div class="bd" style="font-size:13px;color:var(--muted)">
-          <p style="margin-top:0">1. Work the deck top to bottom in order — recruiter screens first, then IR35 and commercials, then technical and behavioural.</p>
-          <p>2. Speak every answer with the mic. Contract interviews in London are screening calls; your spoken fluency is being assessed more than your typing.</p>
-          <p>3. Answer in under 90 seconds, hit the numbers (rate, notice, years, users, latency, cost saving), and finish with the outcome.</p>
-          <p style="margin-bottom:0">4. Inside IR35: never say you will control how you deliver. Frame everything as client-directed delivery through an umbrella company, and confirm you are comfortable working as a deemed employee for tax purposes.</p>
+      <section class="panel" id="scoringGuidePanel">
+        <div class="hd">
+          <h2>📊 How the Candidate Gets Scored &amp; What You Can Do Better</h2>
+          <a href="feedback.html" class="btn small primary" style="font-weight:600">Open Feedback Portal →</a>
+        </div>
+        <div class="bd" style="font-size:13px;color:var(--text);display:flex;flex-direction:column;gap:16px">
+          
+          <!-- How Scoring Works -->
+          <div style="background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px">
+            <h3 style="margin:0 0 10px;font-size:14px;color:var(--accent);display:flex;align-items:center;gap:6px">
+              🎯 How the Candidate Gets Scored (0–100 Points Rubric)
+            </h3>
+            <p style="margin:0 0 12px;font-size:12.5px;color:var(--muted)">Every answer submitted to the live interviewer is evaluated using real-time linguistic and heuristic checks:</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;font-size:12.5px">
+              <div style="background:#0d1425;border:1px solid var(--line);border-radius:8px;padding:10px">
+                <strong style="color:#fff">1. Recruiter Keywords (Up to 35 pts)</strong>
+                <p style="margin:4px 0 0;color:var(--muted)">Matches essential domain terms (e.g. <code>BM25</code>, <code>LangGraph</code>, <code>Pydantic</code>, <code>RAGAS</code>, <code>clearance</code>, <code>umbrella</code>, <code>inside IR35</code>). Missing terms trigger follow-up interviewer probes.</p>
+              </div>
+              <div style="background:#0d1425;border:1px solid var(--line);border-radius:8px;padding:10px">
+                <strong style="color:#fff">2. Answer Substance &amp; Depth (Up to 40 pts)</strong>
+                <p style="margin:4px 0 0;color:var(--muted)">+10 pts baseline for &gt;12 words, plus +1 pt for every 2 words (max +30 pts for 60–80 words). Short one-line answers get called out as headline-only.</p>
+              </div>
+              <div style="background:#0d1425;border:1px solid var(--line);border-radius:8px;padding:10px">
+                <strong style="color:#fff">3. Hard Quantification (+10 pts bonus)</strong>
+                <p style="margin:4px 0 0;color:var(--muted)">Automatic 10-point bonus whenever you cite numbers, percentages, or metrics (e.g. <code>-60% latency</code>, <code>10M docs</code>, <code>300% deploy</code>, <code>£650/day</code>, <code>2 weeks notice</code>).</p>
+              </div>
+              <div style="background:#0d1425;border:1px solid var(--line);border-radius:8px;padding:10px">
+                <strong style="color:#fff">4. Structural Reasoning (Up to 15 pts)</strong>
+                <p style="margin:4px 0 0;color:var(--muted)">Points awarded for clear causal framing: <code>because</code>, <code>for example</code>, <code>which meant</code>, <code>led to</code>, <code>measured</code>, <code>i owned</code>, <code>we delivered</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- What Candidate Can Do Better -->
+          <div style="background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px">
+            <h3 style="margin:0 0 10px;font-size:14px;color:var(--good);display:flex;align-items:center;gap:6px">
+              🚀 What the Candidate Can Do Better (High-Yield Interview Techniques)
+            </h3>
+            <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:13px">
+              <li>
+                <strong style="color:#fff">1. Anchor Every Claim in Measured Numbers:</strong> Never say "we improved system speed" or "we cut API costs." Instead say: <em>"Through optimized vector indexes and semantic caching, we reduced retrieval latency by 60% and slashed recurring token API costs by 50% across 10M+ documents."</em> Contract clients buy quantifiable outcomes.
+              </li>
+              <li>
+                <strong style="color:#fff">2. Explicit Inside IR35 Commercial Framing:</strong> Never mention "autonomy", "right of substitution", or "dictating working hours" when applying inside IR35. Confirm: <em>"I operate as a deemed employee via an approved FCSA umbrella company, accept PAYE deductions at source, and integrate directly into client-directed team backlogs."</em>
+              </li>
+              <li>
+                <strong style="color:#fff">3. Follow the 90-Second STAR Spoken Cadence:</strong> Keep spoken answers under 90 seconds. <strong>Situation &amp; Scale</strong> (15s: "Tier-1 investment bank, 10M+ documents") &rarr; <strong>Task &amp; Risk</strong> (15s) &rarr; <strong>Action &amp; Ownership</strong> (45s: "I designed the hybrid BM25 + dense search pipeline with Pydantic tool validation") &rarr; <strong>Measured Result</strong> (15s: "-60% latency, zero regression deployments").
+              </li>
+              <li>
+                <strong style="color:#fff">4. Reassure Banking Risk &amp; Governance:</strong> In tier-1 finance (Morgan Stanley, Goldman Sachs), compliance is mandatory. Always cite <strong>PII regex &amp; NER redaction</strong>, <strong>95% prompt injection guardrails</strong>, <strong>RAGAS faithfulness CI gates</strong>, and <strong>UK SC &amp; NATO security clearances</strong>.
+              </li>
+              <li>
+                <strong style="color:#fff">5. Speak Answers Aloud with the Microphone:</strong> Contract screening calls evaluate verbal poise, concise phrasing, and conversational confidence. Practice answering aloud with the mic button and aim for 120–140 words per minute.
+              </li>
+            </ul>
+          </div>
+
         </div>
       </section>
 

@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post-Interview Feedback &amp; Self-Scoring Portal — Interview Prep 2026</title>
+<meta name="description" content="Ingest your interview outputs, transcripts, and answers to evaluate yourself against Tier-1 banking and London Inside IR35 scoring rules.">
+<style>
+  :root {
+    --bg: #0b0f1a;
+    --bg-grad: radial-gradient(1100px 500px at 12% -10%, rgba(79,140,255,.16), transparent 60%),
+               radial-gradient(900px 500px at 95% 0%, rgba(124,92,255,.14), transparent 55%),
+               #0b0f1a;
+    --panel: #141c30;
+    --panel-2: #1a2440;
+    --line: #26324f;
+    --line-bright: #3d4f7c;
+    --text: #e8edf7;
+    --muted: #93a0bd;
+    --accent: #4f8cff;
+    --accent-2: #7c5cff;
+    --accent-cyan: #38bdf8;
+    --good: #2fd48a;
+    --good-bg: rgba(47,212,138,.14);
+    --good-border: rgba(47,212,138,.4);
+    --warn: #ffb545;
+    --warn-bg: rgba(255,181,69,.12);
+    --bad: #ff6b7a;
+    --bad-bg: rgba(255,107,122,.12);
+    --radius: 16px;
+    --shadow: 0 18px 50px rgba(0,0,0,.45);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100vh; }
+  body {
+    background: var(--bg-grad);
+    color: var(--text);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 18px 18px 60px; }
+
+  /* Header */
+  header.top {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(26,36,64,.85), rgba(16,23,40,.85));
+    backdrop-filter: blur(8px); box-shadow: var(--shadow);
+  }
+  .brand { display: flex; flex-direction: column; gap: 2px; }
+  .brand h1 { margin: 0; font-size: 19px; letter-spacing: .2px; }
+  .brand p { margin: 0; color: var(--muted); font-size: 12.5px; }
+
+  .top-menu { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+  .btn {
+    border: 1px solid var(--line); background: var(--panel-2); border-radius: 10px;
+    padding: 8px 14px; font-size: 13px; font-weight: 500; transition: .15s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: #43557f; background: #1e2a4a; transform: translateY(-1px); }
+  .btn.primary {
+    background: linear-gradient(135deg, #10b981, #0284c7); border-color: transparent;
+    color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(16,185,129,.3);
+  }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; }
+  .btn.active-tab {
+    background: linear-gradient(135deg, rgba(79,140,255,.25), rgba(124,92,255,.25));
+    border-color: var(--accent); color: #fff; font-weight: 600;
+  }
+  .btn.small { padding: 5px 10px; font-size: 12px; }
+
+  /* Grid Layout */
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px;
+    align-items: start;
+  }
+  @media (max-width: 1000px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .panel .hd {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--panel-2);
+    flex-wrap: wrap;
+  }
+  .panel .hd h2 {
+    margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--muted); display: flex; align-items: center; gap: 8px;
+  }
+  .panel .bd { padding: 18px; }
+
+  /* Ingestion Section */
+  textarea.ingest-area {
+    width: 100%; min-height: 250px; background: #0c1221; color: var(--text);
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+    font: 13.5px/1.55 ui-monospace, Menlo, Monaco, Consolas, monospace;
+    resize: vertical;
+  }
+  textarea.ingest-area:focus { outline: none; border-color: var(--accent); }
+
+  .ingest-toolbar {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 10px; margin-top: 12px;
+  }
+
+  /* Metric Cards */
+  .metrics-strip {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px; margin: 14px 0;
+  }
+  .m-card {
+    background: #0d1425; border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; text-align: center;
+  }
+  .m-val { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+  .m-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+  /* Rubric Sliders */
+  .rubric-list { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+  .rubric-item {
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .rubric-header {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .rubric-title { font-size: 13.5px; font-weight: 600; color: #fff; }
+  .rubric-score {
+    font-size: 13px; font-weight: 700; color: var(--accent-cyan);
+    background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.3);
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .rubric-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.45; }
+  .rubric-slider {
+    width: 100%; accent-color: var(--accent); cursor: pointer;
+  }
+
+  /* Report Card */
+  .score-display-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: linear-gradient(135deg, rgba(79,140,255,.15), rgba(16,185,129,.15));
+    border: 1px solid var(--line-bright); border-radius: 14px; padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .score-num-big {
+    font-size: 44px; font-weight: 800; color: #fff; line-height: 1;
+    display: flex; align-items: baseline; gap: 6px;
+  }
+  .score-num-big small { font-size: 16px; color: var(--muted); font-weight: 500; }
+  .score-tier-badge {
+    font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .score-tier-badge.offer { background: var(--good-bg); color: var(--good); border: 1px solid var(--good-border); }
+  .score-tier-badge.mid { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(255,181,69,.4); }
+  .score-tier-badge.low { background: var(--bad-bg); color: var(--bad); border: 1px solid rgba(255,107,122,.4); }
+
+  .feedback-box {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .feedback-section {
+    background: #0d1425; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+  }
+  .feedback-section h4 {
+    margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .feedback-section.strengths h4 { color: var(--good); }
+  .feedback-section.improvements h4 { color: var(--warn); }
+  .feedback-section ul { margin: 0; padding-left: 18px; font-size: 13px; color: #cbd5e1; display: flex; flex-direction: column; gap: 6px; }
+
+  /* Rules Box */
+  .rules-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px; margin-top: 14px;
+  }
+  .rule-card {
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .rule-card strong { font-size: 13px; color: #fff; display: flex; align-items: center; gap: 6px; }
+  .rule-card p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+  footer.ft { margin-top: 24px; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Top Header with Navigation -->
+  <header class="top">
+    <div class="brand">
+      <h1>Interview Prep 2026 · Post-Interview Feedback Portal</h1>
+      <p>Ingest interview transcripts &amp; answers, evaluate rules, score yourself, and get targeted improvements.</p>
+    </div>
+    <nav class="top-menu">
+      <a href="index.html" class="btn">🎙️ Role-Play Decks</a>
+      <a href="quiz.html" class="btn">⚡ 2-Choice Quiz</a>
+      <a href="feedback.html" class="btn active-tab">📊 Feedback &amp; Self-Scoring</a>
+    </nav>
+  </header>
+
+  <!-- Explanation Banner -->
+  <div style="background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(56,189,248,.14));border:1px solid rgba(16,185,129,.35);border-radius:var(--radius);padding:14px 18px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:26px">🧠</span>
+      <div>
+        <div style="font-weight:700;font-size:14.5px;color:#fff">Self-Reflection &amp; Audit Engine for London Inside IR35 &amp; Tier-1 Banking</div>
+        <div style="font-size:12.5px;color:var(--muted)">Ingest your recorded answers or live transcripts from <code>localStorage</code> to benchmark yourself against commercial, technical, and governance criteria.</div>
+      </div>
+    </div>
+    <button class="btn primary" id="btnAutoIngest" style="font-weight:600">
+      📥 Auto-Ingest Saved Answers
+    </button>
+  </div>
+
+  <div class="grid">
+
+    <!-- Column 1: Ingestion & Rules Evaluation -->
+    <div class="col" style="display:flex;flex-direction:column;gap:18px">
+
+      <section class="panel">
+        <div class="hd">
+          <h2><span>📥</span> Ingest Interview Output</h2>
+          <div style="display:flex;gap:6px">
+            <button class="btn small" id="btnLoadSample">Sample Session</button>
+            <button class="btn small" id="btnClearText">Clear</button>
+          </div>
+        </div>
+        <div class="bd">
+          <textarea class="ingest-area" id="ingestText" placeholder="Paste your interview transcript, markdown export, or collected answers here... or click 'Auto-Ingest Saved Answers' above to load directly from your practice session."></textarea>
+          
+          <div class="ingest-toolbar">
+            <span style="font-size:12.5px;color:var(--muted)" id="ingestMeta">0 words · 0 characters</span>
+            <button class="btn primary" id="btnRunAudit">
+              ⚡ Evaluate Rules &amp; Auto-Score →
+            </button>
+          </div>
+
+          <!-- Automated Metrics Extract -->
+          <div class="metrics-strip">
+            <div class="m-card">
+              <div class="m-val" id="metricWords">0</div>
+              <div class="m-lbl">Total Words</div>
+            </div>
+            <div class="m-card">
+              <div class="m-val" id="metricTime">0m</div>
+              <div class="m-lbl">Est. Spoken Time</div>
+            </div>
+            <div class="m-card">
+              <div class="m-val" id="metricNumbers" style="color:var(--good)">0</div>
+              <div class="m-lbl">Numbers / ROI</div>
+            </div>
+            <div class="m-card">
+              <div class="m-val" id="metricKeywords" style="color:var(--accent-cyan)">0</div>
+              <div class="m-lbl">Domain Keywords</div>
+            </div>
+            <div class="m-card">
+              <div class="m-val" id="metricGovernance" style="color:var(--warn)">0</div>
+              <div class="m-lbl">Gov &amp; Clearance</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rules Legend -->
+      <section class="panel">
+        <div class="hd">
+          <h2><span>📐</span> The 5 Interview Evaluation Rules</h2>
+        </div>
+        <div class="bd">
+          <div class="rules-grid">
+            <div class="rule-card">
+              <strong>1. Commercial &amp; IR35 Framing</strong>
+              <p>Confirmed umbrella employment, deemed employee status, rate expectation, and immediate notice without claiming unwarranted control.</p>
+            </div>
+            <div class="rule-card">
+              <strong>2. Hard Quantification &amp; ROI</strong>
+              <p>Concrete metrics: latency reduction (-60%), scale (10M+ docs), cost savings (-50%), deployment velocity (300%).</p>
+            </div>
+            <div class="rule-card">
+              <strong>3. Technical Architectural Depth</strong>
+              <p>Hybrid search (BM25 + vectors), LangGraph cyclic graphs, Pydantic function validation, MCP decoupling, RAGAS regression tests.</p>
+            </div>
+            <div class="rule-card">
+              <strong>4. STAR Structure &amp; 90s Brevity</strong>
+              <p>Situation -> Task -> Action -> Result under 90 seconds. Clean causal words (<em>because, led to, measured</em>).</p>
+            </div>
+            <div class="rule-card">
+              <strong>5. Banking Governance &amp; Security</strong>
+              <p>PII redaction (regex + NER), 95% precision prompt guardrails, UK SC / NATO clearances, and regulatory audit trails.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Column 2: Self-Scoring Rubric & Feedback Report -->
+    <div class="col" style="display:flex;flex-direction:column;gap:18px">
+
+      <section class="panel">
+        <div class="hd">
+          <h2><span>🎚️</span> Interactive Self-Scoring Rubric (100 Pts Max)</h2>
+          <button class="btn small" id="btnSyncAudit" title="Automatically set sliders based on text analysis">Sync from Audit</button>
+        </div>
+        <div class="bd">
+          <div class="rubric-list">
+            
+            <div class="rubric-item">
+              <div class="rubric-header">
+                <span class="rubric-title">1. Inside IR35 &amp; Commercials</span>
+                <span class="rubric-score" id="valR1">16 / 20</span>
+              </div>
+              <p class="rubric-desc">Deemed employee clarity, umbrella confirmation, rate &amp; availability stated upfront.</p>
+              <input type="range" class="rubric-slider" id="sliderR1" min="0" max="20" value="16">
+            </div>
+
+            <div class="rubric-item">
+              <div class="rubric-header">
+                <span class="rubric-title">2. Numbers &amp; Measured ROI</span>
+                <span class="rubric-score" id="valR2">18 / 20</span>
+              </div>
+              <p class="rubric-desc">Hard metrics: -60% latency, 10M+ docs, 300% deployment rate, -50% API cost.</p>
+              <input type="range" class="rubric-slider" id="sliderR2" min="0" max="20" value="18">
+            </div>
+
+            <div class="rubric-item">
+              <div class="rubric-header">
+                <span class="rubric-title">3. Technical Precision (RAG &amp; Agents)</span>
+                <span class="rubric-score" id="valR3">17 / 20</span>
+              </div>
+              <p class="rubric-desc">Hybrid BM25 search, hierarchical chunking, LangGraph cyclic state graphs, MCP.</p>
+              <input type="range" class="rubric-slider" id="sliderR3" min="0" max="20" value="17">
+            </div>
+
+            <div class="rubric-item">
+              <div class="rubric-header">
+                <span class="rubric-title">4. Spoken Brevity &amp; STAR Cadence</span>
+                <span class="rubric-score" id="valR4">16 / 20</span>
+              </div>
+              <p class="rubric-desc">Under 90 seconds, situation-task-action-result structure, confident spoken delivery.</p>
+              <input type="range" class="rubric-slider" id="sliderR4" min="0" max="20" value="16">
+            </div>
+
+            <div class="rubric-item">
+              <div class="rubric-header">
+                <span class="rubric-title">5. Banking Governance &amp; Clearance</span>
+                <span class="rubric-score" id="valR5">19 / 20</span>
+              </div>
+              <p class="rubric-desc">PII redaction, 95% prompt injection defense, UK SC (2028) &amp; NATO (2029) vetting.</p>
+              <input type="range" class="rubric-slider" id="sliderR5" min="0" max="20" value="19">
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Feedback & Action Plan Report -->
+      <section class="panel">
+        <div class="hd">
+          <h2><span>📋</span> Feedback &amp; Improvement Plan</h2>
+          <div style="display:flex;gap:6px">
+            <button class="btn small primary" id="btnCopyReport">📋 Copy Report</button>
+            <button class="btn small" id="btnDownloadReport">📥 Markdown</button>
+          </div>
+        </div>
+        <div class="bd">
+          
+          <div class="score-display-box">
+            <div>
+              <div style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600">Total Score</div>
+              <div class="score-num-big" id="totalScoreNum">86 <small>/ 100</small></div>
+            </div>
+            <div class="score-tier-badge offer" id="scoreTierBadge">
+              🌟 Offer Ready: Principal Banking AI Engineer
+            </div>
+          </div>
+
+          <div class="feedback-box">
+            <div class="feedback-section strengths">
+              <h4><span>✓</span> What You Did Well (Key Strengths)</h4>
+              <ul id="listStrengths">
+                <li>Strong quantification: Cited -60% retrieval latency, 10M+ documents, and -50% token cost reduction.</li>
+                <li>Clear Tier-1 banking credibility with active UK SC (2028) and NATO (2029) clearances.</li>
+                <li>Architectural discipline: Explained hybrid BM25 + dense search and LangGraph checkpoint persistence.</li>
+              </ul>
+            </div>
+
+            <div class="feedback-section improvements">
+              <h4><span>▲</span> What You Can Do Better (Targeted Action Items)</h4>
+              <ul id="listImprovements">
+                <li>Reinforce inside IR35 compliance phrasing earlier in recruiter screening questions.</li>
+                <li>Ensure answers stay tightly under 90 seconds to avoid recruiter interruptions.</li>
+                <li>Explicitly emphasize RAGAS regression blocking in CI/CD before deployment.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <footer class="ft">
+    Interview Prep 2026 · Post-Interview Self-Scoring &amp; Feedback System · London Inside IR35 &amp; Tier-1 Banking Tracks ·
+    <a href="index.html">Back to Main Interview Practice</a>
+  </footer>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const STORAGE_KEY = "interviewPrep2026.v1";
+const SAMPLE_TRANSCRIPT = `# Morgan Stanley & TCS AI Engineer Practice Session
+Role: AI Engineer (Morgan Stanley & TCS)
+Candidate: Rifat Erdem Sahin
+Security Clearance: Active UK SC (2028) and NATO Secret (2029)
+
+Q1. Walk me through your enterprise AI engineering profile and how your UK SC & NATO clearance applies to Morgan Stanley / TCS deployments.
+Candidate Answer:
+I am an enterprise AI engineer specializing in production LLM architectures and RAG systems for Tier-1 investment banking. I hold active UK SC clearance valid to 2028 and NATO clearance to 2029, meaning zero onboarding delay for restricted banking infrastructure and private models. My production track record includes architecting RAG pipelines across Goldman Sachs environments indexing over 10 million enterprise documents, delivering a 60% reduction in retrieval latency and 50% API cost savings through semantic caching. I am fully available for the London 3-day on-site model and comfortable delivering inside IR35 under TCS and Morgan Stanley technical governance.
+
+Q2. How do you design an enterprise RAG pipeline for Morgan Stanley that handles millions of documents without hallucinating?
+Candidate Answer:
+I design RAG as a multi-tier filtered pipeline rather than a single vector lookup. Ingestion uses context-aware chunking — hierarchical markdown splitting so tables, headers, and financial footnotes retain their semantic boundaries. Retrieval is hybrid: dense vectors for conceptual search paired with BM25 for exact financial tickers, contract clause numbers, and ISINs. The candidate pool passes through a cross-encoder re-ranker configured to prioritize precision over recall — in banking, returning nothing is far safer than feeding noisy false positives into the generator. Finally, we apply enterprise RBAC filtering at the index level, ensuring users never retrieve context from documents they do not have clearance to inspect.
+
+Q3. What quantified benchmarks and ROI have you achieved in production enterprise AI deployments?
+Candidate Answer:
+In my recent banking delivery, we measured four concrete benchmarks. First, we cut retrieval latency by 60% through index optimization and local embedded vector caching. Second, we boosted context precision by 40% using domain-specific chunking instead of blind character slicing. Third, we achieved a 300% increase in deployment velocity using a CI/CD agentic framework that automated unit tests and security reviews. Fourth, we reduced external LLM token API costs by 50% by introducing an aggressive semantic caching layer that intercepts recurring financial queries and serves evaluated responses with zero latency.`;
+
+// Ingestion from localStorage
+function ingestLocalStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      alert("No saved interview data found in localStorage. Try practicing an answer on the main page first or load the sample session.");
+      return;
+    }
+    const store = JSON.parse(raw);
+    const answers = store.answers || {};
+    let text = "# Ingested Interview Session from Practice Store\nGenerated: " + new Date().toLocaleString("en-GB") + "\n\n";
+    let foundAny = false;
+
+    for (const [roleKey, roleAnswers] of Object.entries(answers)) {
+      const ids = Object.keys(roleAnswers);
+      if (!ids.length) continue;
+      foundAny = true;
+      text += `## Track: ${roleKey.toUpperCase()}\n\n`;
+      ids.forEach((id, idx) => {
+        const item = roleAnswers[id];
+        if (item && item.answer) {
+          text += `### Question ${idx + 1} (${id})\n`;
+          text += `Answer:\n${item.answer}\n`;
+          if (item.score) text += `Recorded Score: ${item.score}/100\n`;
+          text += "\n";
+        }
+      });
+    }
+
+    if (!foundAny) {
+      alert("Practice store found, but no saved answers yet. Type an answer and click 'Save answer' in the main deck first!");
+      return;
+    }
+
+    $("ingestText").value = text;
+    runAudit();
+  } catch(e) {
+    alert("Error reading practice data: " + e.message);
+  }
+}
+
+// Evaluation Rules Engine
+function runAudit() {
+  const text = $("ingestText").value.trim();
+  const lower = text.toLowerCase();
+  const words = text ? text.split(/\s+/).length : 0;
+  const chars = text.length;
+
+  $("ingestMeta").textContent = `${words} words · ${chars} characters`;
+  $("metricWords").textContent = words;
+
+  // Estimated spoken duration at 130 words per minute
+  const mins = Math.max(0.1, words / 130);
+  $("metricTime").textContent = mins < 1 ? Math.round(mins * 60) + "s" : mins.toFixed(1) + "m";
+
+  // Rule 2: Numbers & ROI count
+  const numbersRegex = /\b(\d+(\.\d+)?%?|\$\d+|£\d+|\d+m|\d+k)\b/gi;
+  const numbersMatch = text.match(numbersRegex) || [];
+  $("metricNumbers").textContent = numbersMatch.length;
+
+  // Rule 3: Technical Keywords
+  const techTerms = ["hybrid", "bm25", "dense", "vector", "rag", "langgraph", "crewai", "pydantic", "mcp", "ragas", "langsmith", "cross-encoder", "re-rank", "lora", "qlora", "caching", "rbac"];
+  const techFound = techTerms.filter(t => lower.includes(t));
+  $("metricKeywords").textContent = `${techFound.length}/${techTerms.length}`;
+
+  // Rule 5: Governance & Clearances
+  const govTerms = ["sc clearance", "uk sc", "nato", "pii", "redaction", "ner", "guardrail", "injection", "audit", "governance", "inside ir35", "umbrella"];
+  const govFound = govTerms.filter(t => lower.includes(t));
+  $("metricGovernance").textContent = `${govFound.length}/${govTerms.length}`;
+
+  // Compute recommended scores (0-20 each)
+  // R1: IR35 / Commercials
+  let scoreR1 = 12;
+  if (/inside ir35|umbrella|deemed employee|day rate|notice/i.test(text)) scoreR1 += 5;
+  if (/client-directed|tcs|morgan stanley|on-site/i.test(text)) scoreR1 += 3;
+  scoreR1 = Math.min(20, scoreR1);
+
+  // R2: Numbers & ROI
+  let scoreR2 = Math.min(20, Math.round(numbersMatch.length * 2.5) + 6);
+
+  // R3: Technical Depth
+  let scoreR3 = Math.min(20, Math.round((techFound.length / techTerms.length) * 16) + 4);
+
+  // R4: STAR & Pacing
+  let scoreR4 = 14;
+  if (words > 80 && words < 1200) scoreR4 += 3;
+  if (/because|led to|measured|result|first|then|outcome/i.test(text)) scoreR4 += 3;
+  scoreR4 = Math.min(20, scoreR4);
+
+  // R5: Governance & Clearance
+  let scoreR5 = Math.min(20, Math.round((govFound.length / govTerms.length) * 15) + 5);
+
+  // Set sliders
+  $("sliderR1").value = scoreR1;
+  $("sliderR2").value = scoreR2;
+  $("sliderR3").value = scoreR3;
+  $("sliderR4").value = scoreR4;
+  $("sliderR5").value = scoreR5;
+
+  updateScoresFromSliders();
+  generateFeedback(words, numbersMatch.length, techFound, govFound);
+}
+
+function updateScoresFromSliders() {
+  const r1 = parseInt($("sliderR1").value, 10);
+  const r2 = parseInt($("sliderR2").value, 10);
+  const r3 = parseInt($("sliderR3").value, 10);
+  const r4 = parseInt($("sliderR4").value, 10);
+  const r5 = parseInt($("sliderR5").value, 10);
+
+  $("valR1").textContent = `${r1} / 20`;
+  $("valR2").textContent = `${r2} / 20`;
+  $("valR3").textContent = `${r3} / 20`;
+  $("valR4").textContent = `${r4} / 20`;
+  $("valR5").textContent = `${r5} / 20`;
+
+  const total = r1 + r2 + r3 + r4 + r5;
+  $("totalScoreNum").innerHTML = `${total} <small>/ 100</small>`;
+
+  const badge = $("scoreTierBadge");
+  if (total >= 90) {
+    badge.className = "score-tier-badge offer";
+    badge.textContent = "🌟 Offer Ready: Principal Banking AI Engineer (90+)";
+  } else if (total >= 75) {
+    badge.className = "score-tier-badge offer";
+    badge.textContent = "🎯 Strong Contender: Senior Delivery Profile (75-89)";
+  } else if (total >= 60) {
+    badge.className = "score-tier-badge mid";
+    badge.textContent = "⚖️ Meets Baseline: Targeted Polish Recommended (60-74)";
+  } else {
+    badge.className = "score-tier-badge low";
+    badge.textContent = "📚 Developing: Substantive Revisions Required (<60)";
+  }
+}
+
+function generateFeedback(words, numbersCount, techFound, govFound) {
+  const strengths = [];
+  const improvements = [];
+
+  if (numbersCount >= 3) {
+    strengths.push(`Excellent quantification: Identified ${numbersCount} hard numbers/metrics (e.g. latency, scale, and costs).`);
+  } else {
+    improvements.push("Add concrete numbers: Always quantify performance (e.g. -60% latency, 10M+ documents, -50% API spend).");
+  }
+
+  if (techFound.includes("hybrid") || techFound.includes("bm25") || techFound.includes("cross-encoder")) {
+    strengths.push("High retrieval maturity: Articulated hybrid search (BM25 + dense vectors) and precision re-ranking.");
+  } else {
+    improvements.push("Highlight RAG depth: Explain why dense vectors alone fail on tickers and why hybrid BM25 + cross-encoders are mandatory.");
+  }
+
+  if (techFound.includes("langgraph") || techFound.includes("pydantic") || techFound.includes("mcp")) {
+    strengths.push("Agentic governance: Referenced cyclic state graphs with checkpointing and schema-enforced tool calling.");
+  } else {
+    improvements.push("Explain tool validation: Mention Pydantic schemas and LangGraph checkpoints to guarantee zero hallucinated inputs.");
+  }
+
+  if (govFound.includes("sc clearance") || govFound.includes("uk sc") || govFound.includes("nato")) {
+    strengths.push("Premier security posture: Emphasized active UK SC & NATO clearances for zero onboarding lag.");
+  } else {
+    improvements.push("Lead with your clearances: Reassure client security that you hold active UK SC and NATO clearance.");
+  }
+
+  if (govFound.includes("pii") || govFound.includes("guardrail") || govFound.includes("ragas")) {
+    strengths.push("Regulated risk controls: Cited automated PII redaction and 95% precision prompt guardrails.");
+  } else {
+    improvements.push("Detail safety layers: Describe automated PII regex/NER sanitization and RAGAS regression gates.");
+  }
+
+  if (words < 100) {
+    improvements.push("Expand spoken depth: Answers under 100 words read as superficial to Tier-1 banking panels.");
+  } else if (words > 1500) {
+    improvements.push("Pacing risk: Total word count is very high. Ensure individual responses stay strictly under 90 seconds.");
+  } else {
+    strengths.push("Disciplined delivery cadence: Word volume fits within realistic London contract screening constraints.");
+  }
+
+  const sList = $("listStrengths");
+  sList.innerHTML = "";
+  strengths.slice(0, 4).forEach(s => {
+    const li = document.createElement("li");
+    li.textContent = s;
+    sList.appendChild(li);
+  });
+
+  const iList = $("listImprovements");
+  iList.innerHTML = "";
+  improvements.slice(0, 4).forEach(i => {
+    const li = document.createElement("li");
+    li.textContent = i;
+    iList.appendChild(li);
+  });
+}
+
+function buildReportText() {
+  const total = $("totalScoreNum").textContent.trim();
+  const tier = $("scoreTierBadge").textContent.trim();
+  let out = `# Post-Interview Feedback & Self-Scoring Report
+Generated: ${new Date().toLocaleString("en-GB")}
+Total Score: ${total}
+Rating: ${tier}
+
+## Breakdown by Dimension (100 Pts Max)
+1. Inside IR35 & Commercials: ${$("valR1").textContent}
+2. Numbers & Measured ROI: ${$("valR2").textContent}
+3. Technical Precision: ${$("valR3").textContent}
+4. Spoken Brevity & STAR Structure: ${$("valR4").textContent}
+5. Banking Governance & Clearance: ${$("valR5").textContent}
+
+## Key Strengths
+`;
+  document.querySelectorAll("#listStrengths li").forEach(li => {
+    out += `- ${li.textContent}\n`;
+  });
+
+  out += `\n## Areas for Improvement\n`;
+  document.querySelectorAll("#listImprovements li").forEach(li => {
+    out += `- ${li.textContent}\n`;
+  });
+
+  return out;
+}
+
+// Event Bindings
+$("btnAutoIngest").addEventListener("click", ingestLocalStorage);
+$("btnLoadSample").addEventListener("click", () => {
+  $("ingestText").value = SAMPLE_TRANSCRIPT;
+  runAudit();
+});
+$("btnClearText").addEventListener("click", () => {
+  $("ingestText").value = "";
+  $("ingestMeta").textContent = "0 words · 0 characters";
+});
+$("btnRunAudit").addEventListener("click", runAudit);
+$("btnSyncAudit").addEventListener("click", runAudit);
+
+["sliderR1", "sliderR2", "sliderR3", "sliderR4", "sliderR5"].forEach(id => {
+  $(id).addEventListener("input", updateScoresFromSliders);
+});
+
+$("btnCopyReport").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(buildReportText());
+    alert("Feedback report copied to clipboard!");
+  } catch(e) {
+    alert("Copy failed - browser permissions");
+  }
+});
+
+$("btnDownloadReport").addEventListener("click", () => {
+  const blob = new Blob([buildReportText()], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "interview-feedback-report.md";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+});
+
+// Run initial evaluation on load
+$("ingestText").value = SAMPLE_TRANSCRIPT;
+runAudit();
+</script>
+</body>
+</html>

@@ -21,6 +21,14 @@ Interactive rapid-fire 2-option flashcards designed specifically for the **Morga
 - **Portfolio Evidence & Slide Deep Dives**: Displays exact slide citations and click-to-enlarge slide graphics from the briefing document.
 - **Review Missed Cards Mode**: Retest missed questions to guarantee 100% mastery before the live panel.
 
+## 📊 Post-Interview Feedback & Self-Scoring Portal (`feedback.html`)
+
+Ingest interview transcripts and evaluate performance against London Inside IR35 & Tier-1 Banking rules:
+- **Auto-Ingestion from Local Storage**: 1-click import of all saved answers and transcripts from practice sessions.
+- **The 5 Evaluation Rules Engine**: Automatic audit tracking IR35 framing, quantification density, technical accuracy, 90-second brevity, and security clearances.
+- **Interactive Self-Scoring Rubric**: Calibrate sliders across 5 dimensions (0–20 pts each, 100 max) with automated tier rating.
+- **Actionable Feedback Report**: Identifies key candidate strengths and targeted improvement areas with 1-click Markdown download.
+
 ## Features
 
 - **Role selection** at the top — switch between Software Developer and AI Architect decks.
